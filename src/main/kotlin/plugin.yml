@@ -1,0 +1,25 @@
+name: Authy
+version: 1.5
+author: Mateusz#1738
+main: me.mateusz.Authy
+api-version: 1.17
+commands:
+  register:
+    description: Rejestruje gracza
+    usage: /<command> [haslo] [haslo]
+    permission: authy.register
+    aliases: reg
+  login:
+    description: Zalogowuje gracza
+    usage: /<command> [haslo]
+    permission: authy.login
+    aliases: l
+  unregister:
+    description: Odrejetrowuje uzytkownika
+    usage: /<command>
+    permission: authy.unregister
+    aliases: unreg
+  remember:
+    description: Automatycznie zalogowywuje przez nastepne 48h
+    usage: /<command>
+    permission: authy.remember

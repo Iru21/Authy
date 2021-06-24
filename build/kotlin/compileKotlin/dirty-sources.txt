@@ -1,0 +1,4 @@
+E:\java\projects\Authy\src\main\kotlin\me\mateusz\authy\interfaces\ICommand.kt
+E:\java\projects\Authy\src\main\kotlin\me\mateusz\authy\utils\registerCommand.kt
+E:\java\projects\Authy\src\main\kotlin\me\mateusz\authy\Authy.kt
+E:\java\projects\Authy\src\main\kotlin\me\mateusz\authy\utils\createItem.kt
