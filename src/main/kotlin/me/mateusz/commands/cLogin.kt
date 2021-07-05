@@ -4,6 +4,7 @@ import me.mateusz.interfaces.ICommand
 import me.mateusz.process.LoginProcess
 import me.mateusz.process.UserData
 import me.mateusz.utils.HashUtil
+import net.md_5.bungee.api.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -34,6 +35,11 @@ class cLogin(override var name: String, jplugin : JavaPlugin, preLoginProcess : 
             } else {
                 LoginProcess.removePlayer(p)
                 p.sendMessage("§a§l(✔) §7Zalogowano!")
+                if(plugin.config.getBoolean("SendWelcomeMessage")) {
+                    for(message : String in plugin.config.getStringList("WelcomeMessage")) {
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', message))
+                    }
+                }
                 LoginProcess.EffectRunner.runLogin(p)
                 true
             }

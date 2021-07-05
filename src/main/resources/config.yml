@@ -1,0 +1,3 @@
+WelcomeMessage:
+  - "&7Welcome to &6server name&7!"
+SendWelcomeMessage: false

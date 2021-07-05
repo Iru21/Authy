@@ -10,9 +10,10 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 
-class cRegister(override var name: String, plugin : JavaPlugin, preLoginProcess : LoginProcess) : ICommand {
-    val UserData : UserData = UserData(plugin)
+class cRegister(override var name: String, jplugin : JavaPlugin, preLoginProcess : LoginProcess) : ICommand {
+    val UserData : UserData = UserData(jplugin)
     val LoginProcess : LoginProcess = preLoginProcess
+    val plugin = jplugin
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender is Player) {
             val p : Player = sender
@@ -36,6 +37,11 @@ class cRegister(override var name: String, plugin : JavaPlugin, preLoginProcess 
                 UserData.CreateOrGetUser(p, args[0])
                 LoginProcess.removePlayer(p)
                 p.sendMessage("${net.md_5.bungee.api.ChatColor.of("#CDFF00")}§l(✔) §7Zarejestrowano!")
+                if(plugin.config.getBoolean("SendWelcomeMessage")) {
+                    for(message : String in plugin.config.getStringList("WelcomeMessage")) {
+                        p.sendMessage(net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', message))
+                    }
+                }
                 LoginProcess.EffectRunner.runRegister(p)
                 true
             } else {
