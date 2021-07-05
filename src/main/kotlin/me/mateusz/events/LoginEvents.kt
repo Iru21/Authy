@@ -31,15 +31,21 @@ class LoginEvents(jplugin : JavaPlugin, preLoginProcess: LoginProcess) : Listene
 
     @EventHandler
     fun onJoin(e : PlayerJoinEvent) {
-
         if(Session.tryAutoLogin(e.player)) {
             e.player.sendMessage("${net.md_5.bungee.api.ChatColor.of("#afffb1")}§l(✔) §7Automatycznie zalogowano!")
             return
         }
 
-        while(e.player.location.block.getRelative(BlockFace.DOWN).type.isAir) {
-            e.player.teleport(Location(e.player.world ,e.player.location.x, e.player.location.y - 1, e.player.location.z))
-        }
+        lateinit var task0 : BukkitTask
+        var loc = e.player.location
+        task0 = plugin.server.scheduler.runTaskTimer(plugin, Runnable {
+            if(loc.block.getRelative(BlockFace.DOWN).type.isAir) {
+                loc = Location(loc.world, loc.x, loc.y - 1, loc.z)
+            } else {
+                task0.cancel()
+                e.player.teleport(loc)
+            }
+        }, 0L, 0L)
 
         LoginProcess.addPlayer(e.player)
         var i = 0
