@@ -4,6 +4,10 @@ author: Mateusz#1738
 main: me.mateusz.Authy
 api-version: 1.17
 commands:
+  authy:
+    description: Informacje i reload
+    usage: /<command> [reload]
+    permission: authy.reload
   register:
     description: Rejestruje gracza
     usage: /<command> [haslo] [haslo]
