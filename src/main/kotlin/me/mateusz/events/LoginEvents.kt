@@ -2,6 +2,7 @@ package me.mateusz.events
 
 import me.mateusz.process.LoginProcess
 import me.mateusz.process.Session
+import net.md_5.bungee.api.ChatColor
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.block.BlockFace
@@ -27,14 +28,10 @@ class LoginEvents(jplugin : JavaPlugin, preLoginProcess: LoginProcess) : Listene
 
     val plugin = jplugin
 
-    val Session : Session = Session(plugin)
+    val Session = Session(plugin)
 
     @EventHandler
     fun onJoin(e : PlayerJoinEvent) {
-        if(Session.tryAutoLogin(e.player)) {
-            e.player.sendMessage("${net.md_5.bungee.api.ChatColor.of("#afffb1")}§l(✔) §7Automatycznie zalogowano!")
-            return
-        }
 
         lateinit var task0 : BukkitTask
         var loc = e.player.location
@@ -46,6 +43,16 @@ class LoginEvents(jplugin : JavaPlugin, preLoginProcess: LoginProcess) : Listene
                 e.player.teleport(loc)
             }
         }, 0L, 0L)
+
+        if(Session.tryAutoLogin(e.player)) {
+            e.player.sendMessage("${ChatColor.of("#afffb1")}§l(✔) §7Automatycznie zalogowano!")
+            if(plugin.config.getBoolean("SendWelcomeMessage")) {
+                for(message : String in plugin.config.getStringList("WelcomeMessage")) {
+                    e.player.sendMessage(ChatColor.translateAlternateColorCodes('&', message))
+                }
+            }
+            return
+        }
 
         LoginProcess.addPlayer(e.player)
         var i = 0
