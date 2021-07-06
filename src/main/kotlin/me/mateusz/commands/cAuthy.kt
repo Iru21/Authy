@@ -1,12 +1,15 @@
 package me.mateusz.commands
 
 import me.mateusz.interfaces.ICommand
-import me.mateusz.process.LoginProcess
-import me.mateusz.process.UserData
+import org.bukkit.Sound
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
+import org.bukkit.configuration.file.FileConfiguration
+import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
+import java.io.File
+
 
 class cAuthy(override var name: String, jplugin : JavaPlugin) : ICommand {
     val plugin = jplugin
@@ -17,8 +20,10 @@ class cAuthy(override var name: String, jplugin : JavaPlugin) : ICommand {
                 p.sendMessage("§8[§6Authy§8] §7Created by: §cIru21 §8- §7https://github.com/Iru21/")
                 return true
             } else if(args[0].lowercase() == "reload") {
-                plugin.saveConfig()
+                val file = File(plugin.dataFolder.absolutePath + "/config.yml")
+                plugin.config.load(file)
                 p.sendMessage("§8[§6Authy§8] §7Reloaded §cconfig§7!")
+                p.playSound(p.location, Sound.BLOCK_CHAIN_PLACE, 1F, 1F)
             }
         }
         return true
