@@ -43,10 +43,6 @@ class Authy : JavaPlugin(), Listener {
 
         val players = server.onlinePlayers
         for(player : Player in players) {
-            if(Session.tryAutoLogin(player)) {
-                player.sendMessage("${net.md_5.bungee.api.ChatColor.of("#afffb1")}§l(✔) §7Automatycznie zalogowano!")
-                return
-            }
 
             lateinit var task0 : BukkitTask
             var loc = player.location
@@ -58,6 +54,16 @@ class Authy : JavaPlugin(), Listener {
                     player.teleport(loc)
                 }
             }, 0L, 0L)
+
+            if(Session.tryAutoLogin(player)) {
+                player.sendMessage("${net.md_5.bungee.api.ChatColor.of("#afffb1")}§l(✔) §7Automatycznie zalogowano!")
+                if(this.config.getBoolean("SendWelcomeMessage")) {
+                    for(message : String in this.config.getStringList("WelcomeMessage")) {
+                        player.sendMessage(net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', message))
+                    }
+                }
+                return
+            }
 
             LoginProcess.addPlayer(player)
             var i = 0
