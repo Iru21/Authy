@@ -12,7 +12,11 @@ class Session(jplugin : JavaPlugin) {
     fun remember(p : Player) {
         val curtime = Timestamp(System.currentTimeMillis())
         val timestamp = curtime.time
+        val ip = p.address?.address?.hostAddress
         UserData.set(p, "session", timestamp)
+        if (ip != null) {
+            UserData.set(p,"ip", ip)
+        }
     }
 
     fun tryAutoLogin(p : Player) : Boolean {
@@ -20,6 +24,7 @@ class Session(jplugin : JavaPlugin) {
         val curtime = Timestamp(System.currentTimeMillis())
         val timestamp = curtime.time
         if(session != null && (parseLong(session.toString()) + 172800000 > timestamp) && p.address?.address?.hostAddress == UserData.get(p, "ip")) {
+            plugin.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} ${org.bukkit.ChatColor.YELLOW}auto logged in with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress}")
             return true
         }
 
