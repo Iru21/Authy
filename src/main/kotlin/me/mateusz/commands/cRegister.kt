@@ -42,6 +42,7 @@ class cRegister(override var name: String, jplugin : JavaPlugin, preLoginProcess
                         p.sendMessage(net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', message))
                     }
                 }
+                plugin.server.consoleSender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}Authy${ChatColor.DARK_GRAY}] ${ChatColor.YELLOW}Player ${ChatColor.WHITE}${p.name} ${ChatColor.YELLOW}registered with ip ${ChatColor.WHITE}${p.address?.address?.hostAddress}")
                 LoginProcess.EffectRunner.runRegister(p)
                 true
             } else {

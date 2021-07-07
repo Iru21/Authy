@@ -40,6 +40,7 @@ class cLogin(override var name: String, jplugin : JavaPlugin, preLoginProcess : 
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', message))
                     }
                 }
+                plugin.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} ${org.bukkit.ChatColor.YELLOW}logged in with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress}")
                 LoginProcess.EffectRunner.runLogin(p)
                 true
             }
