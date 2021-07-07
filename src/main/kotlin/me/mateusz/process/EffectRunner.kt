@@ -16,6 +16,21 @@ class EffectRunner(jplugin : JavaPlugin) {
         }, 5L)
     }
 
+    fun runAutoLogin(p : Player) {
+        p.sendTitle("${net.md_5.bungee.api.ChatColor.of("#afffb1")}§l(✔) §7Automatycznie Zalogowano!", "", 20, 20, 20)
+        runFireWorks(p, Color.fromRGB(175,255,177))
+        p.playSound(p.location, Sound.BLOCK_AMETHYST_BLOCK_STEP, 1F, 1F)
+        plugin.server.scheduler.scheduleSyncDelayedTask(plugin, {
+            p.playSound(p.location, Sound.BLOCK_AMETHYST_BLOCK_STEP, 1F, 1F)
+        }, 10L)
+        plugin.server.scheduler.scheduleSyncDelayedTask(plugin, {
+            p.playSound(p.location, Sound.BLOCK_AMETHYST_BLOCK_STEP, 1F, 1F)
+        }, 20L)
+        plugin.server.scheduler.scheduleSyncDelayedTask(plugin, {
+            p.playSound(p.location, Sound.BLOCK_AMETHYST_BLOCK_BREAK, 1F, 1F)
+        }, 25L)
+    }
+
     fun runRegister(p : Player) {
         p.sendTitle("${net.md_5.bungee.api.ChatColor.of("#CDFF00")}§l(✔) §7Zarejestrowano!", "", 20, 20, 20)
         runFireWorks(p, Color.fromRGB(205, 255, 0))

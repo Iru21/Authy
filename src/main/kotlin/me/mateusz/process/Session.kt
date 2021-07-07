@@ -8,6 +8,7 @@ import java.sql.Timestamp
 class Session(jplugin : JavaPlugin) {
     val plugin = jplugin
     val UserData : UserData = UserData(plugin)
+    val EffectRunner = EffectRunner(plugin)
 
     fun remember(p : Player) {
         val curtime = Timestamp(System.currentTimeMillis())
@@ -25,6 +26,7 @@ class Session(jplugin : JavaPlugin) {
         val timestamp = curtime.time
         if(session != null && (parseLong(session.toString()) + 172800000 > timestamp) && p.address?.address?.hostAddress == UserData.get(p, "ip")) {
             plugin.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} ${org.bukkit.ChatColor.YELLOW}auto logged in with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress}")
+            EffectRunner.runAutoLogin(p)
             return true
         }
 
