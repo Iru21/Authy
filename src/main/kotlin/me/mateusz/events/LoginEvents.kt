@@ -32,6 +32,22 @@ class LoginEvents(jplugin : JavaPlugin, preLoginProcess: LoginProcess) : Listene
 
     @EventHandler
     fun onJoin(e : PlayerJoinEvent) {
+        if(!e.player.hasPlayedBefore() && plugin.config.getBoolean("onFirstJoin.teleport")) {
+            val x = plugin.config.getDouble("onFirstJoin.x")
+            val y = plugin.config.getDouble("onFirstJoin.y") + 0.1
+            val z = plugin.config.getDouble("onFirstJoin.z")
+            e.player.teleport(Location(e.player.world, x, y, z))
+        } else if(plugin.config.getBoolean("onJoin.teleport")) {
+            val x = plugin.config.getDouble("onJoin.x")
+            val y = plugin.config.getDouble("onJoin.y") + 0.1
+            val z = plugin.config.getDouble("onJoin.z")
+            e.player.teleport(Location(e.player.world, x, y, z))
+        }
+        var setFly = false
+        if(e.player.isFlying) {
+            setFly = true
+            e.player.isFlying = false
+        }
 
         lateinit var task0 : BukkitTask
         var loc = e.player.location
@@ -43,6 +59,8 @@ class LoginEvents(jplugin : JavaPlugin, preLoginProcess: LoginProcess) : Listene
                 e.player.teleport(loc)
             }
         }, 0L, 0L)
+
+        if(setFly) e.player.isFlying = true
 
         if(Session.tryAutoLogin(e.player)) {
             e.player.sendMessage("${ChatColor.of("#afffb1")}§l(✔) §7Automatycznie zalogowano!")

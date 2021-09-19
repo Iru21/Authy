@@ -1,3 +1,15 @@
 WelcomeMessage:
   - "&7Welcome to &6server name&7!"
 SendWelcomeMessage: false
+
+onFirstJoin:
+  teleport: false
+  x: 0
+  y: 0
+  z: 0
+
+onJoin:
+  teleport: false
+  x: 0
+  y: 0
+  z: 0
