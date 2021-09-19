@@ -43,6 +43,9 @@ class cRegister(override var name: String, jplugin : JavaPlugin, preLoginProcess
                     }
                 }
                 plugin.server.consoleSender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}Authy${ChatColor.DARK_GRAY}] ${ChatColor.YELLOW}Player ${ChatColor.WHITE}${p.name} ${ChatColor.YELLOW}registered with ip ${ChatColor.WHITE}${p.address?.address?.hostAddress}")
+                if(UserData.get(p, "usePin") == "false") {
+                    p.sendMessage("§6§l(!) §cNie masz wlaczonego pinu§8! §7Dla bezpieczenstwa ustaw go pod §8/§fpin")
+                }
                 LoginProcess.EffectRunner.runRegister(p)
                 true
             } else {

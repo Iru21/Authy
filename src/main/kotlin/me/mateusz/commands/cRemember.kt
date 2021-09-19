@@ -18,7 +18,6 @@ class cRemember(override var name: String, jplugin : JavaPlugin) : ICommand {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender is Player) {
             val p : Player = sender
-            UserData.updateIfOld(p, "session", 0)
             Session.remember(p)
             p.sendMessage("${net.md_5.bungee.api.ChatColor.of("#afffb1")}§l(✔) §7Zapamietano na 48h!")
         }

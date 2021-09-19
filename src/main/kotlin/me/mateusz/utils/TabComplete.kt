@@ -15,6 +15,7 @@ class TabComplete : TabCompleter {
         val completions : MutableList<String> = mutableListOf<String>()
         if(args.size <= 1) {
             if(command.name == "authy") completions.add("reload")
+            else if(command.name == "pin") completions.addAll(mutableListOf("toggle", "set"))
         }
         return completions
     }

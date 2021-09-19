@@ -4,6 +4,7 @@ import me.mateusz.commands.*
 import me.mateusz.events.LoginEvents
 import me.mateusz.process.LoginProcess
 import me.mateusz.process.Session
+import me.mateusz.process.runJoin
 import me.mateusz.utils.CommandFilter
 import me.mateusz.utils.registerCommand
 import org.apache.logging.log4j.core.filter.AbstractFilter
@@ -36,6 +37,7 @@ class Authy : JavaPlugin(), Listener {
         registerCommand(this, cUnregister("unregister", this, LoginProcess))
         registerCommand(this, cRemember("remember", this))
         registerCommand(this, cAuthy("authy", this))
+        registerCommand(this, cPin("pin", this))
 
         with(CommandFilter) { registerFilter() }
 
@@ -43,43 +45,7 @@ class Authy : JavaPlugin(), Listener {
 
         val players = server.onlinePlayers
         for(player : Player in players) {
-
-            lateinit var task0 : BukkitTask
-            var loc = player.location
-            task0 = this.server.scheduler.runTaskTimer(this, Runnable {
-                if(loc.block.getRelative(BlockFace.DOWN).type.isAir) {
-                    loc = Location(loc.world, loc.x, loc.y - 1, loc.z)
-                } else {
-                    task0.cancel()
-                    player.teleport(loc)
-                }
-            }, 0L, 0L)
-
-            if(Session.tryAutoLogin(player)) {
-                player.sendMessage("${net.md_5.bungee.api.ChatColor.of("#afffb1")}§l(✔) §7Automatycznie zalogowano!")
-                if(this.config.getBoolean("SendWelcomeMessage")) {
-                    for(message : String in this.config.getStringList("WelcomeMessage")) {
-                        player.sendMessage(net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', message))
-                    }
-                }
-                return
-            }
-
-            LoginProcess.addPlayer(player)
-            var i = 0
-            lateinit var task : BukkitTask
-            task = this.server.scheduler.runTaskTimer(this, Runnable {
-                if(LoginProcess.checkIfContains(player)) {
-                    if(i == 240) {
-                        task.cancel()
-                        player.kickPlayer("§c§l(!) §7Minal czas na autoryzacje!")
-                        LoginProcess.removePlayer(player)
-                    }
-                    LoginProcess.sendPleaseAuthMessage(player)
-                    i++
-                }
-                else task.cancel()
-            },0L, 200L)
+            runJoin(this, Session, LoginProcess, player)
         }
 
     }

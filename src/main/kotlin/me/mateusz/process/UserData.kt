@@ -1,7 +1,6 @@
 package me.mateusz.process
 
 import me.mateusz.utils.HashUtil
-import org.bukkit.Bukkit
 import org.bukkit.OfflinePlayer
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.configuration.file.YamlConfiguration
@@ -27,7 +26,8 @@ class UserData(jplugin : JavaPlugin) {
             config.set("usr", p.name)
             config.set("ip", p.address?.address?.hostAddress)
             config.set("pass", HashUtil.toSHA256(pass))
-            config.set("email", "not_set")
+            config.set("usePin", false)
+            config.set("pin", "not_set")
             UpdateOrSaveUser(p, config)
             return config
         }
@@ -61,15 +61,20 @@ class UserData(jplugin : JavaPlugin) {
         return UserDataFile.exists()
     }
 
-    fun Validate(p : Player, pass : String) : Boolean {
-        val UserDataFile = File(plugin.dataFolder, "userdata" + File.separator + p.uniqueId + ".yml")
+    fun Validate(player : Player, p : String, what: String) : Boolean {
+        if(what != "pass" && what != "pin") throw Exception("Invalid validation type!")
+        val UserDataFile = File(plugin.dataFolder, "userdata" + File.separator + player.uniqueId + ".yml")
         val config = YamlConfiguration.loadConfiguration(UserDataFile)
-        if(HashUtil.toSHA256(pass) == config.get("pass")) return true
+        if(HashUtil.toSHA256(p) == config.get(what)) return true
         return false
     }
 
     fun PasswordMatchesRules(pass : String) : Boolean {
         return (pass.length >= 6 && pass.contains(Regex("[A-Z]")) && pass.contains(Regex("[0-9]")))
+    }
+
+    fun PinMatchesRules(pin : String) : Boolean {
+        return (pin.length == 6 && pin.contains(Regex("\\d{6}")))
     }
 
     fun DeleteUser(p : Player) : Boolean {

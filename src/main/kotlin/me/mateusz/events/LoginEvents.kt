@@ -2,6 +2,7 @@ package me.mateusz.events
 
 import me.mateusz.process.LoginProcess
 import me.mateusz.process.Session
+import me.mateusz.process.runJoin
 import net.md_5.bungee.api.ChatColor
 import org.bukkit.Bukkit
 import org.bukkit.Location
@@ -32,61 +33,7 @@ class LoginEvents(jplugin : JavaPlugin, preLoginProcess: LoginProcess) : Listene
 
     @EventHandler
     fun onJoin(e : PlayerJoinEvent) {
-        if(!e.player.hasPlayedBefore() && plugin.config.getBoolean("onFirstJoin.teleport")) {
-            val x = plugin.config.getDouble("onFirstJoin.x")
-            val y = plugin.config.getDouble("onFirstJoin.y") + 0.1
-            val z = plugin.config.getDouble("onFirstJoin.z")
-            e.player.teleport(Location(e.player.world, x, y, z))
-        } else if(plugin.config.getBoolean("onJoin.teleport")) {
-            val x = plugin.config.getDouble("onJoin.x")
-            val y = plugin.config.getDouble("onJoin.y") + 0.1
-            val z = plugin.config.getDouble("onJoin.z")
-            e.player.teleport(Location(e.player.world, x, y, z))
-        }
-        var setFly = false
-        if(e.player.isFlying) {
-            setFly = true
-            e.player.isFlying = false
-        }
-
-        lateinit var task0 : BukkitTask
-        var loc = e.player.location
-        task0 = plugin.server.scheduler.runTaskTimer(plugin, Runnable {
-            if(loc.block.getRelative(BlockFace.DOWN).type.isAir) {
-                loc = Location(loc.world, loc.x, loc.y - 1, loc.z)
-            } else {
-                task0.cancel()
-                e.player.teleport(loc)
-            }
-        }, 0L, 0L)
-
-        if(setFly) e.player.isFlying = true
-
-        if(Session.tryAutoLogin(e.player)) {
-            e.player.sendMessage("${ChatColor.of("#afffb1")}§l(✔) §7Automatycznie zalogowano!")
-            if(plugin.config.getBoolean("SendWelcomeMessage")) {
-                for(message : String in plugin.config.getStringList("WelcomeMessage")) {
-                    e.player.sendMessage(ChatColor.translateAlternateColorCodes('&', message))
-                }
-            }
-            return
-        }
-
-        LoginProcess.addPlayer(e.player)
-        var i = 0
-        lateinit var task : BukkitTask
-        task = plugin.server.scheduler.runTaskTimer(plugin, Runnable {
-            if(LoginProcess.checkIfContains(e.player)) {
-                if(i == 240) {
-                    task.cancel()
-                    e.player.kickPlayer("§c§l(!) §7Minal czas na autoryzacje!")
-                    LoginProcess.removePlayer(e.player)
-                }
-                LoginProcess.sendPleaseAuthMessage(e.player)
-                i++
-            }
-            else task.cancel()
-        },0L, 200L)
+        runJoin(plugin, Session, LoginProcess, e.player)
     }
 
     @EventHandler

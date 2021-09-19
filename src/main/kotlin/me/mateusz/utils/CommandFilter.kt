@@ -42,6 +42,7 @@ class CommandFilter : AbstractFilter() {
             if (msg.contains("issued server command:")) {
                 if (msg.contains("/login") || msg.contains("/l")
                     || msg.contains("/reg") || msg.contains("/register")
+                        || msg.contains("/pin")
                 ) {
                     return Filter.Result.DENY
                 }
