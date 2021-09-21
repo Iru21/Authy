@@ -42,6 +42,7 @@ class UserData(jplugin : JavaPlugin) {
     }
 
     fun updateIfOld(p : Player, key : String, default : Any) {
+        if(!CheckIfExists(p)) return
         val UserDataFile = File(plugin.dataFolder, "userdata" + File.separator + p.uniqueId + ".yml")
         val config = YamlConfiguration.loadConfiguration(UserDataFile)
         if(!config.contains(key)) {
