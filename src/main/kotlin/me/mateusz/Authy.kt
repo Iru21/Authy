@@ -18,6 +18,7 @@ class Authy : JavaPlugin() {
 
     companion object {
         lateinit var instance: Authy
+        lateinit var translations: Translations
         lateinit var loginProcess: LoginProcess
         lateinit var session: Session
     }
@@ -25,6 +26,7 @@ class Authy : JavaPlugin() {
     override fun onEnable() {
 
         instance = this
+        translations = Translations()
         loginProcess = LoginProcess()
         session = Session()
 
