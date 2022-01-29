@@ -1,21 +1,17 @@
 package me.mateusz.commands
 
+import me.mateusz.Authy
 import me.mateusz.interfaces.ICommand
 import me.mateusz.process.UserData
 import me.mateusz.utils.HashUtil
-import org.bukkit.Sound
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
-import org.bukkit.configuration.file.FileConfiguration
-import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Player
-import org.bukkit.plugin.java.JavaPlugin
-import java.io.File
 
 
-class cPin(override var name: String, jplugin : JavaPlugin) : ICommand {
-    val plugin = jplugin
-    val UserData : UserData = UserData(plugin)
+class cPin(override var name: String = "pin") : ICommand {
+    val authy = Authy.instance
+    val UserData : UserData = UserData()
     val HashUtil : HashUtil = HashUtil()
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender is Player) {

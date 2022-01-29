@@ -1,17 +1,17 @@
 package me.mateusz.process
 
+import me.mateusz.Authy
 import org.bukkit.*
 import org.bukkit.entity.Firework
 import org.bukkit.entity.Player
-import org.bukkit.plugin.java.JavaPlugin
 
-class EffectRunner(jplugin : JavaPlugin) {
-    val plugin = jplugin
+class EffectRunner() {
+    val authy = Authy.instance
     fun runLogin(p : Player) {
         p.sendTitle("§a§l(✔) §7Zalogowano!", "", 20, 20, 20)
         runFireWorks(p, Color.fromRGB(0, 255, 34))
         p.playSound(p.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1F, 1F)
-        plugin.server.scheduler.runTaskLater(plugin, Runnable {
+        authy.server.scheduler.runTaskLater(authy, Runnable {
             p.playSound(p.location, Sound.ENTITY_EXPERIENCE_BOTTLE_THROW, 1F, 1F)
         }, 5L)
     }
@@ -20,13 +20,13 @@ class EffectRunner(jplugin : JavaPlugin) {
         p.sendTitle("${net.md_5.bungee.api.ChatColor.of("#afffb1")}§l(✔) §7Automatycznie Zalogowano!", "", 20, 20, 20)
         runFireWorks(p, Color.fromRGB(175,255,177))
         p.playSound(p.location, Sound.BLOCK_AMETHYST_BLOCK_STEP, 1F, 1F)
-        plugin.server.scheduler.scheduleSyncDelayedTask(plugin, {
+        authy.server.scheduler.scheduleSyncDelayedTask(authy, {
             p.playSound(p.location, Sound.BLOCK_AMETHYST_BLOCK_STEP, 1F, 1F)
         }, 10L)
-        plugin.server.scheduler.scheduleSyncDelayedTask(plugin, {
+        authy.server.scheduler.scheduleSyncDelayedTask(authy, {
             p.playSound(p.location, Sound.BLOCK_AMETHYST_BLOCK_STEP, 1F, 1F)
         }, 20L)
-        plugin.server.scheduler.scheduleSyncDelayedTask(plugin, {
+        authy.server.scheduler.scheduleSyncDelayedTask(authy, {
             p.playSound(p.location, Sound.BLOCK_AMETHYST_BLOCK_BREAK, 1F, 1F)
         }, 25L)
     }
@@ -36,7 +36,7 @@ class EffectRunner(jplugin : JavaPlugin) {
         runFireWorks(p, Color.fromRGB(205, 255, 0))
         p.playSound(p.location, Sound.BLOCK_TRIPWIRE_CLICK_ON, 1F, 1F)
         p.playSound(p.location, Sound.BLOCK_TRIPWIRE_CLICK_OFF, 1F, 1F)
-        plugin.server.scheduler.runTaskLater(plugin, Runnable {
+        authy.server.scheduler.runTaskLater(authy, Runnable {
             p.playSound(p.location, Sound.BLOCK_TRIPWIRE_ATTACH, 1F, 1F)
         }, 5L)
     }
@@ -45,16 +45,16 @@ class EffectRunner(jplugin : JavaPlugin) {
         p.sendTitle("${ChatColor.GOLD}§l(✔) §7Odrejestrowano!", "", 20, 20, 20)
         runFireWorks(p, Color.fromRGB(0xFFAA00))
         p.playSound(p.location, Sound.BLOCK_CHAIN_BREAK, 1F, 1F)
-        plugin.server.scheduler.runTaskLater(plugin, Runnable {
+        authy.server.scheduler.runTaskLater(authy, Runnable {
             p.playSound(p.location, Sound.BLOCK_CHAIN_BREAK, 1F, 1F)
         }, 5L)
-        plugin.server.scheduler.runTaskLater(plugin, Runnable {
+        authy.server.scheduler.runTaskLater(authy, Runnable {
             p.playSound(p.location, Sound.BLOCK_CHAIN_PLACE, 1F, 1F)
         }, 5L)
     }
 
     private fun runFireWorks(p : Player, c : Color) {
-        plugin.server.scheduler.runTaskLater(plugin, Runnable {
+        authy.server.scheduler.runTaskLater(authy, Runnable {
             val loc = Location(p.world, p.location.x, p.location.y - 1, p.location.z)
             val firework = p.world.spawn(loc, Firework::class.java)
             val fireworkMeta = firework.fireworkMeta

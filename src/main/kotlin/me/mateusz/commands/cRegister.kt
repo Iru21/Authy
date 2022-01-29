@@ -1,19 +1,18 @@
 package me.mateusz.commands
 
+import me.mateusz.Authy
 import me.mateusz.interfaces.ICommand
 import me.mateusz.process.LoginProcess
 import me.mateusz.process.UserData
 import org.bukkit.ChatColor
-import org.bukkit.Color
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
-import org.bukkit.plugin.java.JavaPlugin
 
-class cRegister(override var name: String, jplugin : JavaPlugin, preLoginProcess : LoginProcess) : ICommand {
-    val UserData : UserData = UserData(jplugin)
-    val LoginProcess : LoginProcess = preLoginProcess
-    val plugin = jplugin
+class cRegister(override var name: String = "register") : ICommand {
+    val UserData : UserData = UserData()
+    val LoginProcess : LoginProcess = Authy.loginProcess
+    val authy = Authy.instance
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender is Player) {
             val p : Player = sender
@@ -37,12 +36,12 @@ class cRegister(override var name: String, jplugin : JavaPlugin, preLoginProcess
                 UserData.CreateOrGetUser(p, args[0])
                 LoginProcess.removePlayer(p)
                 p.sendMessage("${net.md_5.bungee.api.ChatColor.of("#CDFF00")}§l(✔) §7Zarejestrowano!")
-                if(plugin.config.getBoolean("SendWelcomeMessage")) {
-                    for(message : String in plugin.config.getStringList("WelcomeMessage")) {
+                if(authy.config.getBoolean("SendWelcomeMessage")) {
+                    for(message : String in authy.config.getStringList("WelcomeMessage")) {
                         p.sendMessage(net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', message))
                     }
                 }
-                plugin.server.consoleSender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}Authy${ChatColor.DARK_GRAY}] ${ChatColor.YELLOW}Player ${ChatColor.WHITE}${p.name} ${ChatColor.YELLOW}registered with ip ${ChatColor.WHITE}${p.address?.address?.hostAddress}")
+                authy.server.consoleSender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}Authy${ChatColor.DARK_GRAY}] ${ChatColor.YELLOW}Player ${ChatColor.WHITE}${p.name} ${ChatColor.YELLOW}registered with ip ${ChatColor.WHITE}${p.address?.address?.hostAddress}")
                 if(UserData.get(p, "usePin") == "false") {
                     p.sendMessage("§6§l(!) §cNie masz wlaczonego pinu§8! §7Dla bezpieczenstwa ustaw go pod §8/§fpin")
                 }

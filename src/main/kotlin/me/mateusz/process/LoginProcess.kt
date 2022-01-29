@@ -1,16 +1,14 @@
 package me.mateusz.process
 
-import org.bukkit.ChatColor
+import me.mateusz.Authy
 import org.bukkit.entity.Player
-import org.bukkit.plugin.java.JavaPlugin
-import org.bukkit.potion.PotionEffect
-import org.bukkit.potion.PotionEffectType
 import java.util.*
 
-class LoginProcess(plugin : JavaPlugin) {
-    val EffectRunner = EffectRunner(plugin)
+class LoginProcess() {
+    val authy = Authy.instance
+    val EffectRunner = EffectRunner()
     val inProcess = mutableListOf<UUID>()
-    val UserData : UserData = UserData(plugin)
+    val UserData : UserData = UserData()
 
     fun addPlayer(p : Player) {
         inProcess.add(p.uniqueId)

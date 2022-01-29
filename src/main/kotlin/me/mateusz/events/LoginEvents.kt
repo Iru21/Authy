@@ -1,12 +1,7 @@
 package me.mateusz.events
 
-import me.mateusz.process.LoginProcess
-import me.mateusz.process.Session
+import me.mateusz.Authy
 import me.mateusz.process.runJoin
-import net.md_5.bungee.api.ChatColor
-import org.bukkit.Bukkit
-import org.bukkit.Location
-import org.bukkit.block.BlockFace
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.*
@@ -14,26 +9,17 @@ import org.bukkit.entity.Player
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.entity.EntityDamageByEntityEvent
-
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause
-
 import org.bukkit.event.entity.EntityDamageEvent
-import org.bukkit.plugin.java.JavaPlugin
-import org.bukkit.scheduler.BukkitTask
-import java.util.concurrent.TimeUnit
 
 
-class LoginEvents(jplugin : JavaPlugin, preLoginProcess: LoginProcess) : Listener {
+class LoginEvents : Listener {
 
-    val LoginProcess : LoginProcess = preLoginProcess
-
-    val plugin = jplugin
-
-    val Session = Session(plugin)
+    val LoginProcess = Authy.loginProcess
+    val authy = Authy.instance
 
     @EventHandler
     fun onJoin(e : PlayerJoinEvent) {
-        runJoin(plugin, Session, LoginProcess, e.player)
+        runJoin(e.player)
     }
 
     @EventHandler
