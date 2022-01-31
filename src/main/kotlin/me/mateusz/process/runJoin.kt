@@ -1,6 +1,7 @@
 package me.mateusz.process
 
 import me.mateusz.Authy
+import me.mateusz.PrefixType
 import net.md_5.bungee.api.ChatColor
 import org.bukkit.Location
 import org.bukkit.block.BlockFace
@@ -50,7 +51,7 @@ fun runJoin(player: Player) {
     if(setFly) player.isFlying = true
 
     if(Session.tryAutoLogin(player)) {
-        player.sendMessage("${ChatColor.of("#afffb1")}§l(✔) ${translations.get("autologin_success")}")
+        player.sendMessage("${translations.getPrefix(PrefixType.LOGIN)} ${translations.get("autologin_success")}")
         if(authy.config.getBoolean("SendWelcomeMessage")) {
             for(message : String in authy.config.getStringList("WelcomeMessage")) {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', message))
@@ -66,7 +67,7 @@ fun runJoin(player: Player) {
         if(LoginProcess.checkIfContains(player)) {
             if(i == 240) {
                 task!!.cancel()
-                player.kickPlayer("§c§l(!) ${translations.get("timedout_error")}")
+                player.kickPlayer("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("timedout_error")}")
                 LoginProcess.removePlayer(player)
             }
             LoginProcess.sendPleaseAuthMessage(player)

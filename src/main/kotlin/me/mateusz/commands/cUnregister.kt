@@ -1,6 +1,7 @@
 package me.mateusz.commands
 
 import me.mateusz.Authy
+import me.mateusz.PrefixType
 import me.mateusz.interfaces.ICommand
 import me.mateusz.process.LoginProcess
 import me.mateusz.process.UserData
@@ -21,10 +22,10 @@ class cUnregister(override var name: String = "unregister") : ICommand {
         if(sender is Player) {
             val p : Player = sender
             UserData.DeleteUser(p)
-            p.sendMessage("§6§l(!) ${translations.get("unregister_success")}")
+            p.sendMessage("${translations.getPrefix(PrefixType.UNREGISTER)} ${translations.get("unregister_success")}")
             LoginProcess.EffectRunner.runUnregister(p)
             authy.server.scheduler.runTaskLater(authy, Runnable {
-                p.kickPlayer("§6§l(!) ${translations.get("command_unregister_successkick")}")
+                p.kickPlayer("${translations.getPrefix(PrefixType.UNREGISTER)} ${translations.get("command_unregister_successkick")}")
             }, 40L)
             return true
 

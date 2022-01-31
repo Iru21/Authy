@@ -1,6 +1,7 @@
 package me.mateusz.process
 
 import me.mateusz.Authy
+import me.mateusz.PrefixType
 import org.bukkit.*
 import org.bukkit.entity.Firework
 import org.bukkit.entity.Player
@@ -9,8 +10,9 @@ class EffectRunner {
     val authy = Authy.instance
     val translations = Authy.translations
     fun runLogin(p : Player) {
-        p.sendTitle("§a§l(✔) ${translations.get("login_success")}", "", 20, 20, 20)
-        runFireWorks(p, Color.fromRGB(0, 255, 34))
+        p.sendTitle("${translations.getPrefix(PrefixType.LOGIN)} ${translations.get("login_success")}", "", 20, 20, 20)
+        val c = translations.getColor("prefix_login_color").color
+        runFireWorks(p, Color.fromRGB(c.red, c.green, c.blue))
         p.playSound(p.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1F, 1F)
         authy.server.scheduler.runTaskLater(authy, Runnable {
             p.playSound(p.location, Sound.ENTITY_EXPERIENCE_BOTTLE_THROW, 1F, 1F)
@@ -18,8 +20,9 @@ class EffectRunner {
     }
 
     fun runAutoLogin(p : Player) {
-        p.sendTitle("${net.md_5.bungee.api.ChatColor.of("#afffb1")}§l(✔) ${translations.get("autologin_success")}", "", 20, 20, 20)
-        runFireWorks(p, Color.fromRGB(175,255,177))
+        p.sendTitle("${translations.getPrefix(PrefixType.LOGIN)} ${translations.get("autologin_success")}", "", 20, 20, 20)
+        val c = translations.getColor("prefix_login_color").color
+        runFireWorks(p, Color.fromRGB(c.red, c.green, c.blue))
         p.playSound(p.location, Sound.BLOCK_AMETHYST_BLOCK_STEP, 1F, 1F)
         authy.server.scheduler.scheduleSyncDelayedTask(authy, {
             p.playSound(p.location, Sound.BLOCK_AMETHYST_BLOCK_STEP, 1F, 1F)
@@ -33,8 +36,9 @@ class EffectRunner {
     }
 
     fun runRegister(p : Player) {
-        p.sendTitle("${net.md_5.bungee.api.ChatColor.of("#CDFF00")}§l(✔) ${translations.get("register_success")}", "", 20, 20, 20)
-        runFireWorks(p, Color.fromRGB(205, 255, 0))
+        p.sendTitle("${translations.getPrefix(PrefixType.REGISTER)} ${translations.get("register_success")}", "", 20, 20, 20)
+        val c = translations.getColor("prefix_register_color").color
+        runFireWorks(p, Color.fromRGB(c.red, c.green, c.blue))
         p.playSound(p.location, Sound.BLOCK_TRIPWIRE_CLICK_ON, 1F, 1F)
         p.playSound(p.location, Sound.BLOCK_TRIPWIRE_CLICK_OFF, 1F, 1F)
         authy.server.scheduler.runTaskLater(authy, Runnable {
@@ -43,8 +47,9 @@ class EffectRunner {
     }
 
     fun runUnregister(p : Player) {
-        p.sendTitle("${ChatColor.GOLD}§l(✔) ${translations.get("unregister_success")}", "", 20, 20, 20)
-        runFireWorks(p, Color.fromRGB(0xFFAA00))
+        p.sendTitle("${translations.getPrefix(PrefixType.UNREGISTER)} ${translations.get("unregister_success")}", "", 20, 20, 20)
+        val c = translations.getColor("prefix_unregister_color").color
+        runFireWorks(p, Color.fromRGB(c.red, c.green, c.blue))
         p.playSound(p.location, Sound.BLOCK_CHAIN_BREAK, 1F, 1F)
         authy.server.scheduler.runTaskLater(authy, Runnable {
             p.playSound(p.location, Sound.BLOCK_CHAIN_BREAK, 1F, 1F)

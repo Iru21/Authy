@@ -4,6 +4,28 @@
 enabled: "§aEnabled"
 disabled: "§cDisabled"
 
+# can be in minecraft (&x) or hex (#abc123) format
+prefix_warning_value: "§l(!)"
+prefix_warning_color: "#FFDA4A"
+
+prefix_error_value: "§l(❌)"
+prefix_error_color: "#BE4143"
+
+prefix_login_value: "§l(✔)"
+prefix_login_color: "&a"
+
+prefix_remember_value: "§l(🔱)"
+prefix_remember_color: "#AFFFB1"
+
+prefix_pin_value: "§l(〰)"
+prefix_pin_color: "#ACEFFF"
+
+prefix_unregister_value: "§l(✔)"
+prefix_unregister_color: "#FFCF8A"
+
+prefix_register_value: "§l(✔)"
+prefix_register_color: "#CDFF00"
+
 already_authed: "§7You're already authenticated!"
 no_pin_warning: "§cYou don't have a pin set! §7For security set it using the §8/§fpin §7command!"
 
@@ -29,7 +51,7 @@ command_login_wrongpassword: "§7Wrong password!"
 command_login_wrongpin: "§7Zly pin!"
 command_login_nopinwarning: "§cYou don't have a pin set! §7For security set it using the §8/§fpin §7command!"
 
-pincommand_info_bar: "§8[§6●§8] §8§m----§r §7Pin §8§m----§r §8[§6●§8]"
+pincommand_info_bar: "§8[%s●§8] §8§m----§r §7Pin §8§m----§r §8[%s●§8]"
 pincommand_info_status: "§8  - §7Status§8: %s"
 pincommand_info_split: "    §8§m----"
 pincommand_info_togglehelp: "§8  - /§fpin §7toggle §8- §7Toggles the pin"

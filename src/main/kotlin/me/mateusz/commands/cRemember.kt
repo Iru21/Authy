@@ -1,6 +1,7 @@
 package me.mateusz.commands
 
 import me.mateusz.Authy
+import me.mateusz.PrefixType
 import me.mateusz.interfaces.ICommand
 import me.mateusz.process.Session
 import org.bukkit.command.Command
@@ -14,7 +15,7 @@ class cRemember(override var name: String = "remember") : ICommand {
         if(sender is Player) {
             val p : Player = sender
             Session.remember(p)
-            p.sendMessage("${net.md_5.bungee.api.ChatColor.of("#afffb1")}§l(✔) ${translations.get("command_remember_success")}")
+            p.sendMessage("${translations.getPrefix(PrefixType.REMEMBER)} ${translations.get("command_remember_success")}")
         }
         return true
     }

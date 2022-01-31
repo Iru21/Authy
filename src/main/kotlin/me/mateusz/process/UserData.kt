@@ -26,8 +26,9 @@ class UserData() {
             config.set("usr", p.name)
             config.set("ip", p.address?.address?.hostAddress)
             config.set("pass", HashUtil.toSHA256(pass))
-            config.set("usePin", false)
+            config.set("usePin", "false")
             config.set("pin", "not_set")
+            config.set("session", 0L)
             UpdateOrSaveUser(p, config)
             return config
         }
@@ -81,6 +82,7 @@ class UserData() {
     fun DeleteUser(p : Player) : Boolean {
         try {
             val UserDataFile = File(authy.dataFolder, "userdata" + File.separator + p.uniqueId + ".yml")
+            if(!UserDataFile.exists()) return false
             UserDataFile.delete()
             return true
         } catch(e : Exception) {

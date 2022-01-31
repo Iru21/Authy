@@ -1,6 +1,7 @@
 package me.mateusz.commands
 
 import me.mateusz.Authy
+import me.mateusz.PrefixType
 import me.mateusz.interfaces.ICommand
 import me.mateusz.process.UserData
 import net.md_5.bungee.api.ChatColor
@@ -18,44 +19,44 @@ class cLogin(override var name: String = "login") : ICommand {
             val p : Player = sender
             val shouldUsePin = UserData.get(p, "usePin") == "true"
             if(!LoginProcess.checkIfContains(p)) {
-                p.sendMessage("§c§l(!) ${translations.get("already_authed")}")
+                p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("already_authed")}")
                 return true
             }
             if(shouldUsePin) {
                 if(args.size != 2) {
-                    p.sendMessage("§c§l(!) ${translations.get("command_login_usagepin")}")
+                    p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_login_usagepin")}")
                     return true
                 }
             } else {
                 if(args.size != 1) {
-                    p.sendMessage("§c§l(!) ${translations.get("command_login_usage")}")
+                    p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_login_usage")}")
                     return true
                 }
             }
             if(!UserData.CheckIfExists(p)) {
-                p.sendMessage("§c§l(!) ${translations.get("command_login_notregistered")}")
+                p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_login_notregistered")}")
                 return true
             }
             return if(!UserData.Validate(p, args[0], "pass")) {
-                p.sendMessage("§c§l(!) ${translations.get("command_login_wrongpassword")}")
+                p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_login_wrongpassword")}")
                 true
             } else {
                 if(shouldUsePin) {
                     if(!UserData.Validate(p, args[1], "pin")) {
-                        p.sendMessage("§c§l(!) ${translations.get("command_login_wrongpin")}")
+                        p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_login_wrongpin")}")
                         return true
                     }
                 }
                 LoginProcess.removePlayer(p)
-                p.sendMessage("§a§l(✔) ${translations.get("login_success")}")
+                p.sendMessage("${translations.getPrefix(PrefixType.LOGIN)} ${translations.get("login_success")}")
                 if(authy.config.getBoolean("SendWelcomeMessage")) {
                     for(message : String in authy.config.getStringList("WelcomeMessage")) {
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', message))
                     }
                 }
                 authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} ${org.bukkit.ChatColor.YELLOW}logged in with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress}")
-                if(UserData.get(p, "usePin") == "false") {
-                    p.sendMessage("§6§l(!) ${translations.get("no_pin_warning")}")
+                if(UserData.get(p, "usePin").toString() == "false") {
+                    p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("no_pin_warning")}")
                 }
                 LoginProcess.EffectRunner.runLogin(p)
                 true

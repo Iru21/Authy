@@ -1,6 +1,7 @@
 package me.mateusz.process
 
 import me.mateusz.Authy
+import me.mateusz.PrefixType
 import org.bukkit.entity.Player
 import java.util.*
 
@@ -26,8 +27,8 @@ class LoginProcess() {
 
     fun sendPleaseAuthMessage( p : Player) {
         if(UserData.CheckIfExists(p)) {
-            p.sendMessage("§6§l(!) ${translations.get("loginprocess_reminder_login").format(if(UserData.get(p, "usePin") == "true") translations.get("loginprocess_reminderlogin_haspin") else "")}")
+            p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("loginprocess_reminder_login").format(if(UserData.get(p, "usePin") == "true") translations.get("loginprocess_reminderlogin_haspin") else "")}")
         }
-        else p.sendMessage("§6§l(!) ${translations.get("loginprocess_reminder_register")}")
+        else p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("loginprocess_reminder_register")}")
     }
 }

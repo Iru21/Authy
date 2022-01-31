@@ -3,6 +3,23 @@ package me.mateusz
 import net.md_5.bungee.api.ChatColor
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
+import java.util.regex.Pattern
+
+enum class PrefixType {
+    WARNING,
+    ERROR,
+    LOGIN,
+    PIN,
+    REGISTER,
+    REMEMBER,
+    UNREGISTER
+}
+
+enum class ParseMode {
+    ResetAndTranslate,
+    Translate,
+    None
+}
 
 class Translations {
     private val authy = Authy.instance
@@ -15,9 +32,30 @@ class Translations {
         updateCache()
     }
 
-    fun get(key: String): String {
+    fun getPrefix(type: PrefixType): String {
+        return "${getColor("prefix_${type.name.lowercase()}_color")}${get("prefix_${type.name.lowercase()}_value", ParseMode.Translate)}"
+    }
+
+    fun getColor(key: String): ChatColor {
+        val mcRegex = Pattern.compile("^&([0-9a-f]{1})\$")
+        val hexRegex = Pattern.compile("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\$")
+        val value = get(key, ParseMode.None)
+        if(hexRegex.matcher(value).matches()) {
+            return ChatColor.of(value)
+        } else if(mcRegex.matcher(value).matches()) {
+            return ChatColor.getByChar(value[1])
+        } else {
+            return ChatColor.BLACK
+        }
+    }
+
+    fun get(key: String, mode: ParseMode = ParseMode.ResetAndTranslate): String {
         val value = cache?.getString(key) ?: "&cThere has been a translation error! Couldn't find key $key in ${authy.config.getString("lang")}"
-        return ChatColor.translateAlternateColorCodes('&', "&r$value")
+        return when(mode) {
+            ParseMode.ResetAndTranslate -> ChatColor.translateAlternateColorCodes('&', "&r$value")
+            ParseMode.Translate -> ChatColor.translateAlternateColorCodes('&', value)
+            ParseMode.None -> value
+        }
     }
 
     fun updateCache() {
