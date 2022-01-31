@@ -1,5 +1,50 @@
 # key template:
 # [where]_[section]_[key]
 
+enabled: "§aEnabled"
+disabled: "§cDisabled"
+
+already_authed: "§7You're already authenticated!"
+no_pin_warning: "§cYou don't have a pin set! §7For security set it using the §8/§fpin §7command!"
+
+login_success: "§7Successfully logged in!"
+autologin_success: "&7Logged in automatically!"
+register_success: "§7Successfully registered!"
+unregister_success: "§7Successfully unregistered!"
+timedout_error: "&7Time for authorization has expired!"
+
+loginprocess_reminder_login: "&7Login using &8/&flogin &8[&fpassword&8] %s"
+loginprocess_reminderlogin_haspin: "&8[&fpin&8]"
+loginprocess_reminder_register: "&7Register using §8/§fregister §8[§fpassword§8] [§frepeat password§8]"
+
+command_register_usage: "§7sage: §8/§fregister §8[§fpassword§8] [§frepeat password§8]"
+command_register_notidentical: "§7Repeated password doesn't match!"
+command_register_breaksrules: "§7Password must contain at least 1 uppercase letter, 1 number and be 6 characters long or more!"
+command_register_alreadyregistered: "§7You're already registered!"
+
+command_login_usagepin: "§7Usage: §8/§flogin §8[§fpassword§8] [§fpin code§8]"
+command_login_usage: "§7Usage: §8/§flogin §8[§fpassword§8]"
+command_login_notregistered: "§7You're not registered! Use the §8/§fregister §7command!"
+command_login_wrongpassword: "§7Wrong password!"
+command_login_wrongpin: "§7Zly pin!"
+command_login_nopinwarning: "§cYou don't have a pin set! §7For security set it using the §8/§fpin §7command!"
+
+pincommand_info_bar: "§8[§6●§8] §8§m----§r §7Pin §8§m----§r §8[§6●§8]"
+pincommand_info_status: "§8  - §7Status§8: %s"
+pincommand_info_split: "    §8§m----"
+pincommand_info_togglehelp: "§8  - /§fpin §7toggle §8- §7Toggles the pin"
+pincommand_info_sethelp: "§8  - /§fpin §7set §8[§7new pin code§8] - §7Sets the pin"
+
+command_pin_setpinbeforetoggle: "§7You need to set a pin first! Use the §8/§fpin §7set §8[§7new pin code§8] §7command!"
+command_pin_toggled: "%s §7the pin!"
+command_pin_setusage: "§7Usage§8: /§fpin §7set §8[§7new pin code§8]"
+command_pin_breaksrules: "§7The pin must consist of 6 digits!"
+command_pin_success: "§7Pin has been set! §7Remember to enable it using the §8/§fpin toggle §7command!"
+
+command_remember_success: "§7Session saved for 48h!"
+
+command_unregister_successkick: "§7Enter again and register!"
+
 # do not edit
+# only updated when new keys have been added/renamed
 version: 1

@@ -16,7 +16,8 @@ class Translations {
     }
 
     fun get(key: String): String {
-        return ChatColor.translateAlternateColorCodes('&', cache!!.getString(key)) ?: "§cThere has been a translation error! Couldn't find key $key in ${authy.config.getString("lang")}.yml§l!"
+        val value = cache?.getString(key) ?: "&cThere has been a translation error! Couldn't find key $key in ${authy.config.getString("lang")}"
+        return ChatColor.translateAlternateColorCodes('&', "&r$value")
     }
 
     fun updateCache() {

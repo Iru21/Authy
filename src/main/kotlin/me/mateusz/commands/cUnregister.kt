@@ -14,36 +14,37 @@ import java.lang.Exception
 
 class cUnregister(override var name: String = "unregister") : ICommand {
     val authy = Authy.instance
+    val translations = Authy.translations
     val UserData : UserData = UserData()
     val LoginProcess : LoginProcess = Authy.loginProcess
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender is Player) {
             val p : Player = sender
             UserData.DeleteUser(p)
-            p.sendMessage("§6§l(!) §7Odrejestrowano!")
+            p.sendMessage("§6§l(!) ${translations.get("unregister_success")}")
             LoginProcess.EffectRunner.runUnregister(p)
             authy.server.scheduler.runTaskLater(authy, Runnable {
-                p.kickPlayer("§6§l(!) §7Wejdz ponownie i zarejestruj sie!")
+                p.kickPlayer("§6§l(!) ${translations.get("command_unregister_successkick")}")
             }, 40L)
             return true
 
         }
         else if(sender is ConsoleCommandSender) {
-            if(args.isEmpty()) {
-                sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.RED}Uzycie: unregister [gracz]")
+            if(args.size != 1) {
+                sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.RED}Usage: unregister [player name]")
                 return true
             }
             try {
                 @Suppress("DEPRECATION")
                 val p = Bukkit.getOfflinePlayer(args[0])
                 if(p.hasPlayedBefore()) {
-                    val b = UserData.DeleteUser(p)
-                    if(b) sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.GREEN}Odrejestrowano!")
-                    else sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.RED}Uzytkownik nie jest zarejestrowany!")
+                    if(UserData.DeleteUser(p)) sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.GREEN}Unregistered!")
+                    else sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.RED}That player is not registered!")
                 }
-                else sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.RED}Nie znalazlem gracza!")
+                else sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.RED}Player not found!")
             } catch (e : Exception) {
-                sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.DARK_RED}Wystapil blad!")
+                sender.sendMessage(e.message)
+                sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.DARK_RED}There has been an error!")
             }
             return true
         }

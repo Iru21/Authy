@@ -6,6 +6,7 @@ import java.util.*
 
 class LoginProcess() {
     val authy = Authy.instance
+    val translations = Authy.translations
     val EffectRunner = EffectRunner()
     val inProcess = mutableListOf<UUID>()
     val UserData : UserData = UserData()
@@ -25,9 +26,8 @@ class LoginProcess() {
 
     fun sendPleaseAuthMessage( p : Player) {
         if(UserData.CheckIfExists(p)) {
-
-            p.sendMessage("§6§l(!) §7Zaloguj sie uzywajac §8/§flogin §8[§fhaslo§8]${if(UserData.get(p, "usePin") == "true") " [§fpin§8]" else ""}")
+            p.sendMessage("§6§l(!) ${translations.get("loginprocess_reminder_login").format(if(UserData.get(p, "usePin") == "true") translations.get("loginprocess_reminderlogin_haspin") else "")}")
         }
-        else p.sendMessage("§6§l(!) §7Zarejestruj sie uzywajac §8/§fregister §8[§fhaslo§8] [§fpowtorz haslo§8]")
+        else p.sendMessage("§6§l(!) ${translations.get("loginprocess_reminder_register")}")
     }
 }

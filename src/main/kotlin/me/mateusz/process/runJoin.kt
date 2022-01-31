@@ -10,6 +10,7 @@ import org.bukkit.scheduler.BukkitTask
 fun runJoin(player: Player) {
 
     val authy = Authy.instance
+    val translations = Authy.translations
     val LoginProcess = Authy.loginProcess
     val Session = Authy.session
     val UserData = UserData()
@@ -49,7 +50,7 @@ fun runJoin(player: Player) {
     if(setFly) player.isFlying = true
 
     if(Session.tryAutoLogin(player)) {
-        player.sendMessage("${ChatColor.of("#afffb1")}§l(✔) §7Automatycznie zalogowano!")
+        player.sendMessage("${ChatColor.of("#afffb1")}§l(✔) ${translations.get("autologin_success")}")
         if(authy.config.getBoolean("SendWelcomeMessage")) {
             for(message : String in authy.config.getStringList("WelcomeMessage")) {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', message))
@@ -65,7 +66,7 @@ fun runJoin(player: Player) {
         if(LoginProcess.checkIfContains(player)) {
             if(i == 240) {
                 task!!.cancel()
-                player.kickPlayer("§c§l(!) §7Minal czas na autoryzacje!")
+                player.kickPlayer("§c§l(!) ${translations.get("timedout_error")}")
                 LoginProcess.removePlayer(player)
             }
             LoginProcess.sendPleaseAuthMessage(player)

@@ -11,53 +11,50 @@ import org.bukkit.entity.Player
 
 class cPin(override var name: String = "pin") : ICommand {
     val authy = Authy.instance
+    val translations = Authy.translations
     val UserData : UserData = UserData()
     val HashUtil : HashUtil = HashUtil()
+
+    fun getStatus(p: Player): Boolean {
+        return UserData.get(p, "usePin") == "true"
+    }
+
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender is Player) {
             val p : Player = sender
             UserData.updateIfOld(p, "usePin", false)
             UserData.updateIfOld(p, "pin", "not_set")
             if(args.isEmpty()) {
-                val status = if(UserData.get(p, "usePin") == "true") "§aWlaczony" else "§cWylaczony"
-                p.sendMessage("§8[§6●§8] §8§m----§r §7Pin §8§m----§r §8[§6●§8]")
+                val status = if(getStatus(p)) translations.get("enabled") else translations.get("disabled")
+                p.sendMessage(translations.get("pincommand_info_bar"))
                 p.sendMessage("")
-                p.sendMessage("§8  - §7Status§8: $status")
+                p.sendMessage(translations.get("pincommand_info_status").format(status))
                 p.sendMessage("")
-                p.sendMessage("    §8§m----")
+                p.sendMessage(translations.get("pincommand_info_split"))
                 p.sendMessage("")
-                p.sendMessage("§8  - /§fpin §7toggle §8- §7Wlacza/wylacza pin")
-                p.sendMessage("§8  - /§fpin §7set §8[§7nowy pin§8] - §7Ustawia pin")
+                p.sendMessage(translations.get("pincommand_info_togglehelp"))
+                p.sendMessage(translations.get("pincommand_info_sethelp"))
                 p.sendMessage("")
-                p.sendMessage("§8[§6●§8] §8§m----§r §7Pin §8§m----§r §8[§6●§8]")
+                p.sendMessage(translations.get("pincommand_info_bar"))
             } else if(args[0].lowercase() == "toggle") {
                 if(UserData.get(p, "pin") == "not_set") {
-                    p.sendMessage("§c§l(!) §7Ustaw najpierw pin! §8/§fpin §7set §8[§7nowy pin§8]")
+                    p.sendMessage("§c§l(!) ${translations.get("command_pin_setpinbeforetoggle")}")
                     return true
                 }
-                val current = UserData.get(p, "usePin")
-                when(current) {
-                    "true" -> {
-                        UserData.set(p, "usePin", false)
-                        p.sendMessage("§a§l(✔) §cWylaczono §7pin§8!")
-                    }
-                    else -> {
-                        UserData.set(p, "usePin", true)
-                        p.sendMessage("§a§l(✔) §aWlaczono §7pin§8!")
-                    }
-
-                }
-            }else if(args[0].lowercase() == "set") {
+                val current = if (getStatus(p)) translations.get("enabled") else translations.get("disabled")
+                UserData.set(p, "usePin", !getStatus(p))
+                p.sendMessage("§a§l(✔) ${translations.get("command_pin_toggled").format(current)}")
+            } else if(args[0].lowercase() == "set") {
                 if(args.size != 2) {
-                    p.sendMessage("§c§l(!) §7Uzycie§8: /§fpin §7set §8[§7nowy pin§8]")
+                    p.sendMessage("§c§l(!) ${translations.get("command_pin_setusage")}")
                     return true
                 }
                 if(!UserData.PinMatchesRules(args[1])) {
-                    p.sendMessage("§c§l(!) §7Pin musis skladac sie z 6 cyfr§8!")
+                    p.sendMessage("§c§l(!) ${translations.get("command_pin_breaksrules")}")
                     return true
                 }
                 UserData.set(p, "pin", HashUtil.toSHA256(args[1]))
-                p.sendMessage("§a§l(✔) §7Ustawiono pin§8! §7Nie zapomnij wlaczyc go uzywajac §8/§fpin §7toggle")
+                p.sendMessage("§a§l(✔) ${translations.get("command_pin_success")}")
             }
         }
         return true
