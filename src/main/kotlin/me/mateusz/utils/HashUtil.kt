@@ -1,7 +1,7 @@
 package me.mateusz.utils
 import java.security.MessageDigest
 
-class HashUtil {
+object HashUtil {
     private fun bytesToHex(hash: ByteArray): String {
         val hexString = StringBuilder(2 * hash.size)
         for (i in hash.indices) {

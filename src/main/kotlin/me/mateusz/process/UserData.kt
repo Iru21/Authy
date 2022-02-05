@@ -9,10 +9,9 @@ import org.bukkit.entity.Player
 import java.io.File
 import java.lang.Exception
 
-class UserData() {
+class UserData {
     val authy = Authy.instance
     val UserDataFolder = File(authy.dataFolder, "userdata" + File.separator)
-    val HashUtil : HashUtil = HashUtil()
 
     init {
         if(!UserDataFolder.exists()) UserDataFolder.mkdirs()

@@ -5,7 +5,7 @@ import org.bukkit.entity.Player
 import java.lang.Long.parseLong
 import java.sql.Timestamp
 
-class Session() {
+class Session {
     val authy = Authy.instance
     val UserData : UserData = UserData()
     val EffectRunner = EffectRunner()

@@ -14,7 +14,6 @@ class cPin(override var name: String = "pin") : ICommand {
     val authy = Authy.instance
     val translations = Authy.translations
     val UserData : UserData = UserData()
-    val HashUtil : HashUtil = HashUtil()
 
     fun getStatus(p: Player): Boolean {
         return UserData.get(p, "usePin").toString() == "true"
