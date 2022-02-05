@@ -24,7 +24,7 @@ enum class ParseMode {
 class Translations {
     private val authy = Authy.instance
     private val defaultLangFolder = File(authy.dataFolder, "lang" + File.separator + "defaults" + File.separator)
-    private val defaultLangs = arrayListOf("en_us")
+    private val defaultLangs = arrayListOf("en_us", "pl_pl", "ru_ru")
     private var cache: YamlConfiguration? = null
 
     init {
@@ -33,7 +33,9 @@ class Translations {
     }
 
     fun getPrefix(type: PrefixType): String {
-        return "${getColor("prefix_${type.name.lowercase()}_color")}${get("prefix_${type.name.lowercase()}_value", ParseMode.Translate)}"
+        return "${getColor("prefix_${type.name.lowercase()}_color")}${get("prefix_${type.name.lowercase()}_value",
+            ParseMode.Translate
+        )}"
     }
 
     fun getColor(key: String): ChatColor {

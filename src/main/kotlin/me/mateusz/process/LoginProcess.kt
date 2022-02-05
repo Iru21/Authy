@@ -27,7 +27,17 @@ class LoginProcess() {
 
     fun sendPleaseAuthMessage( p : Player) {
         if(UserData.CheckIfExists(p)) {
-            p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("loginprocess_reminder_login").format(if(UserData.get(p, "usePin") == "true") translations.get("loginprocess_reminderlogin_haspin") else "")}")
+            p.sendMessage(
+                "${translations.getPrefix(PrefixType.WARNING)} ${
+                    translations.get("loginprocess_reminder_login").format(
+                        if (UserData.get(
+                                p,
+                                "usePin"
+                            ) == "true"
+                        ) translations.get("loginprocess_reminderlogin_haspin") else ""
+                    )
+                }"
+            )
         }
         else p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("loginprocess_reminder_register")}")
     }
