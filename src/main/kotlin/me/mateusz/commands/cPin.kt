@@ -19,6 +19,10 @@ class cPin(override var name: String = "pin") : ICommand {
         return UserData.get(p, "usePin").toString() == "true"
     }
 
+    fun getStatusTranslated(p: Player): String {
+        return if (getStatus(p)) translations.get("enabled") else translations.get("disabled")
+    }
+
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender is Player) {
             val p : Player = sender
@@ -42,9 +46,8 @@ class cPin(override var name: String = "pin") : ICommand {
                     p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_pin_setpinbeforetoggle")}")
                     return true
                 }
-                val current = if (getStatus(p)) translations.get("enabled") else translations.get("disabled")
                 UserData.set(p, "usePin", !getStatus(p))
-                p.sendMessage("${translations.getPrefix(PrefixType.PIN)} ${translations.get("command_pin_toggled").format(current)}")
+                p.sendMessage("${translations.getPrefix(PrefixType.PIN)} ${translations.get("command_pin_toggled").format(getStatusTranslated(p))}")
             } else if(args[0].lowercase() == "set") {
                 if(args.size != 2) {
                     p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_pin_setusage")}")
