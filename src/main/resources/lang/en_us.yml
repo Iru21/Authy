@@ -39,7 +39,7 @@ loginprocess_reminder_login: "&7Login using &8/&flogin &8[&fpassword&8] %s"
 loginprocess_reminderlogin_haspin: "&8[&fpin&8]"
 loginprocess_reminder_register: "&7Register using &8/&fregister &8[&fpassword&8] [&frepeat password&8]"
 
-command_register_usage: "&7sage: &8/&fregister &8[&fpassword&8] [&frepeat password&8]"
+command_register_usage: "&7Usage: &8/&fregister &8[&fpassword&8] [&frepeat password&8]"
 command_register_notidentical: "&7Repeated password doesn't match!"
 command_register_breaksrules: "&7Password must contain at least 1 uppercase letter, 1 number and be 6 characters long or more!"
 command_register_alreadyregistered: "&7You're already registered!"
