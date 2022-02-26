@@ -66,6 +66,11 @@ command_remember_success: "&7Sesja zapisana na 48h!"
 
 command_unregister_successkick: "&7Dołącz ponownie na serwer i zarejestruj się!"
 
+duplicateprotection_notification_message: "&7Konta z tym samym adresem ip: &8(%s&8)"
+duplicateprotection_notification_separator: "&8, &r"
+duplicateprotection_notification_namecolor: "#FFDA4A"
+duplicateprotection_max_reached: "&7Może być tylko &c%s &7kont z tym samym adresem ip!"
+
 # do not edit
 # only updated when new keys have been added/renamed
-version: 1
+version: 2

@@ -34,6 +34,14 @@ class UserData {
         return YamlConfiguration.loadConfiguration(UserDataFile)
     }
 
+    fun getAll(): MutableList<FileConfiguration> {
+        val files = UserDataFolder.listFiles()
+        val list = files?.map {
+            YamlConfiguration.loadConfiguration(it)
+        } ?: mutableListOf<FileConfiguration>()
+        return list as MutableList
+    }
+
     fun set(p : Player, key : String, value : Any) {
         val UserDataFile = File(authy.dataFolder, "userdata" + File.separator + p.uniqueId + ".yml")
         val config = YamlConfiguration.loadConfiguration(UserDataFile)

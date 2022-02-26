@@ -66,6 +66,11 @@ command_remember_success: "&7Сессия сохранена на 48 часов!
 
 command_unregister_successkick: "&7Войдите еще раз и зарегистрируйтесь!"
 
+duplicateprotection_notification_message: "&7Аккаунты с одинаковым IP-адресом: &8(%s&8)"
+duplicateprotection_notification_separator: "&8, &r"
+duplicateprotection_notification_namecolor: "#FFDA4A"
+duplicateprotection_max_reached: "&7Это может быть только &c%s &7учетные записи с одинаковым IP-адресом!"
+
 # do not edit
 # only updated when new keys have been added/renamed
-version: 1
+version: 2

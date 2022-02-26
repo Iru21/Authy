@@ -1,6 +1,7 @@
 package me.mateusz.events
 
 import me.mateusz.Authy
+import me.mateusz.process.DuplicateProtection
 import me.mateusz.process.runJoin
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -19,7 +20,9 @@ class LoginEvents : Listener {
 
     @EventHandler
     fun onJoin(e : PlayerJoinEvent) {
-        runJoin(e.player)
+        if(DuplicateProtection.check(e.player)) {
+            runJoin(e.player)
+        }
     }
 
     @EventHandler

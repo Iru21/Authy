@@ -14,4 +14,12 @@ onJoin:
   y: 0
   z: 0
 
+duplicateIpProtection:
+  # 0 - No protection
+  # 1 - Max is applied to online players
+  # 2 - Max is applied to registered players
+  protectionLevel: 0
+  maxPerIp: 1
+  notifyOnDuplicateIp: true
+
 lang: en_us

@@ -67,6 +67,11 @@ command_remember_success: "&7Session saved for 48h!"
 
 command_unregister_successkick: "&7Enter again and register!"
 
+duplicateprotection_notification_message: "&7Accounts from the same ip address: &8(%s&8)"
+duplicateprotection_notification_separator: "&8, &r"
+duplicateprotection_notification_namecolor: "#FFDA4A"
+duplicateprotection_max_reached: "&7There can be only &c%s &7accounts on the same ip address!"
+
 # do not edit
 # only updated when new keys have been added/renamed
-version: 1
+version: 2
