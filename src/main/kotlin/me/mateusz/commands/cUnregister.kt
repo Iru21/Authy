@@ -4,7 +4,6 @@ import me.mateusz.Authy
 import me.mateusz.PrefixType
 import me.mateusz.interfaces.ICommand
 import me.mateusz.process.LoginProcess
-import me.mateusz.process.UserData
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
@@ -16,12 +15,12 @@ import java.lang.Exception
 class cUnregister(override var name: String = "unregister") : ICommand {
     val authy = Authy.instance
     val translations = Authy.translations
-    val UserData : UserData = UserData()
+    val userdata = Authy.userdata
     val LoginProcess : LoginProcess = Authy.loginProcess
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender is Player) {
             val p : Player = sender
-            UserData.DeleteUser(p)
+            userdata.DeleteUser(p)
             p.sendMessage("${translations.getPrefix(PrefixType.UNREGISTER)} ${translations.get("unregister_success")}")
             LoginProcess.EffectRunner.runUnregister(p)
             authy.server.scheduler.runTaskLater(authy, Runnable {
@@ -38,7 +37,7 @@ class cUnregister(override var name: String = "unregister") : ICommand {
             try {
                 @Suppress("DEPRECATION")
                 val p = Bukkit.getOfflinePlayer(args[0])
-                if(UserData.DeleteUser(p)) sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.GREEN}Unregistered!")
+                if(userdata.DeleteUser(p)) sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.GREEN}Unregistered!")
                 else sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.RED}That player is not registered!")
             } catch (e : Exception) {
                 sender.sendMessage(e.message)

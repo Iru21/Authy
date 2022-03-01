@@ -4,6 +4,7 @@ import me.mateusz.commands.*
 import me.mateusz.events.LoginEvents
 import me.mateusz.process.LoginProcess
 import me.mateusz.process.Session
+import me.mateusz.process.UserData
 import me.mateusz.process.runJoin
 import me.mateusz.utils.CommandFilter
 import me.mateusz.utils.registerCommand
@@ -19,6 +20,7 @@ class Authy : JavaPlugin() {
     companion object {
         lateinit var instance: Authy
         lateinit var translations: Translations
+        lateinit var userdata: UserData
         lateinit var loginProcess: LoginProcess
         lateinit var session: Session
     }
@@ -27,6 +29,7 @@ class Authy : JavaPlugin() {
 
         instance = this
         translations = Translations()
+        userdata = UserData()
         loginProcess = LoginProcess()
         session = Session()
 

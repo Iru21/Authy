@@ -4,7 +4,6 @@ import me.mateusz.Authy
 import me.mateusz.PrefixType
 import me.mateusz.interfaces.ICommand
 import me.mateusz.process.LoginProcess
-import me.mateusz.process.UserData
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
@@ -13,7 +12,7 @@ import org.bukkit.entity.Player
 class cRegister(override var name: String = "register") : ICommand {
     val authy = Authy.instance
     val translations = Authy.translations
-    val UserData : UserData = UserData()
+    val userdata = Authy.userdata
     val LoginProcess : LoginProcess = Authy.loginProcess
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender is Player) {
@@ -30,12 +29,12 @@ class cRegister(override var name: String = "register") : ICommand {
                 p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_register_notidentical")}")
                 return true
             }
-            if(!UserData.PasswordMatchesRules(args[0])) {
+            if(!userdata.PasswordMatchesRules(args[0])) {
                 p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_register_breaksrules")}")
                 return true
             }
-            return if(!UserData.CheckIfExists(p)) {
-                UserData.CreateOrGetUser(p, args[0])
+            return if(!userdata.CheckIfExists(p)) {
+                userdata.CreateOrGetUser(p, args[0])
                 LoginProcess.removePlayer(p)
                 p.sendMessage("${translations.getPrefix(PrefixType.REGISTER)} ${translations.get("register_success")}")
                 if(authy.config.getBoolean("SendWelcomeMessage")) {
@@ -44,7 +43,7 @@ class cRegister(override var name: String = "register") : ICommand {
                     }
                 }
                 authy.server.consoleSender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}Authy${ChatColor.DARK_GRAY}] ${ChatColor.YELLOW}Player ${ChatColor.WHITE}${p.name} ${ChatColor.YELLOW}registered with ip ${ChatColor.WHITE}${p.address?.address?.hostAddress}")
-                if(UserData.get(p, "usePin").toString() == "false") {
+                if(userdata.get(p, "usePin").toString() == "false") {
                     p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("no_pin_warning")}")
                 }
                 LoginProcess.EffectRunner.runRegister(p)

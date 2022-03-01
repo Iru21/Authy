@@ -14,11 +14,11 @@ fun runJoin(player: Player) {
     val translations = Authy.translations
     val LoginProcess = Authy.loginProcess
     val Session = Authy.session
-    val UserData = UserData()
+    val userdata = Authy.userdata
 
-    UserData.updateIfOld(player, "session", 0)
-    UserData.updateIfOld(player, "usePin", false)
-    UserData.updateIfOld(player, "pin", "not_set")
+    userdata.updateIfOld(player, "session", 0)
+    userdata.updateIfOld(player, "usePin", false)
+    userdata.updateIfOld(player, "pin", "not_set")
 
     if(!player.hasPlayedBefore() && authy.config.getBoolean("onFirstJoin.teleport")) {
         val x = authy.config.getDouble("onFirstJoin.x")
