@@ -11,11 +11,9 @@ object DuplicateProtection {
         val protLevel = config.getInt("duplicateIpProtection.protectionLevel")
         val max = config.getInt("duplicateIpProtection.maxPerIp")
         val shouldNotify = config.getBoolean("duplicateIpProtection.notifyOnDuplicateIp")
-        val duplicates = getDuplicatesForIpOf(p).filter {
-            it != p.name
-        }
+        var duplicates = getDuplicatesForIpOf(p)
 
-        if(shouldNotify) {
+        if(shouldNotify && duplicates.size > 1) {
             for (lp in Authy.instance.server.onlinePlayers) {
                 if(lp.hasPermission("authy.notifyonduplicateip")) {
                     val formatted =
@@ -26,6 +24,9 @@ object DuplicateProtection {
                 }
             }
         }
+        duplicates = duplicates.filter {
+            it != p.name
+        } as MutableList<String>
         if(protLevel > 0 && duplicates.size + 1 > max) {
             p.kickPlayer(translations.get("duplicateprotection_max_reached").format(max.toString()))
             return false
@@ -34,7 +35,7 @@ object DuplicateProtection {
     }
 
     private fun getDuplicatesForIpOf(p: Player): MutableList<String> {
-        val userData = UserData()
+        val userData = Authy.userdata
         val config = Authy.instance.config
         val protLevel = config.getInt("duplicateIpProtection.protectionLevel")
         val list = mutableListOf<String>()
