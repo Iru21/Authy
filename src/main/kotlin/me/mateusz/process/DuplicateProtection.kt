@@ -5,13 +5,17 @@ import me.mateusz.PrefixType
 import org.bukkit.entity.Player
 
 object DuplicateProtection {
+
+    val playerData = Authy.playerData
+    val config = Authy.instance.config
+    val translations = Authy.translations
+
     fun check(p: Player): Boolean {
-        val config = Authy.instance.config
-        val translations = Authy.translations
         val protLevel = config.getInt("duplicateIpProtection.protectionLevel")
+        if(protLevel == 0) return true
         val max = config.getInt("duplicateIpProtection.maxPerIp")
         val shouldNotify = config.getBoolean("duplicateIpProtection.notifyOnDuplicateIp")
-        var duplicates = getDuplicatesForIpOf(p)
+        val duplicates = getDuplicatesForIpOf(p)
 
         if(shouldNotify && duplicates.size > 1) {
             for (lp in Authy.instance.server.onlinePlayers) {
@@ -24,35 +28,32 @@ object DuplicateProtection {
                 }
             }
         }
-        duplicates = duplicates.filter {
-            it != p.name
-        } as MutableList<String>
-        if(protLevel > 0 && duplicates.size + 1 > max) {
+        return if(duplicates.size > max && !p.hasPermission("authy.ipbypass")) {
             p.kickPlayer(translations.get("duplicateprotection_max_reached").format(max.toString()))
-            return false
+            false
         }
-        return true
+        else true
     }
 
     private fun getDuplicatesForIpOf(p: Player): MutableList<String> {
-        val userData = Authy.userdata
-        val config = Authy.instance.config
         val protLevel = config.getInt("duplicateIpProtection.protectionLevel")
         val list = mutableListOf<String>()
         val ip = p.address?.address?.hostAddress
-        if(protLevel == 1) {
-            for (lp in Authy.instance.server.onlinePlayers) {
-                val lpip = lp.address?.address?.hostAddress
-                if(ip == lpip) {
-                    list.add(lp.name)
+        when(protLevel) {
+            1 -> {
+                for (lp in Authy.instance.server.onlinePlayers) {
+                    val lpip = lp.address?.address?.hostAddress
+                    if(ip == lpip) {
+                        list.add(lp.name)
+                    }
                 }
             }
-        }
-        else if(protLevel == 2) {
-            for (lp in userData.getAll()) {
-                val lpip = lp.get("ip")
-                if(ip == lpip) {
-                    list.add(lp.get("usr") as String)
+            2 -> {
+                for (lp in playerData.getAll()) {
+                    val lpip = lp.ip
+                    if(ip == lpip) {
+                        list.add(lp.username)
+                    }
                 }
             }
         }

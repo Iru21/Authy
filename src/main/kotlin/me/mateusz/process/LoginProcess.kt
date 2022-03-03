@@ -10,7 +10,7 @@ class LoginProcess {
     val translations = Authy.translations
     val EffectRunner = EffectRunner()
     val inProcess = mutableListOf<UUID>()
-    val userdata = Authy.userdata
+    val playerData = Authy.playerData
 
     fun addPlayer(p : Player) {
         inProcess.add(p.uniqueId)
@@ -26,15 +26,11 @@ class LoginProcess {
     }
 
     fun sendPleaseAuthMessage( p : Player) {
-        if(userdata.CheckIfExists(p)) {
+        if(playerData.exists(p)) {
             p.sendMessage(
                 "${translations.getPrefix(PrefixType.WARNING)} ${
                     translations.get("loginprocess_reminder_login").format(
-                        if (userdata.get(
-                                p,
-                                "usePin"
-                            ) == "true"
-                        ) translations.get("loginprocess_reminderlogin_haspin") else ""
+                        if (playerData.get(p.uniqueId)!!.usePin) translations.get("loginprocess_reminderlogin_haspin") else ""
                     )
                 }"
             )

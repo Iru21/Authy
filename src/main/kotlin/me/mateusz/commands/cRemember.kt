@@ -3,7 +3,7 @@ package me.mateusz.commands
 import me.mateusz.Authy
 import me.mateusz.PrefixType
 import me.mateusz.interfaces.ICommand
-import me.mateusz.process.Session
+import me.mateusz.data.Session
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player

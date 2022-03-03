@@ -2,6 +2,7 @@ package me.mateusz.commands
 
 import me.mateusz.Authy
 import me.mateusz.PrefixType
+import me.mateusz.data.Validation
 import me.mateusz.interfaces.ICommand
 import net.md_5.bungee.api.ChatColor
 import org.bukkit.command.Command
@@ -11,17 +12,21 @@ import org.bukkit.entity.Player
 class cLogin(override var name: String = "login") : ICommand {
     val authy = Authy.instance
     val translations = Authy.translations
-    val userdata = Authy.userdata
+    val playerData = Authy.playerData
     val LoginProcess = Authy.loginProcess
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender is Player) {
             val p : Player = sender
-            val shouldUsePin = userdata.get(p, "usePin") == "true"
+            val playerDataModel = playerData.get(p.uniqueId)
+            if(playerDataModel == null || !playerData.exists(p)) {
+                p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_login_notregistered")}")
+                return true
+            }
             if(!LoginProcess.checkIfContains(p)) {
                 p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("already_authed")}")
                 return true
             }
-            if(shouldUsePin) {
+            if(playerDataModel.usePin) {
                 if(args.size != 2) {
                     p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_login_usagepin")}")
                     return true
@@ -32,16 +37,12 @@ class cLogin(override var name: String = "login") : ICommand {
                     return true
                 }
             }
-            if(!userdata.CheckIfExists(p)) {
-                p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_login_notregistered")}")
-                return true
-            }
-            return if(!userdata.Validate(p, args[0], "pass")) {
+            return if(!Validation.checkPassword(p.uniqueId, args[0])) {
                 p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_login_wrongpassword")}")
                 true
             } else {
-                if(shouldUsePin) {
-                    if(!userdata.Validate(p, args[1], "pin")) {
+                if(playerDataModel.usePin) {
+                    if(!Validation.checkPin(p.uniqueId, args[1])) {
                         p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_login_wrongpin")}")
                         return true
                     }
@@ -54,7 +55,7 @@ class cLogin(override var name: String = "login") : ICommand {
                     }
                 }
                 authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} ${org.bukkit.ChatColor.YELLOW}logged in with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress}")
-                if(userdata.get(p, "usePin").toString() == "false") {
+                if(!playerDataModel.usePin) {
                     p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("no_pin_warning")}")
                 }
                 LoginProcess.EffectRunner.runLogin(p)

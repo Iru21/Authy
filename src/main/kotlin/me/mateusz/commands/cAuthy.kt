@@ -8,7 +8,6 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import java.io.File
 
-
 class cAuthy(override var name: String = "authy") : ICommand {
     val authy = Authy.instance
     val translations = Authy.translations

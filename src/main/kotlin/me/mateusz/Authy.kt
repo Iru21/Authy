@@ -1,10 +1,11 @@
 package me.mateusz
 
 import me.mateusz.commands.*
+import me.mateusz.data.PlayerData
 import me.mateusz.events.LoginEvents
 import me.mateusz.process.LoginProcess
-import me.mateusz.process.Session
-import me.mateusz.process.UserData
+import me.mateusz.data.Session
+import me.mateusz.events.BlockEvents
 import me.mateusz.process.runJoin
 import me.mateusz.utils.CommandFilter
 import me.mateusz.utils.registerCommand
@@ -20,7 +21,7 @@ class Authy : JavaPlugin() {
     companion object {
         lateinit var instance: Authy
         lateinit var translations: Translations
-        lateinit var userdata: UserData
+        lateinit var playerData: PlayerData
         lateinit var loginProcess: LoginProcess
         lateinit var session: Session
     }
@@ -29,7 +30,8 @@ class Authy : JavaPlugin() {
 
         instance = this
         translations = Translations()
-        userdata = UserData()
+        playerData = PlayerData()
+        playerData.init()
         loginProcess = LoginProcess()
         session = Session()
 
@@ -38,6 +40,7 @@ class Authy : JavaPlugin() {
         server.consoleSender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}$pluginName${ChatColor.DARK_GRAY}] ${ChatColor.GREEN}Enabling $version")
 
         server.pluginManager.registerEvents(LoginEvents(), this)
+        server.pluginManager.registerEvents(BlockEvents(), this)
 
         registerCommand(cRegister())
         registerCommand(cLogin())

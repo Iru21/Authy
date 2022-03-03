@@ -1,4 +1,4 @@
-package me.mateusz.process
+package me.mateusz.data
 
 import me.mateusz.Authy
 import org.bukkit.entity.Player
@@ -7,24 +7,25 @@ import java.sql.Timestamp
 
 class Session {
     val authy = Authy.instance
-    val userdata = Authy.userdata
+    val playerData = Authy.playerData
     val effectRunner = Authy.loginProcess.EffectRunner
 
     fun remember(p : Player) {
         val curtime = Timestamp(System.currentTimeMillis())
         val timestamp = curtime.time
-        val ip = p.address?.address?.hostAddress
-        userdata.set(p, "session", timestamp)
-        if (ip != null) {
-            userdata.set(p,"ip", ip)
-        }
+        val playerDataModel = playerData.get(p.uniqueId)!!
+        playerDataModel.session = timestamp
+        playerDataModel.ip = p.address?.address?.hostAddress!!
+        playerData.save(playerDataModel)
     }
 
     fun tryAutoLogin(p : Player) : Boolean {
-        val session = userdata.get(p, "session")
+        val playerDataModel = playerData.get(p.uniqueId)
+        if(playerDataModel == null) return false
+        val session = playerDataModel.session
         val curtime = Timestamp(System.currentTimeMillis())
         val timestamp = curtime.time
-        if(session != null && (parseLong(session.toString()) + 172800000 > timestamp) && p.address?.address?.hostAddress == userdata.get(p, "ip")) {
+        if((parseLong(session.toString()) + 172800000 > timestamp) && p.address?.address?.hostAddress == playerDataModel.ip) {
             authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} ${org.bukkit.ChatColor.YELLOW}auto logged in with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress}")
             effectRunner.runAutoLogin(p)
             return true

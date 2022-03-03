@@ -2,6 +2,7 @@ package me.mateusz.process
 
 import me.mateusz.Authy
 import me.mateusz.PrefixType
+import me.mateusz.data.Migration
 import net.md_5.bungee.api.ChatColor
 import org.bukkit.Location
 import org.bukkit.block.BlockFace
@@ -9,16 +10,12 @@ import org.bukkit.entity.Player
 import org.bukkit.scheduler.BukkitTask
 
 fun runJoin(player: Player) {
-
     val authy = Authy.instance
+    val loginProcess = Authy.loginProcess
     val translations = Authy.translations
-    val LoginProcess = Authy.loginProcess
-    val Session = Authy.session
-    val userdata = Authy.userdata
+    val session = Authy.session
 
-    userdata.updateIfOld(player, "session", 0)
-    userdata.updateIfOld(player, "usePin", false)
-    userdata.updateIfOld(player, "pin", "not_set")
+    Migration.updatePlayer(player)
 
     if(!player.hasPlayedBefore() && authy.config.getBoolean("onFirstJoin.teleport")) {
         val x = authy.config.getDouble("onFirstJoin.x")
@@ -50,7 +47,7 @@ fun runJoin(player: Player) {
 
     if(setFly) player.isFlying = true
 
-    if(Session.tryAutoLogin(player)) {
+    if(session.tryAutoLogin(player)) {
         player.sendMessage("${translations.getPrefix(PrefixType.LOGIN)} ${translations.get("autologin_success")}")
         if(authy.config.getBoolean("SendWelcomeMessage")) {
             for(message : String in authy.config.getStringList("WelcomeMessage")) {
@@ -60,18 +57,19 @@ fun runJoin(player: Player) {
         return
     }
 
-    LoginProcess.addPlayer(player)
+    loginProcess.addPlayer(player)
     var i = 0
     var task : BukkitTask? = null
     task = authy.server.scheduler.runTaskTimer(authy, Runnable {
-        if(LoginProcess.checkIfContains(player)) {
-            if(i == 240) {
+        if(loginProcess.checkIfContains(player)) {
+            if(i == 10) {
                 task!!.cancel()
                 player.kickPlayer("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("timedout_error")}")
-                LoginProcess.removePlayer(player)
+                loginProcess.removePlayer(player)
+            } else {
+                loginProcess.sendPleaseAuthMessage(player)
+                i++
             }
-            LoginProcess.sendPleaseAuthMessage(player)
-            i++
         }
         else task!!.cancel()
     },0L, 200L)
