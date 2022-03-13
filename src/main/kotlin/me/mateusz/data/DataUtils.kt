@@ -17,8 +17,10 @@ object DataUtils {
         return File(getDataFolder(), "$uuid.yml")
     }
 
-    fun construct(data: YamlConfiguration): PlayerDataModel {
-        return PlayerDataModel(
+    fun construct(data: YamlConfiguration): PlayerDataModel? {
+        val version = data.getInt("version")
+        return if(version < PLAYER_MODEL_VERSION) null
+        else PlayerDataModel(
             UUID.fromString(data.getString("uuid")!!),
             data.getString("username")!!,
             data.getString("ip")!!,
@@ -26,7 +28,7 @@ object DataUtils {
             data.getBoolean("usePin"),
             data.getString("hashedPin"),
             data.getLong("session"),
-            data.getInt("version")
+            version
         )
     }
 

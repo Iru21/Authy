@@ -25,7 +25,7 @@ class PlayerData {
         data.set("ip", p.address?.address?.hostAddress)
         data.set("hashedPassword", HashUtil.toSHA256(password))
         data.set("version", DataUtils.PLAYER_MODEL_VERSION)
-        val model = DataUtils.construct(data)
+        val model = DataUtils.construct(data)!!
         save(model)
         return model
     }
@@ -55,7 +55,7 @@ class PlayerData {
         val files = DataUtils.getDataFolder().listFiles()
         return files!!.map {
             DataUtils.construct(YamlConfiguration.loadConfiguration(it))
-        }
+        }.filterNotNull()
     }
 
     fun save(playerDataModel: PlayerDataModel) {
