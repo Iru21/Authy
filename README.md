@@ -20,9 +20,13 @@ The plugins available on the market annoyed us so we decided to write our own pl
 
 ### Commands
 
-`/login [password] [pin (required when toggled and set)]` - login command
+`/login [password] [pin (required when toggled and set)]` - Logs in to the server
 
-`/register [password] [password]` - register command
+`/register [password] [password]` - Registers the player
+
+`/unregister` - Unregisters the player
+
+`/unregister [nickname]` - Unregisters given player (console only)
 
 `/remember` - save login for 48h
 
@@ -42,6 +46,8 @@ The plugins available on the market annoyed us so we decided to write our own pl
 `authy.login` - permission for command /login
 
 `authy.register` - permission for command /register
+
+`authy.unregister` - permission for command /unregister
 
 `authy.remember` - permission for command /remember
 
