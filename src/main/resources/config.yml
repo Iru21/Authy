@@ -1,3 +1,8 @@
+effects:
+  title: true
+  particles: true
+  sounds: true
+
 WelcomeMessage:
   - "&7Welcome to &6server name&7!"
 SendWelcomeMessage: false

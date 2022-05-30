@@ -36,6 +36,8 @@ class Authy : JavaPlugin() {
         session = Session()
 
         saveDefaultConfig()
+        config.options().copyDefaults(true)
+        saveConfig()
 
         server.consoleSender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}$pluginName${ChatColor.DARK_GRAY}] ${ChatColor.GREEN}Enabling $version")
 
