@@ -14,11 +14,11 @@ class cRegister(override var name: String = "register") : ICommand {
     val authy = Authy.instance
     val translations = Authy.translations
     val playerData = Authy.playerData
-    val LoginProcess : LoginProcess = Authy.loginProcess
+    val loginProcess : LoginProcess = Authy.loginProcess
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender is Player) {
             val p : Player = sender
-            if(!LoginProcess.checkIfContains(p)) {
+            if(!loginProcess.checkIfContains(p)) {
                 p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("already_authed")}!")
                 return true
             }
@@ -36,16 +36,22 @@ class cRegister(override var name: String = "register") : ICommand {
             }
             return if(!playerData.exists(p)) {
                 playerData.create(p, args[0])
-                LoginProcess.removePlayer(p)
+                loginProcess.removePlayer(p)
                 p.sendMessage("${translations.getPrefix(PrefixType.REGISTER)} ${translations.get("register_success")}")
                 if(authy.config.getBoolean("SendWelcomeMessage")) {
                     for(message : String in authy.config.getStringList("WelcomeMessage")) {
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', message))
                     }
                 }
+                if(authy.config.getBoolean("onJoin.teleport") && authy.config.getBoolean("onJoin.concealment")) {
+                    val loc = loginProcess.getLocation(p)
+                    if (loc != null) {
+                        p.teleport(loc)
+                    }
+                }
                 authy.server.consoleSender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}Authy${ChatColor.DARK_GRAY}] ${ChatColor.YELLOW}Player ${ChatColor.WHITE}${p.name} ${ChatColor.YELLOW}registered with ip ${ChatColor.WHITE}${p.address?.address?.hostAddress}")
                 p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("no_pin_warning")}")
-                LoginProcess.EffectRunner.runRegister(p)
+                loginProcess.EffectRunner.runRegister(p)
                 true
             } else {
                 p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_register_alreadyregistered")}")

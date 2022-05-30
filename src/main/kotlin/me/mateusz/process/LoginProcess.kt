@@ -2,15 +2,19 @@ package me.mateusz.process
 
 import me.mateusz.Authy
 import me.mateusz.PrefixType
+import org.bukkit.Location
 import org.bukkit.entity.Player
 import java.util.*
+import kotlin.collections.HashMap
 
 class LoginProcess {
     val authy = Authy.instance
     val translations = Authy.translations
     val EffectRunner = EffectRunner()
-    val inProcess = mutableListOf<UUID>()
     val playerData = Authy.playerData
+
+    private val inProcess = mutableListOf<UUID>()
+    private val concealment = HashMap<UUID, Location>()
 
     fun addPlayer(p : Player) {
         inProcess.add(p.uniqueId)
@@ -36,5 +40,13 @@ class LoginProcess {
             )
         }
         else p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("loginprocess_reminder_register")}")
+    }
+
+    fun saveLocation(p : Player) {
+        concealment.set(p.uniqueId, p.location)
+    }
+
+    fun getLocation(p: Player): Location? {
+        return concealment.get(p.uniqueId)
     }
 }

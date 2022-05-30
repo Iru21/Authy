@@ -17,12 +17,16 @@ fun runJoin(player: Player) {
 
     Migration.updatePlayer(player)
 
+
     if(!player.hasPlayedBefore() && authy.config.getBoolean("onFirstJoin.teleport")) {
         val x = authy.config.getDouble("onFirstJoin.x")
         val y = authy.config.getDouble("onFirstJoin.y") + 0.1
         val z = authy.config.getDouble("onFirstJoin.z")
         player.teleport(Location(player.world, x, y, z))
     } else if(authy.config.getBoolean("onJoin.teleport")) {
+        if(authy.config.getBoolean("onJoin.concealment")) {
+            loginProcess.saveLocation(player)
+        }
         val x = authy.config.getDouble("onJoin.x")
         val y = authy.config.getDouble("onJoin.y") + 0.1
         val z = authy.config.getDouble("onJoin.z")

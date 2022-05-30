@@ -14,6 +14,8 @@ onFirstJoin:
   z: 0
 
 onJoin:
+  # Concealment if set to true (also requires teleport to be true) will teleport a player to their position after authentication
+  concealment: false
   teleport: false
   x: 0
   y: 0
