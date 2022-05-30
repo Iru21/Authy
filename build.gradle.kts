@@ -5,6 +5,7 @@ plugins {
 }
 
 group = "me.mateusz"
+val mcversion = "1.18.2"
 
 repositories {
     mavenCentral()
@@ -13,16 +14,11 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test-junit"))
-    implementation("org.spigotmc:spigot-api:1.18.1-R0.1-SNAPSHOT")
-    implementation("org.apache.logging.log4j:log4j-api:2.17.0")
-    implementation("org.apache.logging.log4j:log4j-core:2.17.0")
+    implementation("org.spigotmc:spigot-api:${mcversion}-R0.1-SNAPSHOT")
+    implementation("org.apache.logging.log4j:log4j-api:2.17.2")
+    implementation("org.apache.logging.log4j:log4j-core:2.17.2")
     implementation(kotlin("stdlib-jdk8"))
 
-}
-
-tasks.test {
-    useJUnit()
 }
 
 tasks.withType<KotlinCompile>() {
