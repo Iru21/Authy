@@ -59,10 +59,15 @@ The plugins available on the market annoyed us so we decided to write our own pl
 
 `authy.notifyonduplicateip` - notifications from duplicate ip accounts
 
-## Reporting Issues
+## Useful Links
 
-Please report any errors/suggestions [here](https://github.com/Iru21/Authy/issues)
+### [Default Config](https://github.com/Iru21/Authy/blob/master/src/main/resources/config.yml)
+
+### [Submitting Translations](https://discord.gg/BDQA66sDkK)
+[English template](https://github.com/Iru21/Authy/blob/master/src/main/resources/lang/en_us.yml)
+
+### [Reporting Issues and giving suggestions](https://github.com/Iru21/Authy/issues)
 
 ## Used On
 
-<img src="https://cdn.discordapp.com/attachments/855011517766697001/857656153223331851/reklama-poprawka2.png" width=350>
+<img src="https://cdn.discordapp.com/attachments/855011517766697001/857656153223331851/reklama-poprawka2.png" width=700>
