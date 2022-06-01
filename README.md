@@ -1,9 +1,7 @@
 # Authy 
 A simple authentication plugin for minecraft 1.18!
 
-[Also get it here!](https://www.spigotmc.org/resources/authy.100004/)
-
-#### Before updating from 2.1 to 2.2 make sure to make a backup of your `userdata` folder! (There is an auto-update system in place though it could brake)
+[Also get it on spigot!](https://www.spigotmc.org/resources/authy.100004/)
 
 ## What is this plugin?
 
