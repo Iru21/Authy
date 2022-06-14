@@ -34,8 +34,8 @@ class Authy : JavaPlugin() {
         playerData = PlayerData()
         playerData.init()
         loginProcess = LoginProcess()
-        session = Session()
         authManager = AuthManager()
+        session = Session()
 
         saveDefaultConfig()
         config.options().copyDefaults(true)
