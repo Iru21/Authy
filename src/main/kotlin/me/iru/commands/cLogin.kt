@@ -4,7 +4,6 @@ import me.iru.Authy
 import me.iru.PrefixType
 import me.iru.data.Validation
 import me.iru.interfaces.ICommand
-import net.md_5.bungee.api.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -14,6 +13,8 @@ class cLogin(override var name: String = "login") : ICommand {
     val translations = Authy.translations
     val playerData = Authy.playerData
     val loginProcess = Authy.loginProcess
+    val authManager = Authy.authManager
+
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender is Player) {
             val p : Player = sender
@@ -47,24 +48,7 @@ class cLogin(override var name: String = "login") : ICommand {
                         return true
                     }
                 }
-                loginProcess.removePlayer(p)
-                p.sendMessage("${translations.getPrefix(PrefixType.LOGIN)} ${translations.get("login_success")}")
-                if(authy.config.getBoolean("SendWelcomeMessage")) {
-                    for(message : String in authy.config.getStringList("WelcomeMessage")) {
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', message))
-                    }
-                }
-                if(authy.config.getBoolean("onJoin.teleport") && authy.config.getBoolean("onJoin.concealment")) {
-                    val loc = loginProcess.getLocation(p)
-                    if (loc != null) {
-                        p.teleport(loc)
-                    }
-                }
-                authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} ${org.bukkit.ChatColor.YELLOW}logged in with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress}")
-                if(!playerDataModel.usePin) {
-                    p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("no_pin_warning")}")
-                }
-                loginProcess.EffectRunner.runLogin(p)
+                authManager.login(p)
                 true
             }
 

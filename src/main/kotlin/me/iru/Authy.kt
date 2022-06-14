@@ -19,11 +19,12 @@ class Authy : JavaPlugin() {
     val CommandFilter : CommandFilter = CommandFilter()
 
     companion object {
-        lateinit var instance: Authy
-        lateinit var translations: Translations
-        lateinit var playerData: PlayerData
-        lateinit var loginProcess: LoginProcess
-        lateinit var session: Session
+        lateinit var instance: Authy private set
+        lateinit var translations: Translations private set
+        lateinit var playerData: PlayerData private set
+        lateinit var loginProcess: LoginProcess private set
+        lateinit var session: Session private set
+        lateinit var authManager: AuthManager private set
     }
 
     override fun onEnable() {
@@ -34,6 +35,7 @@ class Authy : JavaPlugin() {
         playerData.init()
         loginProcess = LoginProcess()
         session = Session()
+        authManager = AuthManager()
 
         saveDefaultConfig()
         config.options().copyDefaults(true)

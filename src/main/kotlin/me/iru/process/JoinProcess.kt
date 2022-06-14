@@ -3,7 +3,6 @@ package me.iru.process
 import me.iru.Authy
 import me.iru.PrefixType
 import me.iru.data.Migration
-import net.md_5.bungee.api.ChatColor
 import org.bukkit.Location
 import org.bukkit.block.BlockFace
 import org.bukkit.entity.Player
@@ -21,7 +20,7 @@ class JoinProcess(private val player: Player) {
 
         joinTeleports()
         teleportToGround()
-        if(tryAutoLogin()) return
+        if(session.tryAutoLogin(player)) return
 
         loginProcess.addPlayer(player)
 
@@ -64,19 +63,6 @@ class JoinProcess(private val player: Player) {
         }, 0L, 0L)
 
         if(setFly) player.isFlying = true
-    }
-
-    private fun tryAutoLogin(): Boolean {
-        return if(session.tryAutoLogin(player)) {
-            player.sendMessage("${translations.getPrefix(PrefixType.LOGIN)} ${translations.get("autologin_success")}")
-            if(authy.config.getBoolean("SendWelcomeMessage")) {
-                for(message : String in authy.config.getStringList("WelcomeMessage")) {
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', message))
-                }
-            }
-            true
-        }
-        else false
     }
 
     private fun check() {

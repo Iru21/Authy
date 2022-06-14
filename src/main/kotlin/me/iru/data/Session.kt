@@ -1,6 +1,7 @@
 package me.iru.data
 
 import me.iru.Authy
+import me.iru.LoginType
 import org.bukkit.entity.Player
 import java.lang.Long.parseLong
 import java.sql.Timestamp
@@ -8,7 +9,7 @@ import java.sql.Timestamp
 class Session {
     val authy = Authy.instance
     val playerData = Authy.playerData
-    val effectRunner = Authy.loginProcess.EffectRunner
+    val authManager = Authy.authManager
 
     fun remember(p : Player) {
         val curtime = Timestamp(System.currentTimeMillis())
@@ -26,8 +27,7 @@ class Session {
         val curtime = Timestamp(System.currentTimeMillis())
         val timestamp = curtime.time
         if((parseLong(session.toString()) + 172800000 > timestamp) && p.address?.address?.hostAddress == playerDataModel.ip) {
-            authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} ${org.bukkit.ChatColor.YELLOW}auto logged in with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress}")
-            effectRunner.runAutoLogin(p)
+            authManager.login(p, LoginType.Session)
             return true
         }
 

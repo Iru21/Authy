@@ -49,4 +49,11 @@ class LoginProcess {
     fun getLocation(p: Player): Location? {
         return concealment.get(p.uniqueId)
     }
+
+    fun teleportToLocation(p: Player) {
+        val loc = getLocation(p)
+        if (loc != null) {
+            p.teleport(loc)
+        }
+    }
 }
