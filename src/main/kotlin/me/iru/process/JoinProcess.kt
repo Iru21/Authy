@@ -20,6 +20,9 @@ class JoinProcess(private val player: Player) {
 
         joinTeleports()
         teleportToGround()
+
+        // Place premium check here
+
         if(session.tryAutoLogin(player)) return
 
         loginProcess.addPlayer(player)

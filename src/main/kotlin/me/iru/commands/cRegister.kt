@@ -2,12 +2,13 @@ package me.iru.commands
 
 import me.iru.Authy
 import me.iru.PrefixType
-import me.iru.data.Validation
 import me.iru.interfaces.ICommand
 import me.iru.process.LoginProcess
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import me.iru.validation.PasswordValidation
+import me.iru.validation.getPasswordRule
 
 class cRegister(override var name: String = "register") : ICommand {
     val authy = Authy.instance
@@ -32,8 +33,9 @@ class cRegister(override var name: String = "register") : ICommand {
                 return true
             }
             val password = args[0]
-            if(!Validation.passwordMatchesRules(password)) {
-                p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_register_breaksrules")}")
+            if(!PasswordValidation.matchesRules(password)) {
+                val rule = getPasswordRule()
+                p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_register_breaksrules").format(rule.minLength, rule.maxLength, rule.minUppercase, rule.minNumbers)}")
                 return true
             }
             return if(!playerData.exists(p)) {

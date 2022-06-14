@@ -1,3 +1,13 @@
+passwordValidation:
+  minLength: 6
+  maxLength: 32
+  minUppercase: 1
+  minNumbers: 1
+
+pinValidation:
+  minLength: 6
+  maxLength: 6
+
 effects:
   title: true
   particles: true

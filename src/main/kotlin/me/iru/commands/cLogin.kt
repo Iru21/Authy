@@ -2,11 +2,12 @@ package me.iru.commands
 
 import me.iru.Authy
 import me.iru.PrefixType
-import me.iru.data.Validation
 import me.iru.interfaces.ICommand
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import me.iru.validation.PasswordValidation
+import me.iru.validation.PinValidation
 
 class cLogin(override var name: String = "login") : ICommand {
     val authy = Authy.instance
@@ -38,12 +39,12 @@ class cLogin(override var name: String = "login") : ICommand {
                     return true
                 }
             }
-            return if(!Validation.checkPassword(p.uniqueId, args[0])) {
+            return if(!PasswordValidation.check(p.uniqueId, args[0])) {
                 p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_login_wrongpassword")}")
                 true
             } else {
                 if(playerDataModel.usePin) {
-                    if(!Validation.checkPin(p.uniqueId, args[1])) {
+                    if(!PinValidation.check(p.uniqueId, args[1])) {
                         p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_login_wrongpin")}")
                         return true
                     }

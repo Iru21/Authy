@@ -2,12 +2,13 @@ package me.iru.commands
 
 import me.iru.Authy
 import me.iru.PrefixType
-import me.iru.data.Validation
 import me.iru.interfaces.ICommand
 import me.iru.utils.HashUtil
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import me.iru.validation.PinValidation
+import me.iru.validation.getPinRule
 
 
 class cPin(override var name: String = "pin") : ICommand {
@@ -50,8 +51,9 @@ class cPin(override var name: String = "pin") : ICommand {
                     p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_pin_setusage")}")
                     return true
                 }
-                if(!Validation.pinMatchesRules(args[1])) {
-                    p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_pin_breaksrules")}")
+                if(!PinValidation.matchesRules(args[1])) {
+                    val rule = getPinRule()
+                    p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_pin_breaksrules").format(rule.minLength, rule.maxLength)}")
                     return true
                 }
                 playerDataModel.hashedPin = HashUtil.toSHA256(args[1])

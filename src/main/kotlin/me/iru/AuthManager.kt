@@ -52,7 +52,7 @@ class AuthManager {
                 effectRunner.runAutoLogin(p)
             }
             LoginType.Premium -> {
-                loginProcess.removePlayer(p)
+                effectRunner.runLogin(p)
             }
         }
 
