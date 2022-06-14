@@ -1,9 +1,7 @@
 # Authy 
 A simple authentication plugin for minecraft 1.18!
 
-[Also get it here!](https://www.spigotmc.org/resources/authy.100004/)
-
-#### Before updating from 2.1 to 2.2 make sure to make a backup of your `userdata` folder! (There is an auto-update system in place though it could brake)
+[Also get it on spigot!](https://www.spigotmc.org/resources/authy.100004/)
 
 ## What is this plugin?
 
@@ -59,10 +57,15 @@ The plugins available on the market annoyed us so we decided to write our own pl
 
 `authy.notifyonduplicateip` - notifications from duplicate ip accounts
 
-## Reporting Issues
+## Useful Links
 
-Please report any errors/suggestions [here](https://github.com/Iru21/Authy/issues)
+### [Default Config](https://github.com/Iru21/Authy/blob/master/src/main/resources/config.yml)
+
+### [Submitting Translations](https://discord.gg/BDQA66sDkK)
+[English template](https://github.com/Iru21/Authy/blob/master/src/main/resources/lang/en_us.yml)
+
+### [Reporting Issues and giving suggestions](https://github.com/Iru21/Authy/issues)
 
 ## Used On
 
-<img src="https://cdn.discordapp.com/attachments/855011517766697001/857656153223331851/reklama-poprawka2.png" width=350>
+<img src="https://cdn.discordapp.com/attachments/855011517766697001/857656153223331851/reklama-poprawka2.png" width=700>
