@@ -40,7 +40,7 @@ class cUnregister(override var name: String = "unregister") : ICommand {
                 if(playerData.delete(p.uniqueId)) sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.GREEN}Unregistered!")
                 else sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.RED}That player is not registered!")
             } catch (e : Exception) {
-                sender.sendMessage(e.message)
+                if(e.message != null) sender.sendMessage(e.message!!)
                 sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.DARK_RED}There has been an error!")
             }
             return true

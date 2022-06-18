@@ -56,7 +56,7 @@ tasks {
     shadowJar {
         dependsOn(processResources)
         dependsOn(makeDefaults)
-        archiveFileName.set("${pluginName}-${pluginVersion}-${minecraftVersion}.jar")
+        archiveFileName.set("${pluginName}-${pluginVersion}.jar")
     }
 }
 
