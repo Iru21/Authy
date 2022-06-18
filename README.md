@@ -61,7 +61,7 @@ The plugins available on the market annoyed us so we decided to write our own pl
 
 ### [Default Config](https://github.com/Iru21/Authy/blob/master/src/main/resources/config.yml)
 
-### [Submitting Translations](https://discord.gg/BDQA66sDkK)
+### [Creating Translations](https://github.com/Iru21/Authy/wiki/Translating-Authy-to-your-language)
 [English template](https://github.com/Iru21/Authy/blob/master/src/main/resources/lang/en_us.yml)
 
 ### [Reporting Issues and giving suggestions](https://github.com/Iru21/Authy/issues)
