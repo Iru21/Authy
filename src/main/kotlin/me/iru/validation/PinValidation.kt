@@ -16,7 +16,7 @@ object PinValidation {
         val rule = getPinRule()
         if(pin.length < rule.minLength) return false
         if(pin.length > rule.maxLength) return false
-        if(pin.matches(Regex("^[0-9]*\$"))) return false
+        if(!pin.matches(Regex("^[0-9]*\$"))) return false
         return true
     }
 }

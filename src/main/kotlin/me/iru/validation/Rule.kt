@@ -4,14 +4,14 @@ import me.iru.Authy
 
 class PinRule(var maxLength: Int, var minLength: Int) {
     init {
-        if(minLength <= 1) {
+        if(minLength < 1) {
             minLength = 1
         }
         if(maxLength > 10) {
             maxLength = 10
         }
         if (minLength > maxLength) {
-            minLength = 9
+            minLength = maxLength
         }
     }
 }
