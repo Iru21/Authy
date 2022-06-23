@@ -28,5 +28,5 @@ jobs:
 
       - uses: actions/upload-artifact@v3.1.0
         with:
-          name: build file
+          name: artifact
           path: build/libs/*.jar
