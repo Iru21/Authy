@@ -24,8 +24,12 @@ enum class ParseMode {
 class Translations {
     private val authy = Authy.instance
     private val defaultLangFolder = File(authy.dataFolder, "lang" + File.separator + "defaults" + File.separator)
-    private val defaultLangs = arrayListOf("en_us", "pl_pl", "ru_ru")
+    private val defaultLangs = arrayListOf("en_us", "pl_pl", "ru_ru", "es_es")
     private var cache: YamlConfiguration? = null
+
+    companion object {
+        const val TRANSLATION_VERSION = 3
+    }
 
     init {
         checkDefaults()
@@ -62,12 +66,16 @@ class Translations {
 
     fun updateCache() {
         val selectedLang = authy.config.getString("lang")
-        val langFile = File(authy.dataFolder, "lang" + File.separator + selectedLang + ".yml")
+        var langFile = File(authy.dataFolder, "lang" + File.separator + selectedLang + ".yml")
         if(!langFile.exists()) {
             authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}${authy.description.name}${org.bukkit.ChatColor.DARK_GRAY}] ${ChatColor.RED}No language file for $selectedLang found! Saving default...")
             checkDefaults()
         }
-        cache = YamlConfiguration.loadConfiguration((langFile))
+        if(hasOldVersion(selectedLang!!)) {
+            langFile = File(authy.dataFolder, "lang" + File.separator + "en_us.yml")
+            authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}${authy.description.name}${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.AQUA} Selected language has been reverted to en_us, because the default for $selectedLang is not on the newest version ($TRANSLATION_VERSION)")
+        }
+        cache = YamlConfiguration.loadConfiguration(langFile)
     }
 
     private fun checkDefaults() {
@@ -80,18 +88,13 @@ class Translations {
                 authy.saveResource("lang${File.separator}$lang.yml", false)
             }
             authy.saveResource("lang${File.separator}defaults${File.separator}$lang.yml", true)
-            if(hasOldVersion(lang)) {
-                authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}${authy.description.name}${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.AQUA}It looks like you have an older vesrion of lang file $lang.yml! You can go to ${authy.dataFolder.name}/lang/defaults/$lang.yml to see the changes and update/replace your main lang files. If not you may experience some issues")
-            }
         }
     }
 
-    private fun hasOldVersion(l : String) : Boolean{
+    private fun hasOldVersion(l: String): Boolean {
         val langFile = File(authy.dataFolder, "lang" + File.separator + l + ".yml")
-        val defaultLangFile = File(authy.dataFolder, "lang" + File.separator + "defaults" + File.separator + l + ".yml")
         val parsed = YamlConfiguration.loadConfiguration(langFile)
-        val defaultParsed = YamlConfiguration.loadConfiguration(defaultLangFile)
-        return defaultParsed.getInt("version") > parsed.getInt("version")
+        return TRANSLATION_VERSION > parsed.getInt("version")
     }
 
 }
