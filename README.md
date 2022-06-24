@@ -1,5 +1,5 @@
 # Authy 
-A simple authentication plugin for minecraft 1.18!
+A simple authentication plugin for minecraft 1.17+!
 
 [Also get it on spigot!](https://www.spigotmc.org/resources/authy.100004/)
 
