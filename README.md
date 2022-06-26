@@ -66,6 +66,6 @@ Piyasada bulunan eklentiler canımızı sıktı, böylece kendi eklentimizi yazm
 
 ### [Hata Bildirimleri ve Öneriler](https://github.com/Iru21/Authy/issues)
 
-## Kullanıldığı Tarih
+## Kullanıldığı Sunucu
 
 <img src="https://cdn.discordapp.com/attachments/855011517766697001/857656153223331851/reklama-poprawka2.png" width=700>
