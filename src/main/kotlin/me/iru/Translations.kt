@@ -28,7 +28,7 @@ class Translations {
     private var cache: YamlConfiguration? = null
 
     companion object {
-        const val TRANSLATION_VERSION = 3
+        const val TRANSLATION_VERSION = 4
     }
 
     init {

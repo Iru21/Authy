@@ -33,6 +33,7 @@ autologin_success: "&7Авторизовался автоматически!"
 register_success: "&7Успешно зарегистрирован!"
 unregister_success: "&7Успешно незарегистрированный!"
 timedout_error: "&7Срок авторизации истек!"
+invalid_username: "&7Неверное имя пользователя! Должен соответствовать регулярному выражению: &c:^\w{3,16}$"
 
 loginprocess_reminder_login: "&7Войдите в свою учетную запись, используя &8/&flogin &8[&fпароль&8] %s"
 loginprocess_reminderlogin_haspin: "&8[&fpin&8]"
@@ -73,4 +74,4 @@ duplicateprotection_max_reached: "&7Это может быть только &c%s
 
 # do not edit
 # only updated when new keys have been added/renamed or the formatting has changed
-version: 3
+version: 4

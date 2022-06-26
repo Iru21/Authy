@@ -33,6 +33,7 @@ autologin_success: "&7Zalogowano automatycznie!"
 register_success: "&7Poprawnie zarejestrowano w bazie!"
 unregister_success: "&7Poprawnie odrejestrowano!"
 timedout_error: "&7Czas na autoryzację upłynął!"
+invalid_username: "&7Niepoprawna nazwa użytkownika! Musi być zgodne z wyrażeniem regularnym: ^\w{3,16}$"
 
 loginprocess_reminder_login: "&7Zaloguj się używając &8/&flogin &8[&fhasło&8] %s"
 loginprocess_reminderlogin_haspin: "&8[&fpin&8]"
@@ -73,4 +74,4 @@ duplicateprotection_max_reached: "&7Może być tylko &c%s &7kont z tym samym adr
 
 # do not edit
 # only updated when new keys have been added/renamed or the formatting has changed
-version: 3
+version: 4

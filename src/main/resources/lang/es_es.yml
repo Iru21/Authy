@@ -34,6 +34,7 @@ autologin_success: "&7¡Te has autenticado automáticamente!"
 register_success: "&7¡Te has registrado correctamente!"
 unregister_success: "&7¡Has borrado tu registro correctamente!"
 timedout_error: "&7¡El tiempo para autenticarte ha pasado!"
+invalid_username: "&7¡Nombre de usuario no válido! Debe coincidir con la expresión regular: &c^\w{3,16}$"
 
 loginprocess_reminder_login: "&7Inicia sesión usando &8/&flogin &8[&fcontraseña&8] %s"
 loginprocess_reminderlogin_haspin: "&8[&fpin&8]"
@@ -74,4 +75,4 @@ duplicateprotection_max_reached: "&7¡Solo puede haber &c%s &7ceuntas con la mis
 
 # do not edit
 # only updated when new keys have been added/renamed or the formatting has changed
-version: 3
+version: 4

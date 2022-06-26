@@ -34,6 +34,7 @@ autologin_success: "&7Logged in automatically!"
 register_success: "&7Successfully registered!"
 unregister_success: "&7Successfully unregistered!"
 timedout_error: "&7Time for authorization has expired!"
+invalid_username: "&7Invalid username! Must match regular expression: &c^\w{3,16}$"
 
 loginprocess_reminder_login: "&7Login using &8/&flogin &8[&fpassword&8] %s"
 loginprocess_reminderlogin_haspin: "&8[&fpin&8]"
@@ -74,4 +75,4 @@ duplicateprotection_max_reached: "&7There can be only &c%s &7accounts on the sam
 
 # do not edit
 # only updated when new keys have been added/renamed or the formatting has changed
-version: 3
+version: 4
