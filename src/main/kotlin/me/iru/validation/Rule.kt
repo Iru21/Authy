@@ -2,7 +2,7 @@ package me.iru.validation
 
 import me.iru.Authy
 
-class PinRule(var maxLength: Int, var minLength: Int) {
+class PinRule(var minLength: Int, var maxLength: Int) {
     init {
         if(minLength < 1) {
             minLength = 1
