@@ -1,71 +1,71 @@
 # Authy 
-A simple authentication plugin for minecraft 1.17+!
+Minecraft 1.17+ için basit bir doğrulama eklentisi!
 
-[Also get it on spigot!](https://www.spigotmc.org/resources/authy.100004/)
+[Ayrıca Spigot'tan elde edebilirsiniz!](https://www.spigotmc.org/resources/authy.100004/)
 
-## What is this plugin?
+## Nedir bu eklenti?
 
-The plugins available on the market annoyed us so we decided to write our own plugin. It has the / remember command that remembers logging for 48 hours, securing multi-accounts per 1 IP address, a special pin system to increase account security and much more.
+Piyasada bulunan eklentiler canımızı sıktı, böylece kendi eklentimizi yazmaya karar verdik. Eklenti 48 saat boyunca girişleri akılda tutabilen /remember komutuna, birçok hesabı 1 IP adresi altında güvencede tutma, hesap güvenliğini artırmak için özel PIN sistemine ve daha fazlasına sahip.
 
-### Features
+### Özellikler
 
-- Security of passwords and pins
-- An additional function that is not required for players with the /pin command
-- Fast and easy to set up
-- The function of remembering login for 48 hours after entering /remember
-- Completly customizable
-- IP protection for multi-accounts
+- Şifre ve PIN'lerin güvenliği
+- Oyuncular için gerekli olmayan /pin komutuyla ek bir fonksiyon
+- Hızlı ve kolay kurulum
+- /remember kullanıldıktan sonra 48 saatliğine girişleri kaydetme fonksiyonu
+- Tamamen özelleştirilebilir
+- Çoklu-hesap adına IP koruması
 
-### Commands
+### Komutlar
 
-`/login [password] [pin (required when toggled and set)]` - Logs in to the server
+`/login [şifre] [pin (etkinleştirildiğinde zorunludur)]` - Sunucuya giriş yapar
 
-`/register [password] [password]` - Registers the player
+`/register [şifre] [şifre]` - Kullanıcıyı kaydeder
 
-`/unregister` - Unregisters the player
+`/unregister` - Kullanıcının kaydını siler
 
-`/unregister [nickname]` - Unregisters given player (console only)
+`/unregister [kullanıcı adı]` - Verilen kullanıcının kaydını siler (konsola özel)
 
-`/remember` - save login for 48h
+`/remember` - 48 saatliğine girişleri kaydeder
 
-`/pin set [pin]` - sets the pin
+`/pin set [pin]` - PIN'i ayarlar
 
-`/pin toggle` - toggle the pin
+`/pin toggle` - PIN'i etkinleştirir/devre dışı bırakır
 
-`/pin` - help command for pin's
+`/pin` - PIN'ler için yardım komutu
 
-`/authy reload` - reload configs and translations
+`/authy reload` - Yapılandırma ve çeviri dosyalarını yeniler
 
-`/authy` - info about the plugin
+`/authy` - Eklenti hakkında bilgi
 
 
-### Permissions
+### Yetkiler
 
-`authy.login` - permission for command /login
+`authy.login` - /login komutu için yetki
 
-`authy.register` - permission for command /register
+`authy.register` - /register komutu için yetki
 
-`authy.unregister` - permission for command /unregister
+`authy.unregister` - /unregister komutu için yetki
 
-`authy.remember` - permission for command /remember
+`authy.remember` - /remember komutu için yetki
 
-`authy.pin` - permissions for commands /pin
+`authy.pin` - /pin komutu için yetki
 
-`authy.reload` - permission for command /authy reload
+`authy.reload` - /authy reload komutu için yetki
 
-`authy.ipbypass` - bypass the ip checking
+`authy.ipbypass` - IP kontrolünü es geç
 
-`authy.notifyonduplicateip` - notifications from duplicate ip accounts
+`authy.notifyonduplicateip` - Kopyalanan IP adresleri için bildirimler
 
-## Useful Links
+## İşe Yarar Bağlantılar
 
-### [Default Config](https://github.com/Iru21/Authy/blob/master/src/main/resources/config.yml)
+### [Varsayılan Yapılandırma Dosyası](https://github.com/Iru21/Authy/blob/master/src/main/resources/config.yml)
 
-### [Creating Translations](https://github.com/Iru21/Authy/wiki/Translating-Authy-to-your-language)
-[English template](https://github.com/Iru21/Authy/blob/master/src/main/resources/lang/en_us.yml)
+### [Çeviri Oluşturma](https://github.com/Iru21/Authy/wiki/Translating-Authy-to-your-language)
+[İngilizce Taslak](https://github.com/Iru21/Authy/blob/master/src/main/resources/lang/en_us.yml)
 
-### [Reporting Issues and giving suggestions](https://github.com/Iru21/Authy/issues)
+### [Hata Bildirimleri ve Öneriler](https://github.com/Iru21/Authy/issues)
 
-## Used On
+## Kullanıldığı Sunucu
 
 <img src="https://cdn.discordapp.com/attachments/855011517766697001/857656153223331851/reklama-poprawka2.png" width=700>
