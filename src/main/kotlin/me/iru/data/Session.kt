@@ -26,11 +26,12 @@ class Session {
         val session = playerDataModel.session
         val curtime = Timestamp(System.currentTimeMillis())
         val timestamp = curtime.time
-        if((parseLong(session.toString()) + 172800000 > timestamp) && p.address?.address?.hostAddress == playerDataModel.ip) {
+        if((parseLong(session.toString()) + (authy.config.getInt("sessionExpiresIn") * 3600000) > timestamp) && p.address?.address?.hostAddress == playerDataModel.ip) {
             authManager.login(p, LoginType.Session)
             return true
         }
 
         return false
     }
+
 }

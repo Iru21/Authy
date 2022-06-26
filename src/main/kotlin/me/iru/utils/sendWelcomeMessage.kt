@@ -8,8 +8,8 @@ fun sendWelcomeMessage(p: Player) {
 
     val authy = Authy.instance
 
-    if(authy.config.getBoolean("SendWelcomeMessage")) {
-        for(message : String in authy.config.getStringList("WelcomeMessage")) {
+    if(authy.config.getBoolean("welcomeMessage.enabled")) {
+        for(message : String in authy.config.getStringList("welcomeMessage.text")) {
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', message))
         }
     }

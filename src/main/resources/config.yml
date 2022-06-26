@@ -13,9 +13,15 @@ effects:
   particles: true
   sounds: true
 
-WelcomeMessage:
-  - "&7Welcome to &6server name&7!"
-SendWelcomeMessage: false
+welcomeMessage:
+  text:
+    - "&7Welcome to &6server name&7!"
+  enabled: false
+
+sendPinSetReminder: true
+
+# In hours
+sessionExpiresIn: 48
 
 onFirstJoin:
   teleport: false

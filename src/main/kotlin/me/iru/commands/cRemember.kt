@@ -10,12 +10,13 @@ import org.bukkit.entity.Player
 
 class cRemember(override var name: String = "remember") : ICommand {
     val Session : Session = Session()
+    val authy = Authy.instance
     val translations = Authy.translations
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender is Player) {
             val p : Player = sender
             Session.remember(p)
-            p.sendMessage("${translations.getPrefix(PrefixType.REMEMBER)} ${translations.get("command_remember_success")}")
+            p.sendMessage("${translations.getPrefix(PrefixType.REMEMBER)} ${translations.get("command_remember_success").format(authy.config.getInt("sessionExpiresIn"))}")
         }
         return true
     }

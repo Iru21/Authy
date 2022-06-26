@@ -63,7 +63,7 @@ command_pin_setusage: "&7использование&8: /&fpin &7set &8[&7пин-
 command_pin_breaksrules: "&7Пин не соответствует требованиям! &Правила&8: &Минимальная длина&8: &c%d&8, &fМаксимальная длина&8: &c%d"
 command_pin_success: "&7PIN-код установлен! &7Не забудьте включить его с помощью &8/&fpin toggle &7!"
 
-command_remember_success: "&7Сессия сохранена на 48 часов!"
+command_remember_success: "&7Сессия сохранена на &c%d часов!"
 
 command_unregister_successkick: "&7Войдите еще раз и зарегистрируйтесь!"
 
@@ -74,4 +74,4 @@ duplicateprotection_max_reached: "&7Это может быть только &c%s
 
 # do not edit
 # only updated when new keys have been added/renamed or the formatting has changed
-version: 4
+version: 5

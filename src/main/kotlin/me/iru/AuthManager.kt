@@ -25,7 +25,7 @@ class AuthManager {
             loginProcess.teleportToLocation(p)
         }
         authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} ${org.bukkit.ChatColor.YELLOW}registered with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress}")
-        p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("no_pin_warning")}")
+        if(authy.config.getBoolean("sendPinSetReminder")) p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("no_pin_warning")}")
         effectRunner.runRegister(p)
 
         sendWelcomeMessage(p)
@@ -41,7 +41,7 @@ class AuthManager {
                 }
                 authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} ${org.bukkit.ChatColor.YELLOW}logged in with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress}")
                 val playerDataModel = playerData.get(p.uniqueId)!!
-                if(!playerDataModel.usePin) {
+                if(!playerDataModel.usePin && authy.config.getBoolean("sendPinSetReminder")) {
                     p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("no_pin_warning")}")
                 }
                 effectRunner.runLogin(p)
