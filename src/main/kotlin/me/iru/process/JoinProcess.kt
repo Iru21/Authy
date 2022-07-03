@@ -17,7 +17,7 @@ class JoinProcess(private val player: Player) {
     private val session = Authy.session
 
     fun run() {
-        if(!hasValidName(player.name)) player.kickPlayer(translations.get("invalid_username"))
+        if(!hasValidName(player.name) && authy.config.getBoolean("nameValidation")) player.kickPlayer(translations.get("invalid_username"))
 
         Migration.updatePlayer(player)
 
