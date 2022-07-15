@@ -34,7 +34,7 @@ autologin_success: "&7Otomatik olarak giriş yapıldı!"
 register_success: "&7Başarıyla kayıt olundu!"
 unregister_success: "&7Başarıyla kaydınız silindi!"
 timedout_error: "&7Doğrulama süresi doldu!"
-invalid_username: "&7Geçersiz kullanıcı adı! Yandaki ifadeye uymalı: &c^\w{3,16}$"
+invalid_username: "&7Geçersiz kullanıcı adı!"
 
 loginprocess_reminder_login: "&8/&flogin &8[&fşifre&8] %s &7komutunu kullanarak giriş yap."
 loginprocess_reminderlogin_haspin: "&8[&fpin&8]"
@@ -75,4 +75,4 @@ duplicateprotection_max_reached: "&7Aynı IP adresinde sadece &c%s &7hesap olabi
 
 # değiştirmeyin
 # yeni özellikler eklendiğinde/adlandırıldıklarında düzenlenir
-version: 5
+version: 6
