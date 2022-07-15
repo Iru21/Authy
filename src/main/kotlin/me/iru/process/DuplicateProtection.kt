@@ -35,28 +35,29 @@ object DuplicateProtection {
         else true
     }
 
-    private fun getDuplicatesForIpOf(p: Player): MutableList<String> {
+    private fun getDuplicatesForIpOf(p: Player): HashSet<String> {
         val protLevel = config.getInt("duplicateIpProtection.protectionLevel")
-        val list = mutableListOf<String>()
+        val d = HashSet<String>()
+        d.add(p.name)
         val ip = p.address?.address?.hostAddress
         when(protLevel) {
             1 -> {
-                for (lp in Authy.instance.server.onlinePlayers) {
-                    val lpip = lp.address?.address?.hostAddress
+                for (onlinePlayer in Authy.instance.server.onlinePlayers) {
+                    val lpip = onlinePlayer.address?.address?.hostAddress
                     if(ip == lpip) {
-                        list.add(lp.name)
+                        d.add(onlinePlayer.name)
                     }
                 }
             }
             2 -> {
-                for (lp in playerData.getAll()) {
-                    val lpip = lp.ip
+                for (registeredPlayer in playerData.getAll()) {
+                    val lpip = registeredPlayer.ip
                     if(ip == lpip) {
-                        list.add(lp.username)
+                        d.add(registeredPlayer.username)
                     }
                 }
             }
         }
-        return list
+        return d
     }
 }
