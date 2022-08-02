@@ -30,10 +30,10 @@ class DatabaseConnection(val type: DatabaseType) {
         val password = authy.config.getString("database.credentials.password")
         val databaseName = authy.config.getString("database.credentials.database")
 
-        DriverManager
+        val t = DriverManager
             .getConnection("jdbc:mysql://$host", user, password)
-            .createStatement()
-            .executeUpdate("CREATE DATABASE IF NOT EXISTS $databaseName")
+        t.createStatement().executeUpdate("CREATE DATABASE IF NOT EXISTS $databaseName")
+        t.close()
 
         return DriverManager.getConnection("jdbc:mysql://$host/$databaseName", user, password)
     }
@@ -46,7 +46,7 @@ class DatabaseConnection(val type: DatabaseType) {
         else null
     }
 
-    fun executeBatch(list: MutableList<String>) {
+    fun queryBatch(list: MutableList<String>) {
         val s = conn.createStatement()
         for(entry in list) {
             s.addBatch(entry)

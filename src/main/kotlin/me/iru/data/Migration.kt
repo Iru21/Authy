@@ -65,7 +65,7 @@ object Migration {
                         "'${p.pin}', " +
                         "'${p.session}')")
             }
-            playerData.databaseConnection.executeBatch(list)
+            playerData.databaseConnection.queryBatch(list)
 
             lastconn.killConnection()
 
