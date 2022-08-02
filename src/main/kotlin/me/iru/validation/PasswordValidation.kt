@@ -9,7 +9,7 @@ object PasswordValidation {
 
     fun check(uuid: UUID, password: String): Boolean {
         val data = playerData.get(uuid)!!
-        return HashUtil.toSHA256(password) == data.hashedPassword
+        return HashUtil.toSHA256(password) == data.password
     }
 
     fun matchesRules(pass: String): Boolean {

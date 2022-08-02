@@ -17,14 +17,14 @@ class cPin(override var name: String = "pin") : ICommand {
     val playerData = Authy.playerData
 
     private fun getStatusTranslated(p: Player): String {
-        val playerDataModel = playerData.get(p.uniqueId)!!
-        return if (playerDataModel.usePin) translations.get("enabled") else translations.get("disabled")
+        val authyPlayer = playerData.get(p.uniqueId)!!
+        return if (authyPlayer.isPinEnabled) translations.get("enabled") else translations.get("disabled")
     }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender is Player) {
             val p : Player = sender
-            val playerDataModel = playerData.get(p.uniqueId)!!
+            val authyPlayer = playerData.get(p.uniqueId)!!
             if(args.isEmpty()) {
                 val pinColor = translations.getColor("prefix_pin_color")
                 val status = getStatusTranslated(p)
@@ -39,12 +39,12 @@ class cPin(override var name: String = "pin") : ICommand {
                 p.sendMessage("")
                 p.sendMessage(translations.get("pincommand_info_bar").format(pinColor, pinColor))
             } else if(args[0].lowercase() == "toggle") {
-                if(playerDataModel.hashedPin == null) {
+                if(authyPlayer.pin == null) {
                     p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_pin_setpinbeforetoggle")}")
                     return true
                 }
-                playerDataModel.usePin = !playerDataModel.usePin
-                playerData.save(playerDataModel)
+                authyPlayer.isPinEnabled = !authyPlayer.isPinEnabled
+                playerData.update(authyPlayer)
                 p.sendMessage("${translations.getPrefix(PrefixType.PIN)} ${translations.get("command_pin_toggled").format(getStatusTranslated(p))}")
             } else if(args[0].lowercase() == "set") {
                 if(args.size != 2) {
@@ -56,8 +56,8 @@ class cPin(override var name: String = "pin") : ICommand {
                     p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_pin_breaksrules").format(rule.minLength, rule.maxLength)}")
                     return true
                 }
-                playerDataModel.hashedPin = HashUtil.toSHA256(args[1])
-                playerData.save(playerDataModel)
+                authyPlayer.pin = HashUtil.toSHA256(args[1])
+                playerData.update(authyPlayer)
                 p.sendMessage("${translations.getPrefix(PrefixType.PIN)} ${translations.get("command_pin_success")}")
             }
         }
