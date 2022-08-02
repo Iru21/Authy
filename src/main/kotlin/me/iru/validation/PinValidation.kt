@@ -9,7 +9,7 @@ object PinValidation {
 
     fun check(uuid: UUID, pin: String): Boolean {
         val data = playerData.get(uuid)!!
-        return HashUtil.toSHA256(pin) == data.hashedPin
+        return HashUtil.toSHA256(pin) == data.pin
     }
 
     fun matchesRules(pin: String): Boolean {

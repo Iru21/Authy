@@ -38,7 +38,7 @@ class cRegister(override var name: String = "register") : ICommand {
                 p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_register_breaksrules").format(rule.minLength, rule.maxLength, rule.minUppercase, rule.minNumbers)}")
                 return true
             }
-            return if(!playerData.exists(p)) {
+            return if(!playerData.exists(p.uniqueId)) {
                 authManager.register(p, password)
                 true
             } else {

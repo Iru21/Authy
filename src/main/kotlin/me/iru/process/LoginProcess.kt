@@ -30,11 +30,11 @@ class LoginProcess {
     }
 
     fun sendPleaseAuthMessage( p : Player) {
-        if(playerData.exists(p)) {
+        if(playerData.exists(p.uniqueId)) {
             p.sendMessage(
                 "${translations.getPrefix(PrefixType.WARNING)} ${
                     translations.get("loginprocess_reminder_login").format(
-                        if (playerData.get(p.uniqueId)!!.usePin) translations.get("loginprocess_reminderlogin_haspin") else ""
+                        if (playerData.get(p.uniqueId)!!.isPinEnabled) translations.get("loginprocess_reminderlogin_haspin") else ""
                     )
                 }"
             )

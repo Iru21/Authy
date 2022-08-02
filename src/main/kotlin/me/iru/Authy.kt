@@ -1,6 +1,7 @@
 package me.iru
 
 import me.iru.commands.*
+import me.iru.data.Migration
 import me.iru.data.PlayerData
 import me.iru.events.LoginEvents
 import me.iru.process.LoginProcess
@@ -18,6 +19,8 @@ class Authy : JavaPlugin() {
     val pluginName: String = this.description.name
     val CommandFilter : CommandFilter = CommandFilter()
 
+    val prefix = "${ChatColor.DARK_GRAY}[${ChatColor.GOLD}$pluginName${ChatColor.DARK_GRAY}]"
+
     companion object {
         lateinit var instance: Authy private set
         lateinit var translations: Translations private set
@@ -32,7 +35,8 @@ class Authy : JavaPlugin() {
 
         translations = Translations()
         playerData = PlayerData()
-        playerData.init()
+        Migration.updateSystem()
+        Migration.migrateDatabase()
         loginProcess = LoginProcess()
         authManager = AuthManager()
         session = Session()
@@ -41,7 +45,7 @@ class Authy : JavaPlugin() {
         config.options().copyDefaults(true)
         saveConfig()
 
-        server.consoleSender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}$pluginName${ChatColor.DARK_GRAY}] ${ChatColor.GREEN}Enabling $version")
+        server.consoleSender.sendMessage("$prefix ${ChatColor.GREEN}Enabling $version")
 
         server.pluginManager.registerEvents(LoginEvents(), this)
         server.pluginManager.registerEvents(BlockEvents(), this)
@@ -63,7 +67,9 @@ class Authy : JavaPlugin() {
     }
 
     override fun onDisable() {
-        server.consoleSender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}$pluginName${ChatColor.DARK_GRAY}] ${ChatColor.RED}Disabling $version")
+        server.consoleSender.sendMessage("$prefix ${ChatColor.RED}Disabling $version")
+        Migration.saveLastDatabaseType()
+        playerData.databaseConnection.killConnection()
     }
 
 }

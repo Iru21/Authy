@@ -14,19 +14,18 @@ class Session {
     fun remember(p : Player) {
         val curtime = Timestamp(System.currentTimeMillis())
         val timestamp = curtime.time
-        val playerDataModel = playerData.get(p.uniqueId)!!
-        playerDataModel.session = timestamp
-        playerDataModel.ip = p.address?.address?.hostAddress!!
-        playerData.save(playerDataModel)
+        val authyPlayer = playerData.get(p.uniqueId)!!
+        authyPlayer.session = timestamp
+        authyPlayer.ip = p.address?.address?.hostAddress!!
+        playerData.update(authyPlayer)
     }
 
     fun tryAutoLogin(p : Player) : Boolean {
-        val playerDataModel = playerData.get(p.uniqueId)
-        if(playerDataModel == null) return false
-        val session = playerDataModel.session
+        val authyPlayer = playerData.get(p.uniqueId) ?: return false
+        val session = authyPlayer.session
         val curtime = Timestamp(System.currentTimeMillis())
         val timestamp = curtime.time
-        if((parseLong(session.toString()) + (authy.config.getInt("sessionExpiresIn") * 3600000) > timestamp) && p.address?.address?.hostAddress == playerDataModel.ip) {
+        if((parseLong(session.toString()) + (authy.config.getInt("sessionExpiresIn") * 3600000) > timestamp) && p.address?.address?.hostAddress == authyPlayer.ip) {
             authManager.login(p, LoginType.Session)
             return true
         }
