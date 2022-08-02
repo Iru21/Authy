@@ -17,7 +17,7 @@ class DatabaseConnection(val type: DatabaseType) {
 
     private var conn: Connection = when(type) {
         DatabaseType.MySQL -> connectMySQL()
-        else -> connectSQLite()
+        DatabaseType.SQLite -> connectSQLite()
     }
 
     fun connectSQLite(): Connection {

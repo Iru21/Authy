@@ -63,7 +63,6 @@ class Authy : JavaPlugin() {
         for(player : Player in players) {
             JoinProcess(player).run()
         }
-
     }
 
     override fun onDisable() {
