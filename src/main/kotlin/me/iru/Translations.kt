@@ -55,8 +55,14 @@ class Translations {
         }
     }
 
+    private fun getFallback(key: String): String {
+        authy.server.consoleSender.sendMessage("${authy.prefix} &cThere has been a translation error! Couldn't find key $key in ${authy.config.getString("lang")}")
+        val en = File(authy.dataFolder, "lang" + File.separator + "en_us.yml")
+        return YamlConfiguration.loadConfiguration(en).getString(key) ?: throw IllegalStateException("Key $key not found in lang file en_us! Check folder Authy/lang/")
+    }
+
     fun get(key: String, mode: ParseMode = ParseMode.ResetAndTranslate): String {
-        val value = cache?.getString(key) ?: "&cThere has been a translation error! Couldn't find key $key in ${authy.config.getString("lang")}"
+        val value = cache?.getString(key) ?: getFallback(key)
         return when(mode) {
             ParseMode.ResetAndTranslate -> ChatColor.translateAlternateColorCodes('&', "&r$value")
             ParseMode.Translate -> ChatColor.translateAlternateColorCodes('&', value)
