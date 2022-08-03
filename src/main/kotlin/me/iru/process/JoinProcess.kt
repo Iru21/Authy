@@ -2,7 +2,7 @@ package me.iru.process
 
 import me.iru.Authy
 import me.iru.PrefixType
-import me.iru.data.Migration
+import me.iru.data.migration.Migration
 import me.iru.utils.hasValidName
 import org.bukkit.Location
 import org.bukkit.block.BlockFace

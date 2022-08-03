@@ -1,11 +1,12 @@
 package me.iru
 
 import me.iru.commands.*
-import me.iru.data.Migration
+import me.iru.data.migration.Migration
 import me.iru.data.PlayerData
 import me.iru.events.LoginEvents
 import me.iru.process.LoginProcess
 import me.iru.data.Session
+import me.iru.data.migration.DatabaseMigration
 import me.iru.events.BlockEvents
 import me.iru.process.JoinProcess
 import me.iru.utils.CommandFilter
@@ -36,7 +37,7 @@ class Authy : JavaPlugin() {
         translations = Translations()
         playerData = PlayerData()
         Migration.updateSystem()
-        Migration.migrateDatabase()
+        DatabaseMigration.tryMigrate()
         loginProcess = LoginProcess()
         authManager = AuthManager()
         session = Session()
@@ -67,8 +68,8 @@ class Authy : JavaPlugin() {
 
     override fun onDisable() {
         server.consoleSender.sendMessage("$prefix ${ChatColor.RED}Disabling $version")
-        Migration.saveLastDatabaseType()
-        playerData.databaseConnection.killConnection()
+        DatabaseMigration.saveLastDatabaseType()
+        playerData.databaseConnection.shutdownConnections()
     }
 
 }
