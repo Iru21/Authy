@@ -1,0 +1,80 @@
+# by York
+
+# key template:
+# [where]_[section]_[key]
+
+enabled: "&a已啟用"
+disabled: "&c已禁用"
+
+# can be in minecraft (&x) or hex (#abc123) format
+prefix_warning_value: "&l(!)"
+prefix_warning_color: "#FFDA4A"
+
+prefix_error_value: "&l(❌)"
+prefix_error_color: "#BE4143"
+
+prefix_login_value: "&l(✔)"
+prefix_login_color: "&a"
+
+prefix_remember_value: "&l(🔱)"
+prefix_remember_color: "#AFFFB1"
+
+prefix_pin_value: "&l(〰)"
+prefix_pin_color: "#ACEFFF"
+
+prefix_unregister_value: "&l(✔)"
+prefix_unregister_color: "#FFCF8A"
+
+prefix_register_value: "&l(✔)"
+prefix_register_color: "#CDFF00"
+
+already_authed: "&7您已通過身份驗證！"
+no_pin_warning: "&c您還沒有設定pin碼 &7為了安全起見請使用 &8/&fpin &7指令來設定!"
+
+login_success: "&7成功登入!"
+autologin_success: "&7已自動登入!"
+register_success: "&7已成功註冊!"
+unregister_success: "&7成功取消註冊!"
+timedout_error: "&7登入驗證時間已過!"
+invalid_username: "&7無效的用戶名！"
+
+loginprocess_reminder_login: "&7使用此指令登入: &8/&flogin &8[&f密碼&8] %s"
+loginprocess_reminderlogin_haspin: "&8[&fpin&8]"
+loginprocess_reminder_register: "&7使用此指令註冊 &8/&fregister &8[&f密碼&8] [&f重複輸入密碼&8]"
+
+command_register_usage: "&7使用方式: &8/&fregister &8[&f密碼&8] [&f重複輸入密碼&8]"
+command_register_notidentical: "&7重複密碼不匹配!"
+command_register_breaksrules: "&7您的密碼不符合要求！ &c規則&8: &f最小長度&8: &c%d&8, &f最大長度&8: &c%d&8, &fM最少大寫字符&8: &c%s&8, &f最少數字&8: &c%s"
+command_register_alreadyregistered: "&7你已經註冊過了!"
+
+command_login_usagepin: "&7使用方式: &8/&flogin &8[&f密碼&8] [&fpin碼&8]"
+command_login_usage: "&7使用方式: &8/&flogin &8[&f密碼&8]"
+command_login_notregistered: "&7您尚未註冊! 使用 &8/&fregister &7指令來註冊!"
+command_login_wrongpassword: "&7密碼錯誤!"
+command_login_wrongpin: "&7PIN錯誤!"
+command_login_nopinwarning: "&c您還沒有設定pin碼 &7為了安全起見請使用 &8/&fpin &7指令來設定!"
+
+pincommand_info_bar: "&8[%s●&8] &8&m----&r &7Pin &8&m----&r &8[%s●&8]"
+pincommand_info_status: "&8  - &7狀態&8: %s"
+pincommand_info_split: "    &8&m----"
+pincommand_info_togglehelp: "&8  - /&fpin &7toggle &8- &7啟用/禁用PIN"
+pincommand_info_sethelp: "&8  - /&fpin &7set &8[&7新PIN碼&8] - &7設定PIN"
+
+command_pin_setpinbeforetoggle: "&7你需要先設定PIN! 使用 &8/&fpin &7set &8[&7新PIN碼&8] &7指令來設定!"
+command_pin_toggled: "%s &7pin!"
+command_pin_setusage: "&7使用方法&8: /&fpin &7set &8[&7新PIN碼&8]"
+command_pin_breaksrules: "&7您的PIN碼不符合要求! &c規則&8: &f最小長度&8: &c%d&8, &f最大長度&8: &c%d&8"
+command_pin_success: "&7PIN已設定! &7記得使用 &8/&fpin toggle &7指令來啟用PIN!"
+
+command_remember_success: "&7已為 &c%dh 記住!"
+
+command_unregister_successkick: "&7再次輸入並註冊！"
+
+duplicateprotection_notification_message: "&7來自同一 IP 地址的帳戶: &8(%s&8)"
+duplicateprotection_notification_separator: "&8, &r"
+duplicateprotection_notification_namecolor: "#FFDA4A"
+duplicateprotection_max_reached: "&7只允許 &c%s &7 帳號來自同IP位置!"
+
+# do not edit
+# only updated when new keys have been added/renamed or the formatting has changed
+version: 6
