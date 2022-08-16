@@ -66,7 +66,7 @@ command_pin_success: "&7pin已经设置成功！ &7要记得通过 &8/&fpin togg
 
 command_remember_success: "&7已为 &c%dh 存储登录信息！"
 
-command_unregister_successkick: "&7再次输入并注册！"
+command_unregister_successkick: "&7请重新进入服务器并注册！"
 
 duplicateprotection_notification_message: "&7来自同一ip地址的账户： &8(%s&8)"
 duplicateprotection_notification_separator: "&8, &r"
