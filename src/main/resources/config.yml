@@ -14,6 +14,7 @@ effects:
   title: true
   particles: true
   sounds: true
+  blindness: false
 
 welcomeMessage:
   text:

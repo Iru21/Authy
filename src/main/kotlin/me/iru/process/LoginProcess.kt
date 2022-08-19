@@ -4,6 +4,8 @@ import me.iru.Authy
 import me.iru.PrefixType
 import org.bukkit.Location
 import org.bukkit.entity.Player
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -18,10 +20,15 @@ class LoginProcess {
 
     fun addPlayer(p : Player) {
         inProcess.add(p.uniqueId)
+        if(authy.config.getBoolean("effects.blindness")) {
+            p.addPotionEffect(PotionEffect(PotionEffectType.BLINDNESS, Int.MAX_VALUE, 255))
+        }
     }
 
     fun removePlayer(p : Player) {
         p.fallDistance = 0F
+        p.removePotionEffect(PotionEffectType.BLINDNESS)
+        EffectStore.restore(p)
         inProcess.remove(p.uniqueId)
     }
 

@@ -28,6 +28,8 @@ class JoinProcess(private val player: Player) {
 
         if(session.tryAutoLogin(player)) return
 
+        EffectStore.save(player)
+
         loginProcess.addPlayer(player)
 
         check()
