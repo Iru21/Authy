@@ -24,7 +24,7 @@ class cLogin(override var name: String = "login") : ICommand {
                 p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_login_notregistered")}")
                 return true
             }
-            if(!loginProcess.checkIfContains(p)) {
+            if(!loginProcess.contains(p)) {
                 p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("already_authed")}")
                 return true
             }

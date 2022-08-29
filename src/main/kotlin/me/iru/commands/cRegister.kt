@@ -20,7 +20,7 @@ class cRegister(override var name: String = "register") : ICommand {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender is Player) {
             val p : Player = sender
-            if(!loginProcess.checkIfContains(p)) {
+            if(!loginProcess.contains(p)) {
                 p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("already_authed")}!")
                 return true
             }

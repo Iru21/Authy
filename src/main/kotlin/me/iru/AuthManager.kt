@@ -1,6 +1,5 @@
 package me.iru
 
-import me.iru.utils.sendWelcomeMessage
 import org.bukkit.entity.Player
 
 enum class LoginType {
@@ -20,15 +19,9 @@ class AuthManager {
         playerData.create(p, password)
         loginProcess.removePlayer(p)
         p.sendMessage("${translations.getPrefix(PrefixType.REGISTER)} ${translations.get("register_success")}")
-
-        if(authy.config.getBoolean("onJoin.teleport") && authy.config.getBoolean("onJoin.concealment")) {
-            loginProcess.teleportToLocation(p)
-        }
         authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} ${org.bukkit.ChatColor.YELLOW}registered with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress}")
         if(authy.config.getBoolean("sendPinSetReminder")) p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("no_pin_warning")}")
         effectRunner.runRegister(p)
-
-        sendWelcomeMessage(p)
     }
 
     fun login(p: Player, type: LoginType = LoginType.Default) {
@@ -36,9 +29,6 @@ class AuthManager {
         when(type) {
             LoginType.Default -> {
                 p.sendMessage("${translations.getPrefix(PrefixType.LOGIN)} ${translations.get("login_success")}")
-                if(authy.config.getBoolean("onJoin.teleport") && authy.config.getBoolean("onJoin.concealment")) {
-                    loginProcess.teleportToLocation(p)
-                }
                 authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} ${org.bukkit.ChatColor.YELLOW}logged in with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress}")
                 val authyPlayer = playerData.get(p.uniqueId)!!
                 if(!authyPlayer.isPinEnabled && authy.config.getBoolean("sendPinSetReminder")) {
@@ -55,8 +45,6 @@ class AuthManager {
                 effectRunner.runLogin(p)
             }
         }
-
-        sendWelcomeMessage(p)
     }
 
 }

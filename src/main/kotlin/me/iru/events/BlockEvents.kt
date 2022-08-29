@@ -15,56 +15,56 @@ class BlockEvents : Listener {
 
     @EventHandler
     fun onMove(e : PlayerMoveEvent) {
-        if(loginProcess.checkIfContains(e.player)) {
+        if(loginProcess.contains(e.player)) {
             e.isCancelled = true
         }
     }
 
     @EventHandler
     fun onBlockBreak(e : BlockBreakEvent) {
-        if (loginProcess.checkIfContains(e.player)) {
+        if (loginProcess.contains(e.player)) {
             e.isCancelled = true
         }
     }
 
     @EventHandler
     fun onBlockPlace(e : BlockPlaceEvent) {
-        if(loginProcess.checkIfContains(e.player)) {
+        if(loginProcess.contains(e.player)) {
             e.isCancelled = true
         }
     }
 
     @EventHandler
     fun onItemConsume(e : PlayerItemConsumeEvent) {
-        if(loginProcess.checkIfContains(e.player)) {
+        if(loginProcess.contains(e.player)) {
             e.isCancelled = true
         }
     }
 
     @EventHandler
     fun onItemDrop(e : PlayerDropItemEvent) {
-        if(loginProcess.checkIfContains(e.player)) {
+        if(loginProcess.contains(e.player)) {
             e.isCancelled = true
         }
     }
 
     @EventHandler
     fun onUse(e : PlayerInteractEvent) {
-        if(loginProcess.checkIfContains(e.player)) {
+        if(loginProcess.contains(e.player)) {
             e.isCancelled = true
         }
     }
 
     @EventHandler
     fun onEntityUse(e : PlayerInteractAtEntityEvent) {
-        if(loginProcess.checkIfContains(e.player)) {
+        if(loginProcess.contains(e.player)) {
             e.isCancelled = true
         }
     }
 
     @EventHandler
     fun onEntityUse2(e : PlayerInteractEntityEvent) {
-        if(loginProcess.checkIfContains(e.player)) {
+        if(loginProcess.contains(e.player)) {
             e.isCancelled = true
         }
     }
@@ -72,7 +72,7 @@ class BlockEvents : Listener {
     @EventHandler
     fun onDamageTaken(e : EntityDamageEvent) {
         if(e.entity is Player) {
-            if (loginProcess.checkIfContains((e.entity as Player).player as Player)) {
+            if (loginProcess.contains((e.entity as Player).player as Player)) {
                 e.isCancelled = true
             }
         }
@@ -81,7 +81,7 @@ class BlockEvents : Listener {
     @EventHandler
     fun onAttack(e : EntityDamageByEntityEvent) {
         if(e.damager is Player) {
-            if (loginProcess.checkIfContains(e.damager as Player)) {
+            if (loginProcess.contains(e.damager as Player)) {
                 e.isCancelled = true
             }
         }
@@ -91,7 +91,7 @@ class BlockEvents : Listener {
     @EventHandler
     fun onAnyCommand(e : PlayerCommandPreprocessEvent) {
         val allowedCommands = mutableListOf("/l", "/login", "/reg", "/register")
-        if(loginProcess.checkIfContains(e.player)) {
+        if(loginProcess.contains(e.player)) {
             if (!allowedCommands.contains(e.message.split(" ")[0])) {
                 e.isCancelled = true
                 loginProcess.sendPleaseAuthMessage(e.player)
@@ -101,7 +101,7 @@ class BlockEvents : Listener {
 
     @EventHandler
     fun onChat(e : AsyncPlayerChatEvent)  {
-        if(loginProcess.checkIfContains(e.player)) {
+        if(loginProcess.contains(e.player)) {
             e.isCancelled = true
             loginProcess.sendPleaseAuthMessage(e.player)
         }

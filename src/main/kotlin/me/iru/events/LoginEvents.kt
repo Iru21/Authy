@@ -21,7 +21,7 @@ class LoginEvents : Listener {
 
     @EventHandler
     fun onQuit(e : PlayerQuitEvent) {
-        if (loginProcess.checkIfContains(e.player)) {
+        if (loginProcess.contains(e.player)) {
             loginProcess.removePlayer(e.player)
         }
     }
