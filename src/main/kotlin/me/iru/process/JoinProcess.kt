@@ -46,12 +46,14 @@ class JoinProcess(private val player: Player) {
             val x = authy.config.getDouble("onFirstJoin.x")
             val y = authy.config.getDouble("onFirstJoin.y") + 0.1
             val z = authy.config.getDouble("onFirstJoin.z")
-            player.teleport(Location(player.world, x, y, z))
+            val world = authy.config.getString("onFirstJoin.world") ?: "world"
+            player.teleport(Location(authy.server.getWorld(world), x, y, z))
         } else if(authy.config.getBoolean("onJoin.teleport")) {
             val x = authy.config.getDouble("onJoin.x")
             val y = authy.config.getDouble("onJoin.y") + 0.1
             val z = authy.config.getDouble("onJoin.z")
-            player.teleport(Location(player.world, x, y, z))
+            val world = authy.config.getString("onJoin.world") ?: "world"
+            player.teleport(Location(authy.server.getWorld(world), x, y, z))
         }
     }
 

@@ -31,6 +31,7 @@ onFirstJoin:
   x: 0
   y: 0
   z: 0
+  world: world
 
 onJoin:
   # Concealment if set to true (also requires teleport to be true) will teleport a player to their position after authentication
@@ -39,6 +40,7 @@ onJoin:
   x: 0
   y: 0
   z: 0
+  world: world
 
 duplicateIpProtection:
   # 0 - No protection
