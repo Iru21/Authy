@@ -1,0 +1,78 @@
+# key template:
+# [where]_[section]_[key]
+
+enabled: "&aZapnut"
+disabled: "&cVypnut"
+
+# can be in minecraft (&x) or hex (#abc123) format
+prefix_warning_value: "&l(!)"
+prefix_warning_color: "#FFDA4A"
+
+prefix_error_value: "&l(❌)"
+prefix_error_color: "#BE4143"
+
+prefix_login_value: "&l(✔)"
+prefix_login_color: "&a"
+
+prefix_remember_value: "&l(🔱)"
+prefix_remember_color: "#AFFFB1"
+
+prefix_pin_value: "&l(〰)"
+prefix_pin_color: "#ACEFFF"
+
+prefix_unregister_value: "&l(✔)"
+prefix_unregister_color: "#FFCF8A"
+
+prefix_register_value: "&l(✔)"
+prefix_register_color: "#CDFF00"
+
+already_authed: "&7Již jsi přihlášen/a!"
+no_pin_warning: "&cNení nastavený pin kód! &7Z důvodu bezpečnosti ho můžeš nastavit příkazem &8/&fpin&7!"
+
+login_success: "&7Přihlášení proběhlo úspěšně!"
+autologin_success: "&7Automaticky přihlášen!"
+register_success: "&7Registrace proběhla úspěšně!"
+unregister_success: "&7Registrace úspěšně smazána!"
+timedout_error: "&7Vypršel čas pro přihlášení!"
+invalid_username: "&7Neplatné uživatelské jméno!"
+
+loginprocess_reminder_login: "&7Přihlas se pomocí &8/&flogin &8[&fheslo&8] %s"
+loginprocess_reminderlogin_haspin: "&8[&fpin&8]"
+loginprocess_reminder_register: "&7Zaregistruj se pomocí &8/&fregister &8[&fheslo&8] [&fheslo znovu&8]"
+
+command_register_usage: "&7Použití: &8/&fregister &8[&fheslo&8] [&fheslo znovu&8]"
+command_register_notidentical: "&7Hesla se neshodují!"
+command_register_breaksrules: "&7Tvoje heslo neodpovídá požadavkům pro heslo! &fMinimální Délka&8: &c%d&8, &fMaximální Délka&8: &c%d&8, &fMinimum Velkých Znaků&8: &c%s&8, &fMinimum Čísel&8: &c%s"
+command_register_alreadyregistered: "&7Již jsi zaregistrovaný/á!"
+
+command_login_usagepin: "&7Použití: &8/&flogin &8[&fheslo&8] [&fpin&8]"
+command_login_usage: "&7Použití: &8/&flogin &8[&fheslo&8]"
+command_login_notregistered: "&7Nejsi zaregistrovaný/á! Použij příkaz &8/&fregister&7!"
+command_login_wrongpassword: "&7Nesprávné heslo!"
+command_login_wrongpin: "&7Nesprávný pin!"
+command_login_nopinwarning: "&cNemáš nastavený žádný pin! &7Z důvodu bezpečnosti ho můžeš zapnout pomocí příkazu &8/&fpin&7!"
+
+pincommand_info_bar: "&8[%s●&8] &8&m----&r &7Pin &8&m----&r &8[%s●&8]"
+pincommand_info_status: "&8  - &7Status&8: %s"
+pincommand_info_split: "    &8&m----"
+pincommand_info_togglehelp: "&8  - /&fpin &7toggle &8- &7Přepne pin"
+pincommand_info_sethelp: "&8  - /&fpin &7set &8[&7nový pin kód&8] - &7Nastaví pin"
+
+command_pin_setpinbeforetoggle: "&7Musíš prvně nastavit pin! Použij příkaz &8/&fpin &7set &8[&7new pin code&8]!"
+command_pin_toggled: "&7Pin %s&7!"
+command_pin_setusage: "&7Použití&8: /&fpin &7set &8[&7nový pin kód&8]"
+command_pin_breaksrules: "&7Zadaný pin neodpovídá požadavkům pro pin! &fMinimální Délka&8: &c%d&8, &fMaximální Délka&8: &c%d&8"
+command_pin_success: "&7Pin byl nastaven! &7Zapneš ho pomocí příkazu &8/&fpin toggle&7!"
+
+command_remember_success: "&7Session uložená pro &c%dh!"
+
+command_unregister_successkick: "&7Připoj se znovu a zaregistruj se!"
+
+duplicateprotection_notification_message: "&7Účty ze stejné IP adresy: &8(%s&8)"
+duplicateprotection_notification_separator: "&8, &r"
+duplicateprotection_notification_namecolor: "#FFDA4A"
+duplicateprotection_max_reached: "&7Může existovat pouze &c%s &7účtů na stejné IP adrese!"
+
+# do not edit
+# only updated when new keys have been added/renamed or the formatting has changed
+version: 6
