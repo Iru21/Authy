@@ -3,16 +3,23 @@ package me.iru.process
 import me.iru.Authy
 import me.iru.PrefixType
 import org.bukkit.entity.Player
+import org.bukkit.event.player.PlayerLoginEvent
 
 object DuplicateProtection {
 
     val playerData = Authy.playerData
-    val config = Authy.instance.config
     val translations = Authy.translations
+    val authy = Authy.instance
+    val config = authy.config
 
-    fun check(p: Player): Boolean {
+    fun check(e: PlayerLoginEvent) {
+        val p = e.player
+        if(authy.server.getPlayer(p.name) != null) {
+            e.disallow(PlayerLoginEvent.Result.KICK_OTHER, "")
+        }
+
         val protLevel = config.getInt("duplicateIpProtection.protectionLevel")
-        if(protLevel == 0) return true
+        if(protLevel == 0) return
         val max = config.getInt("duplicateIpProtection.maxPerIp")
         val shouldNotify = config.getBoolean("duplicateIpProtection.notifyOnDuplicateIp")
         val duplicates = getDuplicatesForIpOf(p)
@@ -28,11 +35,9 @@ object DuplicateProtection {
                 }
             }
         }
-        return if(duplicates.size > max && !p.hasPermission("authy.ipbypass")) {
-            p.kickPlayer(translations.get("duplicateprotection_max_reached").format(max.toString()))
-            false
+        if(duplicates.size > max && !p.hasPermission("authy.ipbypass")) {
+            e.disallow(PlayerLoginEvent.Result.KICK_OTHER, translations.get("duplicateprotection_max_reached").format(max.toString()))
         }
-        else true
     }
 
     private fun getDuplicatesForIpOf(p: Player): HashSet<String> {

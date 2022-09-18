@@ -14,9 +14,12 @@ class LoginEvents : Listener {
 
     @EventHandler
     fun onJoin(e : PlayerJoinEvent) {
-        if(DuplicateProtection.check(e.player)) {
-            JoinProcess(e.player).run()
-        }
+        JoinProcess(e.player).run()
+    }
+
+    @EventHandler
+    fun onInitialLogin(e : PlayerLoginEvent) {
+        DuplicateProtection.check(e)
     }
 
     @EventHandler
