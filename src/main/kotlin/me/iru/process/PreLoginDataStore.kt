@@ -13,6 +13,7 @@ object PreLoginDataStore {
     private val effects = mutableMapOf<UUID, Collection<PotionEffect>>()
     private val locations = mutableMapOf<UUID, Location>()
     private val fireTicks = mutableMapOf<UUID, Int>()
+    private val flyingState = mutableMapOf<UUID, Boolean>()
 
     fun save(p: Player) {
         saveEffects(p)
@@ -20,6 +21,7 @@ object PreLoginDataStore {
             locations[p.uniqueId] = p.location
         }
         saveFireTicks(p)
+        flyingState[p.uniqueId] = p.isFlying
     }
 
     fun restore(p: Player) {
@@ -28,6 +30,7 @@ object PreLoginDataStore {
             restoreLocation(p)
         }
         p.fireTicks = fireTicks[p.uniqueId] ?: 0
+        p.isFlying = flyingState[p.uniqueId] ?: false
     }
 
     private fun saveFireTicks(p: Player) {
