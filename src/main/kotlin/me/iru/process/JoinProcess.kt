@@ -3,8 +3,8 @@ package me.iru.process
 import me.iru.Authy
 import me.iru.PrefixType
 import me.iru.data.migration.Migration
+import me.iru.utils.TeleportUtil
 import me.iru.utils.hasValidName
-import me.iru.utils.teleportToGround
 import org.bukkit.Location
 import org.bukkit.entity.Player
 import org.bukkit.potion.PotionEffect
@@ -28,7 +28,7 @@ class JoinProcess(private val player: Player) {
         if(session.tryAutoLogin(player)) return
 
         joinTeleports()
-        teleportToGround(player)
+        TeleportUtil.teleportToValidPlace(player)
 
         // Place premium check here
 
