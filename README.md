@@ -1,3 +1,5 @@
+![Spiget Downloads](https://img.shields.io/spiget/downloads/100004?label=Spigot%20Downloads)
+
 # Authy 
 A simple authentication plugin for Minecraft 1.17+!
 
