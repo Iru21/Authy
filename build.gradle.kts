@@ -70,8 +70,10 @@ repositories {
 
 dependencies {
 
-    compileOnly("org.apache.logging.log4j:log4j-api:2.18.0")
-    compileOnly("org.apache.logging.log4j:log4j-core:2.18.0")
+    compileOnly("org.apache.logging.log4j:log4j-api:2.19.0")
+    compileOnly("org.apache.logging.log4j:log4j-core:2.19.0")
+
+    runtimeOnly("mysql:mysql-connector-java:8.0.31")
 
     implementation("org.spigotmc:spigot-api:${minecraftVersion}-R0.1-SNAPSHOT")
     implementation(kotlin("stdlib-jdk8"))

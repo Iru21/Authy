@@ -42,6 +42,8 @@ class DatabaseConnection(val type: DatabaseType) {
         val password = authy.config.getString("database.credentials.password")
         val databaseName = authy.config.getString("database.credentials.database")
 
+        Class.forName("com.mysql.jdbc.Driver")
+
         val t = DriverManager
             .getConnection("jdbc:mysql://$host", user, password)
         t.createStatement().executeUpdate("CREATE DATABASE IF NOT EXISTS $databaseName")
