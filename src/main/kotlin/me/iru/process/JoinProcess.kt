@@ -58,21 +58,23 @@ class JoinProcess(private val player: Player) {
     }
 
     private fun check() {
-        var i = 0
-        var task : BukkitTask? = null
-        task = authy.server.scheduler.runTaskTimer(authy, Runnable {
+        lateinit var messageTask : BukkitTask
+        messageTask = authy.server.scheduler.runTaskTimer(authy, Runnable {
             if(loginProcess.contains(player)) {
-                if(i == 10) {
-                    task!!.cancel()
-                    player.kickPlayer("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("timedout_error")}")
-                    loginProcess.removePlayer(player)
-                } else {
-                    loginProcess.sendPleaseAuthMessage(player)
-                    i++
-                }
+                loginProcess.sendPleaseAuthMessage(player)
             }
-            else task!!.cancel()
+            else messageTask.cancel()
         },0L, 200L)
+
+        authy.server.scheduler.runTaskLater(authy, Runnable {
+            if(loginProcess.contains(player)) {
+                messageTask.cancel()
+                player.kickPlayer("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("timedout_error")}")
+                loginProcess.removePlayer(player)
+            }
+        }, authy.config.getLong("timeout") * 20L)
     }
+
+
 
 }
