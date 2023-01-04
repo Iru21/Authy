@@ -46,8 +46,6 @@ class Authy : JavaPlugin() {
         config.options().copyDefaults(true)
         saveConfig()
 
-        server.consoleSender.sendMessage("$prefix ${ChatColor.GREEN}Enabling $version")
-
         server.pluginManager.registerEvents(LoginEvents(), this)
         server.pluginManager.registerEvents(BlockEvents(), this)
 
@@ -60,6 +58,8 @@ class Authy : JavaPlugin() {
 
         with(CommandFilter) { registerFilter() }
 
+        server.consoleSender.sendMessage("$prefix ${ChatColor.GREEN}Enabled $version")
+
         val players = server.onlinePlayers
         for(player : Player in players) {
             JoinProcess(player).run()
@@ -67,9 +67,9 @@ class Authy : JavaPlugin() {
     }
 
     override fun onDisable() {
-        server.consoleSender.sendMessage("$prefix ${ChatColor.RED}Disabling $version")
         DatabaseMigration.saveLastDatabaseType()
         playerData.databaseConnection.shutdownConnections()
+        server.consoleSender.sendMessage("$prefix ${ChatColor.RED}Disabled $version")
     }
 
 }
