@@ -35,10 +35,22 @@ class cUnregister(override var name: String = "unregister") : ICommand {
                 return true
             }
             try {
+                val username = args[0]
+                val nrMessage = "${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.RED}That player is not registered!"
+
                 @Suppress("DEPRECATION")
-                val p = Bukkit.getOfflinePlayer(args[0])
-                if(playerData.delete(p.uniqueId)) sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.GREEN}Unregistered!")
-                else sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.RED}That player is not registered!")
+                val p = Bukkit.getOfflinePlayer(username)
+                var uuid = p.uniqueId
+                if(!playerData.exists(uuid)) {
+                    val found = playerData.get(username)
+                    if(found == null) {
+                        sender.sendMessage(nrMessage)
+                        return true
+                    }
+                    uuid = found.uuid
+                }
+                playerData.delete(uuid)
+                sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.GREEN}Unregistered!")
             } catch (e : Exception) {
                 if(e.message != null) sender.sendMessage(e.message!!)
                 sender.sendMessage("${ChatColor.DARK_GRAY}[${ChatColor.GOLD}${authy.description.name}${ChatColor.DARK_GRAY}] ${ChatColor.DARK_RED}There has been an error!")

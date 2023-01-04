@@ -72,6 +72,15 @@ class PlayerData {
         }
     }
 
+    fun get(username: String): AuthyPlayer? {
+        val d = databaseConnection.query("SELECT * FROM players WHERE username = '${username}'")!!
+        return if(!d.isBeforeFirst) null
+        else {
+            d.next()
+            construct(d)
+        }
+    }
+
     fun update(d: AuthyPlayer) {
         var dup = ""
         if(databaseConnection.type == DatabaseType.MySQL) dup = "DUPLICATE KEY UPDATE"
