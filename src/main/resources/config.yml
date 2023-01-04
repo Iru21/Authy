@@ -1,5 +1,8 @@
 nameValidation: true
 
+# In seconds
+timeout: 60
+
 passwordValidation:
   minLength: 6
   maxLength: 32
