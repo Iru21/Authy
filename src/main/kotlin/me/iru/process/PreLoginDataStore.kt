@@ -17,7 +17,7 @@ object PreLoginDataStore {
 
     fun save(p: Player) {
         saveEffects(p)
-        if(shouldConceal()) {
+        if(shouldConceal() && !p.isDead) {
             locations[p.uniqueId] = p.location
         }
         saveFireTicks(p)
@@ -30,7 +30,9 @@ object PreLoginDataStore {
             restoreLocation(p)
         }
         p.fireTicks = fireTicks[p.uniqueId] ?: 0
+        fireTicks.remove(p.uniqueId)
         p.isFlying = flyingState[p.uniqueId] ?: false
+        flyingState.remove(p.uniqueId)
     }
 
     private fun saveFireTicks(p: Player) {
@@ -42,7 +44,10 @@ object PreLoginDataStore {
 
     private fun restoreLocation(p: Player) {
         val loc = locations[p.uniqueId]
-        if(loc != null) p.teleport(loc)
+        if(loc != null) {
+            p.teleport(loc)
+            locations.remove(p.uniqueId)
+        }
     }
 
     private fun restoreEffects(p: Player) {
@@ -53,6 +58,8 @@ object PreLoginDataStore {
         for(e in es) {
             p.addPotionEffect(e)
         }
+
+        effects.remove(p.uniqueId)
     }
 
     private fun saveEffects(p: Player) {
