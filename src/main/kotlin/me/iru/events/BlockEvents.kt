@@ -8,6 +8,7 @@ import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDamageEvent
+import org.bukkit.event.inventory.InventoryInteractEvent
 import org.bukkit.event.player.*
 
 class BlockEvents : Listener {
@@ -104,6 +105,15 @@ class BlockEvents : Listener {
         if(loginProcess.contains(e.player)) {
             e.isCancelled = true
             loginProcess.sendPleaseAuthMessage(e.player)
+        }
+    }
+
+    @EventHandler
+    fun onInventoryInteract(e : InventoryInteractEvent) {
+        val p = e.whoClicked as Player
+        if(loginProcess.contains(p)) {
+            e.isCancelled = true
+            loginProcess.sendPleaseAuthMessage(p)
         }
     }
 }
