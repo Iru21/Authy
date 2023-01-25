@@ -42,18 +42,18 @@ class JoinProcess(private val player: Player) {
     }
 
     private fun joinTeleports() {
-        if(!this.player.hasPlayedBefore() && authy.config.getBoolean("onFirstJoin.teleport")) {
-            val x = authy.config.getDouble("onFirstJoin.x")
-            val y = authy.config.getDouble("onFirstJoin.y") + 0.1
-            val z = authy.config.getDouble("onFirstJoin.z")
-            val world = authy.config.getString("onFirstJoin.world") ?: "world"
-            player.teleport(Location(authy.server.getWorld(world), x, y, z))
-        } else if(authy.config.getBoolean("onJoin.teleport")) {
-            val x = authy.config.getDouble("onJoin.x")
-            val y = authy.config.getDouble("onJoin.y") + 0.1
-            val z = authy.config.getDouble("onJoin.z")
-            val world = authy.config.getString("onJoin.world") ?: "world"
-            player.teleport(Location(authy.server.getWorld(world), x, y, z))
+        var key = "onJoin"
+        if(!this.player.hasPlayedBefore()) {
+            key = "onFirstJoin"
+        }
+        if(authy.config.getBoolean("onFirstJoin.teleport") || authy.config.getBoolean("onJoin.teleport")) {
+            val x = authy.config.getDouble("$key.x")
+            val y = authy.config.getDouble("$key.y") + 0.1
+            val z = authy.config.getDouble("$key.z")
+            val yaw = authy.config.getDouble("$key.yaw").toFloat()
+            val pitch = authy.config.getDouble("$key.pitch").toFloat()
+            val world = authy.config.getString("$key.world") ?: "world"
+            player.teleport(Location(authy.server.getWorld(world), x, y, z, yaw, pitch))
         }
     }
 
