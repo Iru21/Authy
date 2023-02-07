@@ -41,10 +41,14 @@ object TeleportUtil {
 
         val mh = loc.world?.minHeight ?: 0
 
-        var task0 : BukkitTask? = null
-        task0 = authy.server.scheduler.runTaskTimer(authy, Runnable {
+        lateinit var task : BukkitTask
+        task = authy.server.scheduler.runTaskTimer(authy, Runnable {
+            if(!Authy.loginProcess.contains(player)) {
+                task.cancel()
+            }
+
             if(loc.y < mh) {
-                task0!!.cancel()
+                task.cancel()
                 player.teleport(loc)
             }
 
@@ -52,7 +56,7 @@ object TeleportUtil {
             if(!under.type.isSolid) {
                 loc = under.location
             } else {
-                task0!!.cancel()
+                task.cancel()
                 player.teleport(loc)
             }
         }, 0L, 0L)
