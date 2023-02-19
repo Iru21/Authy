@@ -10,6 +10,7 @@ import me.iru.data.migration.DatabaseMigration
 import me.iru.events.BlockEvents
 import me.iru.process.JoinProcess
 import me.iru.utils.CommandFilter
+import me.iru.utils.isNewVersionAvailable
 import me.iru.utils.registerCommand
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
@@ -17,8 +18,10 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class Authy : JavaPlugin() {
     val version = this.description.version
-    val pluginName: String = this.description.name
-    val CommandFilter : CommandFilter = CommandFilter()
+    var latestVersion = this.version
+
+    private val pluginName = this.description.name
+    private val commandFilter = CommandFilter()
 
     val prefix = "${ChatColor.DARK_GRAY}[${ChatColor.GOLD}$pluginName${ChatColor.DARK_GRAY}]"
 
@@ -56,7 +59,7 @@ class Authy : JavaPlugin() {
         registerCommand(cAuthy())
         registerCommand(cPin())
 
-        with(CommandFilter) { registerFilter() }
+        with(commandFilter) { registerFilter() }
 
         server.consoleSender.sendMessage("$prefix ${ChatColor.GREEN}Enabled $version")
 
@@ -64,6 +67,14 @@ class Authy : JavaPlugin() {
         for(player : Player in players) {
             JoinProcess(player).run()
         }
+
+        this.server.scheduler.runTaskAsynchronously(this, Runnable {
+            val v = isNewVersionAvailable()
+            if(v.first) {
+                this.latestVersion = v.second
+                server.consoleSender.sendMessage("$prefix ${ChatColor.YELLOW}New version available - ${ChatColor.GREEN}${this.latestVersion}${ChatColor.YELLOW}!")
+            }
+        })
     }
 
     override fun onDisable() {

@@ -13,7 +13,11 @@ class cAuthy(override var name: String = "authy") : ICommand {
     val translations = Authy.translations
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(args.size != 1) {
-            sender.sendMessage("§8[§6Authy§8] §7Created by: §cIru21 §8- §7https://github.com/Iru21/")
+            sender.sendMessage("§8[§6Authy§8] §7Created by§8: §cIru §8- §7https://iru.codes")
+            sender.sendMessage("§8[§6Authy§8] §7Version§8: §c${authy.version}")
+            if(authy.latestVersion != authy.version) {
+                sender.sendMessage("§8[§6Authy§8] §7New version available§8: §c${authy.latestVersion}§8!")
+            }
             return true
         } else if(args[0].lowercase() == "reload") {
             if(sender.hasPermission("authy.reload")) {
