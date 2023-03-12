@@ -10,9 +10,9 @@ import java.net.http.HttpResponse
 
 
 fun isNewVersionAvailable(): Pair<Boolean, String> {
-    val latestRelease = getLatestRelease()
-    val latestVersion = latestRelease.get("tag_name").asString
-    return Pair(versionToNum(Authy.instance.version) < versionToNum(latestVersion), latestVersion)
+    val current = Authy.instance.version
+    val latestVersion = getLatestRelease().get("tag_name")?.asString ?: current
+    return Pair(versionToNum(current) < versionToNum(latestVersion), latestVersion)
 }
 
 private fun versionToNum(ver: String): Int {
@@ -33,6 +33,5 @@ private fun getLatestRelease(): JsonObject {
         .build()
 
     val res = client.send(request, HttpResponse.BodyHandlers.ofString())
-    val d: String = res.body()
-    return JsonParser().parse(d).asJsonObject
+    return JsonParser().parse(res.body()).asJsonObject
 }
