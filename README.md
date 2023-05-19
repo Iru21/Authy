@@ -13,10 +13,10 @@ The plugins available on the market annoyed us so we decided to write our own pl
 
 - Security of passwords and pins
 - An additional function that is not required for players with the /pin command
-- Fast and easy to set up
-- The function of remembering login for 48 hours after entering /remember
+- Instant setup
+- The function of remembering login for 48 hours with /remember
 - Completly customizable
-- IP protection for multi-accounts
+- Per IP multi-account detection
 
 ### Commands
 
