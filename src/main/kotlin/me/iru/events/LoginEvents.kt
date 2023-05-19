@@ -4,6 +4,7 @@ import me.iru.Authy
 import me.iru.process.DuplicateProtection
 import me.iru.process.JoinProcess
 import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.*
 
@@ -22,7 +23,7 @@ class LoginEvents : Listener {
         DuplicateProtection.check(e)
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     fun onQuit(e : PlayerQuitEvent) {
         if (loginProcess.contains(e.player)) {
             loginProcess.removePlayer(e.player)
