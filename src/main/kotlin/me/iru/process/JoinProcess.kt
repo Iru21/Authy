@@ -3,9 +3,10 @@ package me.iru.process
 import me.iru.Authy
 import me.iru.PrefixType
 import me.iru.data.migration.Migration
-import me.iru.utils.TeleportUtil
 import me.iru.utils.hasValidName
 import org.bukkit.Location
+import org.bukkit.Material
+import org.bukkit.block.BlockFace
 import org.bukkit.entity.Player
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
@@ -28,7 +29,7 @@ class JoinProcess(private val player: Player) {
         if(session.tryAutoLogin(player)) return
 
         joinTeleports()
-        TeleportUtil.teleportToValidPlace(player)
+        teleportToValidPlace()
 
         // Place premium check here
 
@@ -55,6 +56,25 @@ class JoinProcess(private val player: Player) {
             val world = authy.config.getString("$key.world") ?: "world"
             player.teleport(Location(authy.server.getWorld(world), x, y, z, yaw, pitch))
         }
+    }
+
+    private fun teleportToValidPlace() {
+        val invalidBlocks = mutableListOf(Material.NETHER_PORTAL)
+        val loc = player.location
+        if(!invalidBlocks.contains(loc.block.type)) return
+
+        var b = loc.block
+        for(x in 2 downTo -2 step 1) {
+            for(z in 2 downTo -2 step 1) {
+                if(invalidBlocks.contains(b.type) && !(b.type.isSolid && b.getRelative(BlockFace.UP).type.isSolid)) {
+                    b = b.getRelative(x, 0, z)
+                } else {
+                    player.teleport(b.location)
+                    return
+                }
+            }
+        }
+        return
     }
 
     private fun check() {
