@@ -59,6 +59,7 @@ tasks {
         dependsOn(processResources)
         dependsOn(makeDefaults)
         archiveFileName.set("${pluginName}-${pluginVersion}.jar")
+        relocate("org.bstats", "me.iru")
     }
 }
 
@@ -70,12 +71,13 @@ repositories {
 
 dependencies {
 
-    compileOnly("org.apache.logging.log4j:log4j-api:2.19.0")
-    compileOnly("org.apache.logging.log4j:log4j-core:2.19.0")
+    compileOnly("org.apache.logging.log4j:log4j-api:2.20.0")
+    compileOnly("org.apache.logging.log4j:log4j-core:2.20.0")
 
-    runtimeOnly("mysql:mysql-connector-java:8.0.31")
+    runtimeOnly("mysql:mysql-connector-java:8.0.32")
 
     implementation("org.spigotmc:spigot-api:${minecraftVersion}-R0.1-SNAPSHOT")
+    implementation("org.bstats:bstats-bukkit:3.0.2")
     implementation(kotlin("stdlib-jdk8"))
 }
 
