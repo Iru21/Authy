@@ -20,7 +20,10 @@ class JoinProcess(private val player: Player) {
     private val session = Authy.session
 
     fun run() {
-        if(!hasValidName(player.name) && authy.config.getBoolean("nameValidation")) player.kickPlayer(translations.get("invalid_username"))
+        if(!hasValidName(player.name) && authy.config.getBoolean("nameValidation")) {
+            player.kickPlayer(translations.get("invalid_username"))
+            return
+        }
 
         Migration.updatePlayer(player)
 
@@ -30,8 +33,6 @@ class JoinProcess(private val player: Player) {
 
         joinTeleports()
         teleportToValidPlace()
-
-        // Place premium check here
 
         loginProcess.addPlayer(player)
 

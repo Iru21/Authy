@@ -23,7 +23,7 @@ class LoginEvents : Listener {
         DuplicateProtection.check(e)
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.LOWEST)
     fun onQuit(e : PlayerQuitEvent) {
         if (loginProcess.contains(e.player)) {
             loginProcess.removePlayer(e.player)
