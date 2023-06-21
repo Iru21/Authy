@@ -17,7 +17,7 @@ object PreLoginDataStore {
 
     fun save(p: Player) {
         saveEffects(p)
-        if(shouldConceal() && !p.isDead) {
+        if(shouldConceal(p) && !p.isDead) {
             locations[p.uniqueId] = p.location
         }
         saveFireTicks(p)
@@ -26,7 +26,7 @@ object PreLoginDataStore {
 
     fun restore(p: Player) {
         restoreEffects(p)
-        if(shouldConceal()) {
+        if(shouldConceal(p)) {
             restoreLocation(p)
         }
         p.fireTicks = fireTicks[p.uniqueId] ?: 0
@@ -71,8 +71,10 @@ object PreLoginDataStore {
         }
     }
 
-    private fun shouldConceal(): Boolean {
-        return authy.config.getBoolean("onJoin.teleport") && authy.config.getBoolean("onJoin.concealment")
+    private fun shouldConceal(p: Player): Boolean {
+        return authy.config.getBoolean("onJoin.teleport") &&
+               authy.config.getBoolean("onJoin.concealment") &&
+               p.hasPlayedBefore()
     }
 
 }
