@@ -13,12 +13,12 @@ class LoginEvents : Listener {
     val loginProcess = Authy.loginProcess
     val authy = Authy.instance
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     fun onJoin(e : PlayerJoinEvent) {
         JoinProcess(e.player).run()
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     fun onInitialLogin(e : PlayerLoginEvent) {
         DuplicateProtection.check(e)
     }
