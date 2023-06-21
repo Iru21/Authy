@@ -19,7 +19,12 @@ class AuthManager {
         playerData.create(p, password)
         loginProcess.removePlayer(p)
         p.sendMessage("${translations.getPrefix(PrefixType.REGISTER)} ${translations.get("register_success")}")
-        authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} ${org.bukkit.ChatColor.YELLOW}registered with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress}")
+        authy.server.consoleSender.sendMessage(
+            "${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] " +
+                    "${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} " +
+                    "${org.bukkit.ChatColor.YELLOW}registered with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress} " +
+                    "${org.bukkit.ChatColor.YELLOW}and UUID ${org.bukkit.ChatColor.WHITE}${p.uniqueId}"
+        )
         if(authy.config.getBoolean("sendPinSetReminder")) p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("no_pin_warning")}")
         effectRunner.runRegister(p)
     }
@@ -29,7 +34,11 @@ class AuthManager {
         when(type) {
             LoginType.Default -> {
                 p.sendMessage("${translations.getPrefix(PrefixType.LOGIN)} ${translations.get("login_success")}")
-                authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} ${org.bukkit.ChatColor.YELLOW}logged in with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress}")
+                authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] " +
+                        "${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} " +
+                        "${org.bukkit.ChatColor.YELLOW}logged in with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress} " +
+                        "${org.bukkit.ChatColor.YELLOW}and UUID ${org.bukkit.ChatColor.WHITE}${p.uniqueId}"
+                )
                 val authyPlayer = playerData.get(p.uniqueId)!!
                 if(!authyPlayer.isPinEnabled && authy.config.getBoolean("sendPinSetReminder")) {
                     p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("no_pin_warning")}")
@@ -37,7 +46,11 @@ class AuthManager {
                 effectRunner.runLogin(p)
             }
             LoginType.Session -> {
-                authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} ${org.bukkit.ChatColor.YELLOW}auto logged in with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress}")
+                authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}Authy${org.bukkit.ChatColor.DARK_GRAY}] " +
+                        "${org.bukkit.ChatColor.YELLOW}Player ${org.bukkit.ChatColor.WHITE}${p.name} " +
+                        "${org.bukkit.ChatColor.YELLOW}auto logged in with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress} " +
+                        "${org.bukkit.ChatColor.YELLOW}and UUID ${org.bukkit.ChatColor.WHITE}${p.uniqueId}"
+                )
                 p.sendMessage("${translations.getPrefix(PrefixType.LOGIN)} ${translations.get("autologin_success")}")
                 effectRunner.runAutoLogin(p)
             }
