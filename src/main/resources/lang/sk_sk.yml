@@ -37,8 +37,10 @@ timedout_error: "&7Čas pre prihlásenie vypršal!"
 invalid_username: "&7Neplatný Nick!"
 
 loginprocess_reminder_login: "&7Prihlás sa pomocou &7> &8/&flogin &8(&fHeslo&8) %s"
-loginprocess_reminderlogin_haspin: "&8[&fpin&8]"
-loginprocess_reminder_register: "&7Registruj sa pomocou &7> &8/&fregister &8(&fHeslo&8) (&fZnova Heslo&8)"
+loginprocess_reminder_pin: "&8(&fpin kód&8)"
+loginprocess_reminder_register: "&7Registruj sa pomocou &7> &8/&fregister &8(&fHeslo&8) (&fZnova Heslo&8) %s"
+
+command_register_usagepin: "&7Použitie > &8/&fregister &8(&fHeslo&8) (&fZnova Heslo&8) (&fpin kód&8)"
 command_register_usage: "&7Použitie > &8/&fregister &8(&fHeslo&8) (&fZnova Heslo&8)"
 command_register_notidentical: "&7Heslá sa nezhodujú!"
 command_register_breaksrules: "&7Heslo nesplňuje minimálnie požiadavky! &cPravidlá&8: &fMinimálna Dĺžka&8: &c%d&8, &fMaximálna Dĺžka&8: &c%d&8, &fPočet Minimálnych Veľkých Písmen&8: &c%s&8, &fMinimálne Čísel&8: &c%s"
@@ -59,13 +61,14 @@ pincommand_info_sethelp: "&8  - /&fpin &7set &8[&7new pin code&8] - &fNastaví p
 
 command_pin_setpinbeforetoggle: "&7Pre túto akciu su musíš nastaviť Pin! Použi &8/&fpin &7set &8(&7Nový pin kód&8) &7!"
 command_pin_toggled: "%s &7Pin!"
+command_pin_required: "&7Na tomto serveri nemôžete zakázať kód pin!"
 command_pin_setusage: "&7Pouźitie&7>&8 /&fpin &7set &8(&7Nový pin kód&8)"
 command_pin_breaksrules: "&7Pin nespĺňa minimálne požiadavky! &cPravidlá&8: &fMinimálna Dĺžka &8: &c%d&8, &fMaximálna Dĺžka &8: &c%d&8"
 command_pin_success: "&7Pin nastavený! &7Zapneš si ho pomocou > &8/&fpin toggle &7!"
 
 command_remember_success: "&7Session uložená &c%dh!"
 
-command_unregister_successkick: "&7Pripoj sa znova a "&7Registruj sa!"
+command_unregister_successkick: "&7Pripoj sa znova a &7Registruj sa!"
 
 duplicateprotection_notification_message: "&7Účty , z tej istej IP: &8(%s&8)"
 duplicateprotection_notification_separator: "&8, &r"
@@ -74,4 +77,4 @@ duplicateprotection_max_reached: "&7Môžeš registrovať len &c%s &7účtov na 
 
 # do not edit
 # only updated when new keys have been added/renamed or the formatting has changed
-version: 6
+version: 7

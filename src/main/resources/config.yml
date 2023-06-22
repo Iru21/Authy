@@ -24,6 +24,7 @@ welcomeMessage:
     - "&7Welcome to &6server name&7!"
   enabled: false
 
+requirePin: false
 sendPinSetReminder: true
 
 # In hours

@@ -15,8 +15,8 @@ class AuthManager {
     private val playerData = Authy.playerData
     private val effectRunner = Authy.loginProcess.EffectRunner
 
-    fun register(p: Player, password: String) {
-        playerData.create(p, password)
+    fun register(p: Player, password: String, pin: String? = null) {
+        playerData.create(p, password, pin)
         loginProcess.removePlayer(p)
         p.sendMessage("${translations.getPrefix(PrefixType.REGISTER)} ${translations.get("register_success")}")
         authy.server.consoleSender.sendMessage(
@@ -25,7 +25,7 @@ class AuthManager {
                     "${org.bukkit.ChatColor.YELLOW}registered with ip ${org.bukkit.ChatColor.WHITE}${p.address?.address?.hostAddress} " +
                     "${org.bukkit.ChatColor.YELLOW}and UUID ${org.bukkit.ChatColor.WHITE}${p.uniqueId}"
         )
-        if(authy.config.getBoolean("sendPinSetReminder")) p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("no_pin_warning")}")
+        if(authy.config.getBoolean("sendPinSetReminder") && pin != null) p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("no_pin_warning")}")
         effectRunner.runRegister(p)
     }
 

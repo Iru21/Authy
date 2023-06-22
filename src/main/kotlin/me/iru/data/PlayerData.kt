@@ -31,14 +31,16 @@ class PlayerData {
                 ")")
     }
 
-    fun create(p: Player, password: String) {
+    fun create(p: Player, password: String, pin: String?) {
         if(!exists(p.uniqueId)) {
             update(
                 AuthyPlayer(
                     p.uniqueId,
                     p.name,
                     p.address?.address?.hostAddress!!,
-                    HashUtil.toSHA256(password)
+                    HashUtil.toSHA256(password),
+                    pin != null,
+                    if (pin != null) HashUtil.toSHA256(pin) else null
                 )
             )
         }

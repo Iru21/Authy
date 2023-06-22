@@ -43,6 +43,10 @@ class cPin(override var name: String = "pin") : ICommand {
                     p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_pin_setpinbeforetoggle")}")
                     return true
                 }
+                if(authyPlayer.isPinEnabled && authy.config.getBoolean("requirePin")) {
+                    p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_pin_required")}")
+                    return true
+                }
                 authyPlayer.isPinEnabled = !authyPlayer.isPinEnabled
                 playerData.update(authyPlayer)
                 p.sendMessage("${translations.getPrefix(PrefixType.PIN)} ${translations.get("command_pin_toggled").format(getStatusTranslated(p))}")

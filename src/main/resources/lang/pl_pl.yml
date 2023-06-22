@@ -36,9 +36,10 @@ timedout_error: "&7Czas na autoryzację upłynął!"
 invalid_username: "&7Niepoprawna nazwa użytkownika!"
 
 loginprocess_reminder_login: "&7Zaloguj się używając &8/&flogin &8[&fhasło&8] %s"
-loginprocess_reminderlogin_haspin: "&8[&fpin&8]"
-loginprocess_reminder_register: "&7Zarejestruj się używając &8/&fregister &8[&fhasło&8] [&fpowtórz hasło&8]"
+loginprocess_reminder_pin: "&8[&fkod pin&8]"
+loginprocess_reminder_register: "&7Zarejestruj się używając &8/&fregister &8[&fhasło&8] [&fpowtórz hasło&8] %s"
 
+command_register_usagepin: "&7Użycie: &8/&fregister &8[&fhasło&8] [&fpowtórz hasło&8] [&fkod pin&8]"
 command_register_usage: "&7Użycie: &8/&fregister &8[&fhasło&8] [&fpowtórz hasło&8]"
 command_register_notidentical: "&7Hasła się nie zgadzają!"
 command_register_breaksrules: "&7Hasło nie spełnia wymagań! &cZasady&8: &fMinimalna Długość&8: &c%d&8, &fMaksymalna Długość&8: &c%d&8, &fMinimalna Ilość Wielkich Liter&8: &c%s&8, &fMinimalna Ilość Liczb&8: &c%s"
@@ -59,6 +60,7 @@ pincommand_info_sethelp: "&8  - /&fpin &7set &8[&7nowy pin&8] - &7Ustawia pin"
 
 command_pin_setpinbeforetoggle: "&7Musisz najpierw ustawić pin! Użyj &8/&fpin &7set &8[&7nowy pin&8]&7!"
 command_pin_toggled: "%s &7pin!"
+command_pin_required: "&7Nie możesz wyłączyć kodu pin na tym serwerze!"
 command_pin_setusage: "&7Użycie&8: /&fpin &7set &8[&7nowy pin&8]"
 command_pin_breaksrules: "&7Pin nie spełnia wymagań! &cZasady&8: &fMinimalna Długość&8: &c%d&8, &fMaksymalna Długość&8: &c%d&8"
 command_pin_success: "&7Pin został ustawiony! &7Pamiętaj, aby włączyć go za pomocą &8/&fpin toggle&7!"
@@ -74,4 +76,4 @@ duplicateprotection_max_reached: "&7Może być tylko &c%s &7kont z tym samym adr
 
 # do not edit
 # only updated when new keys have been added/renamed or the formatting has changed
-version: 6
+version: 7

@@ -28,7 +28,7 @@ class Translations {
     private var cache: YamlConfiguration? = null
 
     companion object {
-        const val TRANSLATION_VERSION = 6
+        const val TRANSLATION_VERSION = 7
     }
 
     init {
@@ -56,9 +56,14 @@ class Translations {
     }
 
     private fun getFallback(key: String): String {
-        authy.server.consoleSender.sendMessage("${authy.prefix} &cThere has been a translation error! Couldn't find key $key in ${authy.config.getString("lang")}")
+        authy.server.consoleSender.sendMessage("${authy.prefix} §cThere has been a translation error! Couldn't find key §6$key §cin §6${authy.config.getString("lang")}")
         val en = File(authy.dataFolder, "lang" + File.separator + "en_us.yml")
-        return YamlConfiguration.loadConfiguration(en).getString(key) ?: throw IllegalStateException("Key $key not found in lang file en_us! Check folder Authy/lang/")
+        var fallback = YamlConfiguration.loadConfiguration(en).getString(key)
+        if(fallback == null) {
+            authy.server.consoleSender.sendMessage("${authy.prefix} §cFallback key §6$key §cnot found in lang file §6en_us§c! Please update file §6plugins/Authy/lang/en_us.yml")
+            fallback = "§cTranslation error, please contact an administrator!"
+        }
+        return fallback
     }
 
     fun get(key: String, mode: ParseMode = ParseMode.ResetAndTranslate): String {
@@ -78,8 +83,8 @@ class Translations {
             checkDefaults()
         }
         if(hasOldVersion(selectedLang!!)) {
-            langFile = File(authy.dataFolder, "lang" + File.separator + "en_us.yml")
-            authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}${authy.description.name}${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.AQUA} Selected language has been reverted to en_us, because the default for $selectedLang is not on the newest version ($TRANSLATION_VERSION)")
+            langFile = File(authy.dataFolder, "lang" + File.separator + "defaults" + File.separator + "en_us.yml")
+            authy.server.consoleSender.sendMessage("${org.bukkit.ChatColor.DARK_GRAY}[${org.bukkit.ChatColor.GOLD}${authy.description.name}${org.bukkit.ChatColor.DARK_GRAY}] ${org.bukkit.ChatColor.AQUA} Selected language has been reverted to default en_us, because $selectedLang is not on the newest version ($TRANSLATION_VERSION)")
         }
         cache = YamlConfiguration.loadConfiguration(langFile)
     }

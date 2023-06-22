@@ -37,9 +37,10 @@ timedout_error: "&7Vypršel čas pro přihlášení!"
 invalid_username: "&7Neplatné uživatelské jméno!"
 
 loginprocess_reminder_login: "&7Přihlas se pomocí &8/&flogin &8[&fheslo&8] %s"
-loginprocess_reminderlogin_haspin: "&8[&fpin&8]"
-loginprocess_reminder_register: "&7Zaregistruj se pomocí &8/&fregister &8[&fheslo&8] [&fheslo znovu&8]"
+loginprocess_reminder_pin: "&8[&fpin&8]"
+loginprocess_reminder_register: "&7Zaregistruj se pomocí &8/&fregister &8[&fheslo&8] [&fheslo znovu&8] %s"
 
+command_register_usagepin: "&7Použití: &8/&fregister &8[&fheslo&8] [&fheslo znovu&8] [&fpin&8]"
 command_register_usage: "&7Použití: &8/&fregister &8[&fheslo&8] [&fheslo znovu&8]"
 command_register_notidentical: "&7Hesla se neshodují!"
 command_register_breaksrules: "&7Tvoje heslo neodpovídá požadavkům pro heslo! &fMinimální Délka&8: &c%d&8, &fMaximální Délka&8: &c%d&8, &fMinimum Velkých Znaků&8: &c%s&8, &fMinimum Čísel&8: &c%s"
@@ -58,8 +59,9 @@ pincommand_info_split: "    &8&m----"
 pincommand_info_togglehelp: "&8  - /&fpin &7toggle &8- &7Přepne pin"
 pincommand_info_sethelp: "&8  - /&fpin &7set &8[&7nový pin kód&8] - &7Nastaví pin"
 
-command_pin_setpinbeforetoggle: "&7Musíš prvně nastavit pin! Použij příkaz &8/&fpin &7set &8[&7new pin code&8]!"
+command_pin_setpinbeforetoggle: "&7Musíš prvně nastavit pin! Použij příkaz &8/&fpin &7set &8[&7nový pin kód&8]!"
 command_pin_toggled: "&7Pin %s&7!"
+command_pin_required: "&7Na tomto serveru nelze zakázat kód pin!"
 command_pin_setusage: "&7Použití&8: /&fpin &7set &8[&7nový pin kód&8]"
 command_pin_breaksrules: "&7Zadaný pin neodpovídá požadavkům pro pin! &fMinimální Délka&8: &c%d&8, &fMaximální Délka&8: &c%d&8"
 command_pin_success: "&7Pin byl nastaven! &7Zapneš ho pomocí příkazu &8/&fpin toggle&7!"
@@ -75,4 +77,4 @@ duplicateprotection_max_reached: "&7Může existovat pouze &c%s &7účtů na ste
 
 # do not edit
 # only updated when new keys have been added/renamed or the formatting has changed
-version: 6
+version: 7

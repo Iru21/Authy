@@ -39,9 +39,10 @@ timedout_error: "&7登入驗證時間已過!"
 invalid_username: "&7無效的用戶名！"
 
 loginprocess_reminder_login: "&7使用此指令登入: &8/&flogin &8[&f密碼&8] %s"
-loginprocess_reminderlogin_haspin: "&8[&fpin&8]"
-loginprocess_reminder_register: "&7使用此指令註冊 &8/&fregister &8[&f密碼&8] [&f重複輸入密碼&8]"
+loginprocess_reminder_pin: "&8[&fpin碼&8]"
+loginprocess_reminder_register: "&7使用此指令註冊 &8/&fregister &8[&f密碼&8] [&f重複輸入密碼&8] %s"
 
+command_register_usagepin: "&7使用方式: &8/&fregister &8[&f密碼&8] [&f重複輸入密碼&8] [&fpin碼&8]"
 command_register_usage: "&7使用方式: &8/&fregister &8[&f密碼&8] [&f重複輸入密碼&8]"
 command_register_notidentical: "&7重複密碼不匹配!"
 command_register_breaksrules: "&7您的密碼不符合要求！ &c規則&8: &f最小長度&8: &c%d&8, &f最大長度&8: &c%d&8, &fM最少大寫字符&8: &c%s&8, &f最少數字&8: &c%s"
@@ -62,6 +63,7 @@ pincommand_info_sethelp: "&8  - /&fpin &7set &8[&7新PIN碼&8] - &7設定PIN"
 
 command_pin_setpinbeforetoggle: "&7你需要先設定PIN! 使用 &8/&fpin &7set &8[&7新PIN碼&8] &7指令來設定!"
 command_pin_toggled: "%s &7pin!"
+command_pin_required: "&7你無法在此伺服器上停用 PIN 碼！"
 command_pin_setusage: "&7使用方法&8: /&fpin &7set &8[&7新PIN碼&8]"
 command_pin_breaksrules: "&7您的PIN碼不符合要求! &c規則&8: &f最小長度&8: &c%d&8, &f最大長度&8: &c%d&8"
 command_pin_success: "&7PIN已設定! &7記得使用 &8/&fpin toggle &7指令來啟用PIN!"
@@ -77,4 +79,4 @@ duplicateprotection_max_reached: "&7只允許 &c%s &7 帳號來自同IP位置!"
 
 # do not edit
 # only updated when new keys have been added/renamed or the formatting has changed
-version: 6
+version: 7

@@ -36,11 +36,13 @@ class LoginProcess {
             p.sendMessage(
                 "${translations.getPrefix(PrefixType.WARNING)} ${
                     translations.get("loginprocess_reminder_login").format(
-                        if (playerData.get(p.uniqueId)!!.isPinEnabled) translations.get("loginprocess_reminderlogin_haspin") else ""
+                        if (playerData.get(p.uniqueId)!!.isPinEnabled) translations.get("loginprocess_reminder_pin") else ""
                     )
                 }"
             )
         }
-        else p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("loginprocess_reminder_register")}")
+        else p.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("loginprocess_reminder_register").format(
+            if (authy.config.getBoolean("requirePin")) translations.get("loginprocess_reminder_pin") else ""
+        )}")
     }
 }
