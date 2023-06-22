@@ -13,7 +13,7 @@ class LoginProcess {
     val EffectRunner = EffectRunner()
     val playerData = Authy.playerData
 
-    private val inProcess = mutableListOf<UUID>()
+    private val inProcess = mutableSetOf<UUID>()
 
     fun addPlayer(p : Player) {
         inProcess.add(p.uniqueId)
