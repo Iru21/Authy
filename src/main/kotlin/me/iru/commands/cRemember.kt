@@ -16,7 +16,10 @@ class cRemember(override var name: String = "remember") : ICommand {
         if(sender is Player) {
             val p : Player = sender
             Session.remember(p)
-            p.sendMessage("${translations.getPrefix(PrefixType.REMEMBER)} ${translations.get("command_remember_success").format(authy.config.getInt("sessionExpiresIn"))}")
+            val hours = authy.config.getInt("sessionExpiresIn")
+            p.sendMessage("${translations.getPrefix(PrefixType.REMEMBER)} ${translations.get("command_remember_success").format(
+                if(hours > 500 || hours < 0) "∞" else hours
+            )}")
         }
         return true
     }

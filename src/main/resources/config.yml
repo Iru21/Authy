@@ -1,7 +1,6 @@
 nameValidation: true
 
-# In seconds
-timeout: 60
+timeout: 60 # In seconds
 
 passwordValidation:
   minLength: 6
@@ -27,8 +26,7 @@ welcomeMessage:
 requirePin: false
 sendPinSetReminder: true
 
-# In hours
-sessionExpiresIn: 48
+sessionExpiresIn: 48 # In hours, set to negative for infinity (not recommended)
 
 onFirstJoin:
   teleport: false

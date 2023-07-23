@@ -3,7 +3,6 @@ package me.iru.data
 import me.iru.Authy
 import me.iru.LoginType
 import org.bukkit.entity.Player
-import java.lang.Long.parseLong
 import java.sql.Timestamp
 
 class Session {
@@ -12,20 +11,19 @@ class Session {
     val authManager = Authy.authManager
 
     fun remember(p : Player) {
-        val curtime = Timestamp(System.currentTimeMillis())
-        val timestamp = curtime.time
         val authyPlayer = playerData.get(p.uniqueId)!!
-        authyPlayer.session = timestamp
+        authyPlayer.session = Timestamp(System.currentTimeMillis()).time
         authyPlayer.ip = p.address?.address?.hostAddress!!
         playerData.update(authyPlayer)
     }
 
     fun tryAutoLogin(p : Player) : Boolean {
         val authyPlayer = playerData.get(p.uniqueId) ?: return false
-        val session = authyPlayer.session
-        val curtime = Timestamp(System.currentTimeMillis())
-        val timestamp = curtime.time
-        if((parseLong(session.toString()) + (authy.config.getInt("sessionExpiresIn") * 3600000) > timestamp) && p.address?.address?.hostAddress == authyPlayer.ip) {
+        val now = Timestamp(System.currentTimeMillis()).time
+        val hours = authy.config.getInt("sessionExpiresIn")
+        val passes = if(hours > 500 || hours < 0) true
+                     else authyPlayer.session + (hours * 3600000L) > now
+        if(passes && p.address?.address?.hostAddress == authyPlayer.ip) {
             authManager.login(p, LoginType.Session)
             return true
         }

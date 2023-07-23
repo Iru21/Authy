@@ -28,7 +28,7 @@ class Translations {
     private var cache: YamlConfiguration? = null
 
     companion object {
-        const val TRANSLATION_VERSION = 7
+        const val TRANSLATION_VERSION = 8
     }
 
     init {
@@ -43,15 +43,15 @@ class Translations {
     }
 
     fun getColor(key: String): ChatColor {
-        val mcRegex = Pattern.compile("^&([0-9a-f]{1})\$")
+        val mcRegex = Pattern.compile("^&([0-9a-f])\$")
         val hexRegex = Pattern.compile("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\$")
         val value = get(key, ParseMode.None)
-        if(hexRegex.matcher(value).matches()) {
-            return ChatColor.of(value)
+        return if(hexRegex.matcher(value).matches()) {
+            ChatColor.of(value)
         } else if(mcRegex.matcher(value).matches()) {
-            return ChatColor.getByChar(value[1])
+            ChatColor.getByChar(value[1])
         } else {
-            return ChatColor.BLACK
+            ChatColor.BLACK
         }
     }
 

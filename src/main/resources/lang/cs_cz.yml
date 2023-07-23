@@ -66,7 +66,7 @@ command_pin_setusage: "&7Použití&8: /&fpin &7set &8[&7nový pin kód&8]"
 command_pin_breaksrules: "&7Zadaný pin neodpovídá požadavkům pro pin! &fMinimální Délka&8: &c%d&8, &fMaximální Délka&8: &c%d&8"
 command_pin_success: "&7Pin byl nastaven! &7Zapneš ho pomocí příkazu &8/&fpin toggle&7!"
 
-command_remember_success: "&7Session uložená pro &c%dh!"
+command_remember_success: "&7Session uložená pro &c%sh!"
 
 command_unregister_successkick: "&7Připoj se znovu a zaregistruj se!"
 
@@ -77,4 +77,4 @@ duplicateprotection_max_reached: "&7Může existovat pouze &c%s &7účtů na ste
 
 # do not edit
 # only updated when new keys have been added/renamed or the formatting has changed
-version: 7
+version: 8
