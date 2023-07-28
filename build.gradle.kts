@@ -17,6 +17,7 @@ plugins {
     id("java")
     kotlin("jvm") version "1.6.10"
     id("org.ajoberstar.grgit") version "5.2.0"
+    id("com.modrinth.minotaur") version "2.+"
 }
 
 apply(plugin = "java")
@@ -61,11 +62,33 @@ tasks {
         dependsOn(processResources)
         dependsOn(makeDefaults)
         archiveFileName.set("${pluginName}-${pluginVersion}.jar")
-        relocate("org.bstats", "me.iru")
+        relocate("org.bstats", group)
     }
 }
 
+tasks.register("createReleases") {
+    dependsOn(tasks["createGitHubRelease"])
+    dependsOn(tasks.modrinth)
+    dependsOn(tasks.modrinthSyncBody)
+}
+
+modrinth {
+    val version = pluginVersion
+
+    token.set(System.getenv("MODRINTH_TOKEN"))
+    projectId.set("authy")
+    versionNumber.set(version)
+    versionType.set("release")
+    versionName.set("$pluginName $version")
+    uploadFile.set(tasks.shadowJar as Any)
+    gameVersions.addAll("1.17", "1.18", "1.19", "1.20")
+    loaders.addAll("spigot", "paper", "purpur")
+    changelog.set(rootProject.file("changelog.md").readText())
+    syncBodyFrom.set(rootProject.file("README.md").readText())
+}
+
 tasks.register("createGitHubRelease") {
+    dependsOn(tasks.shadowJar)
     doLast {
         val git = Grgit.open {
             dir = projectDir
@@ -76,20 +99,17 @@ tasks.register("createGitHubRelease") {
             message = "Release $tagName"
             force = true
         }
-
         git.push {
             tags = true
         }
-        println("Created tag $tagName and pushed to remote")
+        git.close()
 
         val command = "gh release create $tagName -F changelog.md -t \"$tagName\" \"build/libs/${pluginName}-${pluginVersion}.jar\""
         val process = ProcessBuilder(command.split(" ")).start()
         process.waitFor()
-        println("Created release $tagName on GitHub")
-
-        git.close()
     }
 }
+
 
 repositories {
     mavenCentral()
