@@ -77,7 +77,8 @@ duplicateprotection_max_reached: "&7There can be only &c%s &7accounts on the sam
 
 command_changepassword_usage: "&7Usage: &8/&fchangepassword &8[&fold password&8] &8[&fnew password&8] [&frepeat new password&8]"
 command_changepassword_success: "&7Your password has been updated!"
+command_changepassword_samepassword: "&7Your new password can't be the same as the old one!"
 
 # do not edit
 # only updated when new keys have been added/renamed or the formatting has changed
-version: 9
+version: 10

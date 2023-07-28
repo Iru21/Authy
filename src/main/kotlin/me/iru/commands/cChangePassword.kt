@@ -33,6 +33,11 @@ class cChangePassword(override var name: String = "changepassword") : ICommand {
                 return true
             }
 
+            if(args[0] == args[1]) {
+                p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("command_changepassword_samepassword")}")
+                return true
+            }
+
             val password = args[1]
             if(!PasswordValidation.matchesRules(password)) {
                 val rule = getPasswordRule()

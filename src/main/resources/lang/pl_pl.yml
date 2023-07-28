@@ -76,7 +76,8 @@ duplicateprotection_max_reached: "&7Może być tylko &c%s &7kont z tym samym adr
 
 command_changepassword_usage: "&7Użycie: &8/&fchangepassword &8[&fstare hasło&8] &8[&fnowe hasło&8] [&fpowtórz nowe hasło&8]"
 command_changepassword_success: "&7Twoje hasło zostało zmienione!"
+command_changepassword_samepassword: "&7Twoje nowe hasło nie może być takie samo jak stare!"
 
 # do not edit
 # only updated when new keys have been added/renamed or the formatting has changed
-version: 9
+version: 10
