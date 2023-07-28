@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.ajoberstar.grgit.*
 
 buildscript {
     repositories {
@@ -15,6 +16,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("java")
     kotlin("jvm") version "1.6.10"
+    id("org.ajoberstar.grgit") version "5.2.0"
 }
 
 apply(plugin = "java")
@@ -60,6 +62,32 @@ tasks {
         dependsOn(makeDefaults)
         archiveFileName.set("${pluginName}-${pluginVersion}.jar")
         relocate("org.bstats", "me.iru")
+    }
+}
+
+tasks.register("createGitHubRelease") {
+    doLast {
+        val git = Grgit.open {
+            dir = projectDir
+        }
+        val tagName = "v${pluginVersion}"
+        git.tag.add {
+            name = tagName
+            message = "Release $tagName"
+            force = true
+        }
+
+        git.push {
+            tags = true
+        }
+        println("Created tag $tagName and pushed to remote")
+
+        val command = "gh release create $tagName -F changelog.md -t \"$tagName\" \"build/libs/${pluginName}-${pluginVersion}.jar\""
+        val process = ProcessBuilder(command.split(" ")).start()
+        process.waitFor()
+        println("Created release $tagName on GitHub")
+
+        git.close()
     }
 }
 

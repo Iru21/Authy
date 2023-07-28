@@ -1,0 +1,1 @@
+- [Add check to block changing password to the same one](https://github.com/Iru21/Authy/commit/23f606d81f5eefb65bfd043372d4c8ba54167ee4)
