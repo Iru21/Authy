@@ -63,6 +63,8 @@ Also get it on [Spigot](https://www.spigotmc.org/resources/authy.100004/) and [M
 
 `authy.info` - permission for command /authy info
 
+<a href="https://bstats.org/plugin/bukkit/Authy/14475"><img src="https://bstats.org/signatures/bukkit/Authy.svg"></a>
+
 ## Useful Links
 
 ### [Default Config](https://github.com/Iru21/Authy/blob/master/src/main/resources/config.yml)
