@@ -53,7 +53,7 @@ Also get it on [Spigot](https://www.spigotmc.org/resources/authy.100004/) and [M
 
 `authy.pin` - permissions for commands /pin
 
-`authy.changepassword` - permission for command /authy changepassword
+`authy.changepassword` - permission for command /changepassword
 
 `authy.reload` - permission for command /authy reload
 
