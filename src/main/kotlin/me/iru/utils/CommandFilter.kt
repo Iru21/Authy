@@ -38,15 +38,9 @@ class CommandFilter : AbstractFilter() {
     }
 
     private fun isLoggable(msg: String?): Filter.Result {
-        if (msg != null) {
-            if (msg.contains("issued server command:")) {
-                if (msg.contains("/login") || msg.contains("/l")
-                    || msg.contains("/reg") || msg.contains("/register")
-                        || msg.contains("/pin")
-                ) {
-                    return Filter.Result.DENY
-                }
-            }
+        val filteredCommands = listOf("login", "l", "register", "reg", "pin", "changepassword")
+        if (msg != null && filteredCommands.any { msg.contains(" issued server command: /$it ") }) {
+            return Filter.Result.DENY
         }
         return Filter.Result.NEUTRAL
     }

@@ -84,9 +84,8 @@ class PlayerData {
     }
 
     fun update(d: AuthyPlayer) {
-        var dup = ""
-        if(databaseConnection.type == DatabaseType.MySQL) dup = "DUPLICATE KEY UPDATE"
-        else if(databaseConnection.type == DatabaseType.SQLite) dup = "CONFLICT(uuid) DO UPDATE SET"
+        var dup = "DUPLICATE KEY UPDATE"
+        if(databaseConnection.type == DatabaseType.SQLite) dup = "CONFLICT(uuid) DO UPDATE SET"
         databaseConnection.query(
             "INSERT INTO players(uuid, username, ip, password, isPinEnabled, pin, session) VALUES(" +
                "'${d.uuid}', " +

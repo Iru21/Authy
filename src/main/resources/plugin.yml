@@ -30,3 +30,7 @@ commands:
     description: Enables and sets a pin code
     usage: /<command>
     permission: authy.pin
+  changepassword:
+    description: Changes player's password
+    usage>: /<command> [new password] [repeat new password]
+    permission: authy.changepassword

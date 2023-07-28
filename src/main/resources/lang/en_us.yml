@@ -75,6 +75,9 @@ duplicateprotection_notification_separator: "&8, &r"
 duplicateprotection_notification_namecolor: "#FFDA4A"
 duplicateprotection_max_reached: "&7There can be only &c%s &7accounts on the same ip address!"
 
+command_changepassword_usage: "&7Usage: &8/&fchangepassword &8[&fold password&8] &8[&fnew password&8] [&frepeat new password&8]"
+command_changepassword_success: "&7Your password has been updated!"
+
 # do not edit
 # only updated when new keys have been added/renamed or the formatting has changed
-version: 8
+version: 9

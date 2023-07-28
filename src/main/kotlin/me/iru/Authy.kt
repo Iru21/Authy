@@ -61,6 +61,7 @@ class Authy : JavaPlugin() {
         registerCommand(cRemember())
         registerCommand(cAuthy())
         registerCommand(cPin())
+        registerCommand(cChangePassword())
 
         with(commandFilter) { registerFilter() }
 
