@@ -26,6 +26,8 @@ Also get it on [Spigot](https://www.spigotmc.org/resources/authy.100004/) and [M
 
 `/remember` - Saves session for 48 hours (customizable)
 
+`/changepassword [old password] [new password] [repeat new [password]` - Changes your password
+
 `/pin set [pin]` - Sets the pin
 
 `/pin toggle` - Toggles the pin
