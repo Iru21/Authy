@@ -1,1 +1,1 @@
-- [Add check to block changing password to the same one](https://github.com/Iru21/Authy/commit/23f606d81f5eefb65bfd043372d4c8ba54167ee4)
+- [Fix crash when trying to restore flight to player who is not allowed to fly anymore](https://github.com/Iru21/Authy/commit/c180a0e45eca25485bab0d983edada649564d3cf) ([#43](https://github.com/Iru21/Authy/issues/43))
