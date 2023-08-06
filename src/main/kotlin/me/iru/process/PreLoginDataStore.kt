@@ -31,7 +31,7 @@ object PreLoginDataStore {
         }
         p.fireTicks = fireTicks[p.uniqueId] ?: 0
         fireTicks.remove(p.uniqueId)
-        p.isFlying = flyingState[p.uniqueId] ?: false
+        p.isFlying = if(p.allowFlight) flyingState[p.uniqueId] == true else false
         flyingState.remove(p.uniqueId)
     }
 
