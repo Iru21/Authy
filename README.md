@@ -1,4 +1,5 @@
-![Spiget Downloads](https://img.shields.io/spiget/downloads/100004?label=Spigot%20Downloads)
+![Spiget Downloads](https://img.shields.io/spiget/downloads/100004?label=Spigot%20Downloads&color=%23ee8b1a)
+![Modrinth Downloads](https://img.shields.io/modrinth/dt/authy?label=Modrinth%20Downloads&color=%231bd96a)
 
 # Authy 
 A simple authentication plugin for Minecraft 1.17+!
