@@ -1,3 +1,4 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.ajoberstar.grgit.*
 
@@ -30,9 +31,11 @@ val pluginName: String by project
 val pluginVersion: String by project
 val minecraftVersion: String by project
 
+val withDrivers: Configuration by configurations.creating
+
 tasks {
 
-    withType<KotlinCompile>() {
+    withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
     }
 
@@ -61,55 +64,63 @@ tasks {
     shadowJar {
         dependsOn(processResources)
         dependsOn(makeDefaults)
-        archiveFileName.set("${pluginName}-${pluginVersion}.jar")
         relocate("org.bstats", group)
+        archiveFileName.set("${pluginName}-${pluginVersion}.jar")
+    }
+
+    val shadowJarDrivers by registering(ShadowJar::class) {
+        dependsOn(processResources)
+        dependsOn(makeDefaults)
+        relocate("org.bstats", group)
+        archiveFileName.set("${pluginName}-${pluginVersion}-drv.jar")
+        configurations = listOf(project.configurations["runtimeClasspath"], withDrivers)
+
+    }
+
+    modrinth {
+        val version = pluginVersion
+
+        token.set(System.getenv("MODRINTH_TOKEN"))
+        projectId.set("authy")
+        versionNumber.set(version)
+        versionType.set("release")
+        versionName.set("$pluginName $version")
+        uploadFile.set(shadowJar as Any)
+        gameVersions.addAll("1.17", "1.18", "1.19", "1.20")
+        loaders.addAll("spigot", "paper", "purpur")
+        changelog.set(rootProject.file("changelog.md").readText())
+        syncBodyFrom.set(rootProject.file("README.md").readText())
+    }
+
+    val createGitHubRelease by registering {
+        dependsOn(shadowJar)
+        doLast {
+            val git = Grgit.open {
+                dir = projectDir
+            }
+            val tagName = "v${pluginVersion}"
+            git.tag.add {
+                name = tagName
+                message = "Release $tagName"
+                force = true
+            }
+            git.push {
+                tags = true
+            }
+            git.close()
+
+            val command = "gh release create $tagName -F changelog.md -t \"$tagName\" \"build/libs/${pluginName}-${pluginVersion}.jar\""
+            val process = ProcessBuilder(command.split(" ")).start()
+            process.waitFor()
+        }
+    }
+
+    register("createReleases") {
+        dependsOn(createGitHubRelease)
+        dependsOn(modrinth)
+        dependsOn(modrinthSyncBody)
     }
 }
-
-tasks.register("createReleases") {
-    dependsOn(tasks["createGitHubRelease"])
-    dependsOn(tasks.modrinth)
-    dependsOn(tasks.modrinthSyncBody)
-}
-
-modrinth {
-    val version = pluginVersion
-
-    token.set(System.getenv("MODRINTH_TOKEN"))
-    projectId.set("authy")
-    versionNumber.set(version)
-    versionType.set("release")
-    versionName.set("$pluginName $version")
-    uploadFile.set(tasks.shadowJar as Any)
-    gameVersions.addAll("1.17", "1.18", "1.19", "1.20")
-    loaders.addAll("spigot", "paper", "purpur")
-    changelog.set(rootProject.file("changelog.md").readText())
-    syncBodyFrom.set(rootProject.file("README.md").readText())
-}
-
-tasks.register("createGitHubRelease") {
-    dependsOn(tasks.shadowJar)
-    doLast {
-        val git = Grgit.open {
-            dir = projectDir
-        }
-        val tagName = "v${pluginVersion}"
-        git.tag.add {
-            name = tagName
-            message = "Release $tagName"
-            force = true
-        }
-        git.push {
-            tags = true
-        }
-        git.close()
-
-        val command = "gh release create $tagName -F changelog.md -t \"$tagName\" \"build/libs/${pluginName}-${pluginVersion}.jar\""
-        val process = ProcessBuilder(command.split(" ")).start()
-        process.waitFor()
-    }
-}
-
 
 repositories {
     mavenCentral()
@@ -122,7 +133,8 @@ dependencies {
     compileOnly("org.apache.logging.log4j:log4j-api:2.20.0")
     compileOnly("org.apache.logging.log4j:log4j-core:2.20.0")
 
-    runtimeOnly("mysql:mysql-connector-java:8.0.33")
+    withDrivers("mysql:mysql-connector-java:8.0.33")
+    withDrivers("org.xerial:sqlite-jdbc:3.42.0.0")
 
     implementation("org.spigotmc:spigot-api:${minecraftVersion}-R0.1-SNAPSHOT")
     implementation("org.bstats:bstats-bukkit:3.0.2")
@@ -131,9 +143,5 @@ dependencies {
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
-    jvmTarget = "1.8"
-}
-val compileTestKotlin: KotlinCompile by tasks
-compileTestKotlin.kotlinOptions {
     jvmTarget = "1.8"
 }

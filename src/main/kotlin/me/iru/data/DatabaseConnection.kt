@@ -33,6 +33,12 @@ class DatabaseConnection(val type: DatabaseType) {
     }
 
     private fun connectSQLite(): Connection {
+        Class.forName("org.sqlite.JDBC");
+
+        if(!authy.dataFolder.exists()) {
+            authy.dataFolder.mkdir()
+        }
+
         return DriverManager.getConnection("jdbc:sqlite:${authy.dataFolder}${File.separator}data.db")
     }
 
@@ -42,7 +48,7 @@ class DatabaseConnection(val type: DatabaseType) {
         val password = authy.config.getString("database.credentials.password")
         val databaseName = authy.config.getString("database.credentials.database")
 
-        Class.forName("com.mysql.jdbc.Driver")
+        Class.forName("com.mysql.cj.jdbc.Driver")
 
         val t = DriverManager
             .getConnection("jdbc:mysql://$host", user, password)
