@@ -28,6 +28,8 @@ class Authy : JavaPlugin() {
 
     val prefix = "${ChatColor.DARK_GRAY}[${ChatColor.GOLD}$pluginName${ChatColor.DARK_GRAY}]"
 
+    private var initialized = false
+
     companion object {
         lateinit var instance: Authy private set
         lateinit var translations: Translations private set
@@ -40,10 +42,17 @@ class Authy : JavaPlugin() {
     override fun onEnable() {
         instance = this
 
-        translations = Translations()
+        if(server.onlineMode) {
+            server.consoleSender.sendMessage("$prefix ${ChatColor.RED}Server is in online mode! Switch to offline mode and restart the server!")
+            server.pluginManager.disablePlugin(this)
+            return
+        }
+
         playerData = PlayerData()
         Migration.updateSystem()
         DatabaseMigration.tryMigrate()
+
+        translations = Translations()
         loginProcess = LoginProcess()
         authManager = AuthManager()
         session = Session()
@@ -65,6 +74,8 @@ class Authy : JavaPlugin() {
 
         with(commandFilter) { registerFilter() }
 
+        initialized = true
+
         server.consoleSender.sendMessage("$prefix ${ChatColor.GREEN}Enabled $version")
 
         val players = server.onlinePlayers
@@ -84,8 +95,11 @@ class Authy : JavaPlugin() {
     }
 
     override fun onDisable() {
-        DatabaseMigration.saveLastDatabaseType()
-        playerData.databaseConnection.shutdownConnections()
+        if(initialized) {
+            DatabaseMigration.saveLastDatabaseType()
+            playerData.databaseConnection.shutdownConnections()
+            initialized = false
+        }
         server.consoleSender.sendMessage("$prefix ${ChatColor.RED}Disabled $version")
     }
 
