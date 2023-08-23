@@ -1,6 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.ajoberstar.grgit.*
 
 buildscript {
     repositories {
@@ -17,7 +16,6 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("java")
     kotlin("jvm") version "1.6.10"
-    id("org.ajoberstar.grgit") version "5.2.0"
     id("com.modrinth.minotaur") version "2.+"
 }
 
@@ -68,7 +66,7 @@ tasks {
         archiveFileName.set("${pluginName}-${pluginVersion}.jar")
     }
 
-    val shadowJarDrivers by registering(ShadowJar::class) {
+    register<ShadowJar>("shadowJarDrivers") {
         dependsOn(processResources)
         dependsOn(makeDefaults)
         relocate("org.bstats", group)
@@ -86,40 +84,27 @@ tasks {
         versionType.set("release")
         versionName.set("$pluginName $version")
         uploadFile.set(shadowJar as Any)
-        additionalFiles.set(listOf(shadowJarDrivers))
+        additionalFiles.set(listOf("build/libs/${pluginName}-${pluginVersion}-drv.jar"))
         gameVersions.addAll("1.17", "1.18", "1.19", "1.20")
         loaders.addAll("spigot", "paper", "purpur")
         changelog.set(rootProject.file("changelog.md").readText())
         syncBodyFrom.set(rootProject.file("README.md").readText())
     }
 
-    val createGitHubRelease by registering {
+    register<Exec>("createGitHubRelease") {
         dependsOn(shadowJar)
-        dependsOn(shadowJarDrivers)
+        dependsOn("shadowJarDrivers")
 
-        doLast {
-            val git = Grgit.open {
-                dir = projectDir
-            }
-            val tagName = "v${pluginVersion}"
-            git.tag.add {
-                name = tagName
-                message = "Release $tagName"
-                force = true
-            }
-            git.push {
-                tags = true
-            }
-            git.close()
+        commandLine("git", "tag", "-a", "v${pluginVersion}", "-m", "Release v${pluginVersion}")
+        commandLine("git", "push", "--tags")
 
-            val command = "gh release create $tagName -F changelog.md -t \"$tagName\" \"build/libs/${pluginName}-${pluginVersion}.jar\" \"build/libs/${pluginName}-${pluginVersion}-drv.jar\""
-            val process = ProcessBuilder(command.split(" ")).start()
-            process.waitFor()
-        }
+        commandLine("gh", "release", "create", "v${pluginVersion}", "-F", "changelog.md",
+            "-t", "v${pluginVersion}",
+            "build/libs/${pluginName}-${pluginVersion}.jar", "build/libs/${pluginName}-${pluginVersion}-drv.jar")
     }
 
     register("createReleases") {
-        dependsOn(createGitHubRelease)
+        dependsOn("createGitHubRelease")
         dependsOn(modrinth)
         dependsOn(modrinthSyncBody)
     }
