@@ -33,7 +33,7 @@ class DatabaseConnection(val type: DatabaseType) {
     }
 
     private fun connectSQLite(): Connection {
-        Class.forName("org.sqlite.JDBC");
+        Class.forName("org.sqlite.JDBC")
 
         if(!authy.dataFolder.exists()) {
             authy.dataFolder.mkdir()

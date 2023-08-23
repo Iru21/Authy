@@ -86,6 +86,7 @@ tasks {
         versionType.set("release")
         versionName.set("$pluginName $version")
         uploadFile.set(shadowJar as Any)
+        additionalFiles.set(listOf(shadowJarDrivers))
         gameVersions.addAll("1.17", "1.18", "1.19", "1.20")
         loaders.addAll("spigot", "paper", "purpur")
         changelog.set(rootProject.file("changelog.md").readText())
@@ -94,6 +95,8 @@ tasks {
 
     val createGitHubRelease by registering {
         dependsOn(shadowJar)
+        dependsOn(shadowJarDrivers)
+
         doLast {
             val git = Grgit.open {
                 dir = projectDir
@@ -109,7 +112,7 @@ tasks {
             }
             git.close()
 
-            val command = "gh release create $tagName -F changelog.md -t \"$tagName\" \"build/libs/${pluginName}-${pluginVersion}.jar\""
+            val command = "gh release create $tagName -F changelog.md -t \"$tagName\" \"build/libs/${pluginName}-${pluginVersion}.jar\" \"build/libs/${pluginName}-${pluginVersion}-drv.jar\""
             val process = ProcessBuilder(command.split(" ")).start()
             process.waitFor()
         }
