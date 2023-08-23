@@ -1,1 +1,3 @@
-- [Fix crash when trying to restore flight to player who is not allowed to fly anymore](https://github.com/Iru21/Authy/commit/c180a0e45eca25485bab0d983edada649564d3cf) ([#43](https://github.com/Iru21/Authy/issues/43))
+- [Disable the plugin if the server is in online mode](https://github.com/Iru21/Authy/commit/931f2a51221dd29beb582395af9868f3a292be5a)
+- [Send message to ops when new update is available](https://github.com/Iru21/Authy/commit/b5962643d5d53eacbdb8ac49089306b44624c299)
+- From now on, all release will contain two jars: one with and one without database drivers. Download the one with drivers included if you experience missing drivers errors. ([931f2a5](https://github.com/Iru21/Authy/commit/852e233c98493758a68dc8721159546fb8864b48))
