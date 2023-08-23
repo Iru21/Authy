@@ -2,6 +2,7 @@ package me.iru.process
 
 import me.iru.Authy
 import me.iru.PrefixType
+import me.iru.utils.sendVersionDownload
 import me.iru.utils.sendWelcomeMessage
 import org.bukkit.entity.Player
 import org.bukkit.potion.PotionEffectType
@@ -23,7 +24,10 @@ class LoginProcess {
         p.fallDistance = 0F
         p.removePotionEffect(PotionEffectType.BLINDNESS)
         PreLoginDataStore.restore(p)
+
         sendWelcomeMessage(p)
+        sendVersionDownload(p)
+
         inProcess.remove(p.uniqueId)
     }
 

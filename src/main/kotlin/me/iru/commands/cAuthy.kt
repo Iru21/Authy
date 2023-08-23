@@ -2,6 +2,7 @@ package me.iru.commands
 
 import me.iru.Authy
 import me.iru.interfaces.ICommand
+import me.iru.utils.sendVersionDownload
 import org.bukkit.Sound
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
@@ -15,9 +16,7 @@ class cAuthy(override var name: String = "authy") : ICommand {
         if(args.size != 1) {
             sender.sendMessage("§8[§6Authy§8] §7Created by§8: §cIru §8- §7https://iru.codes")
             sender.sendMessage("§8[§6Authy§8] §7Version§8: §c${authy.version}")
-            if(authy.latestVersion != authy.version) {
-                sender.sendMessage("§8[§6Authy§8] §7New version available§8: §c${authy.latestVersion}§8!")
-            }
+            sendVersionDownload(sender)
             return true
         } else if(args[0].lowercase() == "reload") {
             if(sender.hasPermission("authy.reload")) {
