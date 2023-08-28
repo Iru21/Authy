@@ -1,3 +1,2 @@
-- [Disable the plugin if the server is in online mode](https://github.com/Iru21/Authy/commit/931f2a51221dd29beb582395af9868f3a292be5a)
-- [Send message to ops when new update is available](https://github.com/Iru21/Authy/commit/b5962643d5d53eacbdb8ac49089306b44624c299)
-- From now on, all release will contain two jars: one with and one without database drivers. Download the one with drivers included if you experience missing drivers errors. ([931f2a5](https://github.com/Iru21/Authy/commit/852e233c98493758a68dc8721159546fb8864b48))
+- Add Brazilian Portuguese and Ukrainian languages ([#45](https://github.com/Iru21/Authy/pull/45), [#46](https://github.com/Iru21/Authy/pull/46))
+- Update Russian translation ([#47](https://github.com/Iru21/Authy/pull/47))
