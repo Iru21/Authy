@@ -24,7 +24,10 @@ enum class ParseMode {
 class Translations {
     private val authy = Authy.instance
     private val defaultLangFolder = File(authy.dataFolder, "lang" + File.separator + "defaults" + File.separator)
-    private val defaultLangs = arrayListOf("en_us", "cs_cz", "es_es", "pl_pl", "ru_ru", "tr_tr", "zh_tw", "zh_cn")
+    private val defaultLangs = arrayListOf(
+        "en_us", "cs_cz", "es_es", "pl_pl", "ru_ru", "tr_tr", "zh_tw", "zh_cn",
+        "pt_br", "ua_uk"
+    )
     private var cache: YamlConfiguration? = null
 
     companion object {
