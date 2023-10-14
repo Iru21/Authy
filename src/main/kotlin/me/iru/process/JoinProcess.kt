@@ -87,15 +87,14 @@ class JoinProcess(private val player: Player) {
             else messageTask.cancel()
         },0L, 200L)
 
-        authy.server.scheduler.runTaskLater(authy, Runnable {
+        val checkTask = authy.server.scheduler.runTaskLater(authy, Runnable {
             if(loginProcess.contains(player)) {
                 messageTask.cancel()
                 player.kickPlayer("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("timedout_error")}")
                 loginProcess.removePlayer(player)
+                loginProcess.cancelTasks(player)
             }
         }, authy.config.getLong("timeout") * 20L)
+        loginProcess.addTask(player, checkTask)
     }
-
-
-
 }

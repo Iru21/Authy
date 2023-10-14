@@ -18,20 +18,20 @@ object DuplicateProtection {
             e.disallow(PlayerLoginEvent.Result.KICK_OTHER, "")
         }
 
-        val protLevel = config.getInt("duplicateIpProtection.protectionLevel")
-        if(protLevel == 0) return
+        val level = config.getInt("duplicateIpProtection.protectionLevel")
+        if(level == 0) return
         val max = config.getInt("duplicateIpProtection.maxPerIp")
         val shouldNotify = config.getBoolean("duplicateIpProtection.notifyOnDuplicateIp")
         val duplicates = getDuplicatesForIpOf(p)
 
         if(shouldNotify && duplicates.size > 1) {
-            for (lp in Authy.instance.server.onlinePlayers) {
-                if(lp.hasPermission("authy.notifyonduplicateip")) {
+            for (player in Authy.instance.server.onlinePlayers) {
+                if(player.hasPermission("authy.notifyonduplicateip")) {
                     val formatted =
                         duplicates.joinToString(translations.get("duplicateprotection_notification_separator")) {
                             "${translations.getColor("duplicateprotection_notification_namecolor")}$it"
                         }
-                    lp.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("duplicateprotection_notification_message").format(formatted)}")
+                    player.sendMessage("${translations.getPrefix(PrefixType.WARNING)} ${translations.get("duplicateprotection_notification_message").format(formatted)}")
                 }
             }
         }
@@ -41,28 +41,20 @@ object DuplicateProtection {
     }
 
     private fun getDuplicatesForIpOf(p: Player): HashSet<String> {
-        val protLevel = config.getInt("duplicateIpProtection.protectionLevel")
-        val d = HashSet<String>()
-        d.add(p.name)
+        val level = config.getInt("duplicateIpProtection.protectionLevel")
+        val duplicates = HashSet<String>()
+        duplicates.add(p.name)
         val ip = p.address?.address?.hostAddress
-        when(protLevel) {
+        return when(level) {
             1 -> {
-                for (onlinePlayer in Authy.instance.server.onlinePlayers) {
-                    val lpip = onlinePlayer.address?.address?.hostAddress
-                    if(ip == lpip) {
-                        d.add(onlinePlayer.name)
-                    }
-                }
+                Authy.instance.server.onlinePlayers.filter { it.address?.address?.hostAddress == ip }.mapTo(duplicates) { it.name }
             }
             2 -> {
-                for (registeredPlayer in playerData.getAll()) {
-                    val lpip = registeredPlayer.ip
-                    if(ip == lpip) {
-                        d.add(registeredPlayer.username)
-                    }
-                }
+                playerData.getAll().filter { it.ip == ip }.mapTo(duplicates) { it.username }
+            }
+            else -> {
+                duplicates
             }
         }
-        return d
     }
 }
