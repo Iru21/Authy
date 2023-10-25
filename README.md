@@ -74,3 +74,11 @@ Also get it on [Spigot](https://www.spigotmc.org/resources/authy.100004/) and [M
 [English template](https://github.com/Iru21/Authy/blob/master/src/main/resources/lang/en_us.yml)
 
 ### [Reporting Issues and giving suggestions](https://github.com/Iru21/Authy/issues)
+
+
+
+## All Thanks To Our Contributors
+
+<a href="https://github.com/Iru21/Authy/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Iru21/Authy" />
+</a>
