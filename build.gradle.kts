@@ -34,17 +34,18 @@ val withDrivers: Configuration by configurations.creating {
 }
 
 tasks {
-
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
     }
 
     val makeDefaults by registering(Copy::class) {
-        dependsOn(processResources)
-
         from("src/main/resources/lang/")
         include("**/*.yml")
         into("build/resources/main/lang/defaults/")
+    }
+
+    getByName("jar") {
+        dependsOn(makeDefaults)
     }
 
     processResources {
@@ -62,16 +63,14 @@ tasks {
     }
 
     shadowJar {
-        dependsOn(processResources)
         dependsOn(makeDefaults)
         relocate("org.bstats", group)
         archiveFileName.set("${pluginName}-${pluginVersion}.jar")
     }
 
     register<ShadowJar>("shadowJarDrivers") {
-        from(sourceSets.main.get().output)
-        dependsOn(processResources)
         dependsOn(makeDefaults)
+        from(sourceSets.main.get().output)
         relocate("org.bstats", group)
         archiveFileName.set("${pluginName}-${pluginVersion}-drv.jar")
         configurations = listOf(withDrivers)
