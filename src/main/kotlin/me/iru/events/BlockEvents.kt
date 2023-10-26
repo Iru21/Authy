@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityPickupItemEvent
 import org.bukkit.event.entity.FoodLevelChangeEvent
-import org.bukkit.event.inventory.InventoryInteractEvent
+import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.*
 
 
@@ -146,11 +146,10 @@ class BlockEvents : Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    fun onInventoryInteract(e : InventoryInteractEvent) {
-        val p = e.whoClicked as Player
-        if(loginProcess.contains(p)) {
+    fun onInventoryInteract(e : InventoryClickEvent) {
+        val p = e.whoClicked
+        if(p is Player && loginProcess.contains(p)) {
             e.isCancelled = true
-            loginProcess.sendPleaseAuthMessage(p)
         }
     }
 
