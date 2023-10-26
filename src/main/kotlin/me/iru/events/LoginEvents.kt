@@ -20,7 +20,10 @@ class LoginEvents : Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     fun onInitialLogin(e : PlayerLoginEvent) {
-        DuplicateProtection.check(e)
+        val task = authy.server.scheduler.runTaskAsynchronously(authy, Runnable {
+            DuplicateProtection.check(e)
+        })
+        loginProcess.addTask(e.player, task)
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -28,5 +31,6 @@ class LoginEvents : Listener {
         if (loginProcess.contains(e.player)) {
             loginProcess.removePlayer(e.player)
         }
+        loginProcess.cancelTasks(e.player)
     }
 }

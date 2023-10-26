@@ -75,22 +75,6 @@ tasks {
 
     }
 
-    modrinth {
-        val version = pluginVersion
-
-        token.set(System.getenv("MODRINTH_TOKEN"))
-        projectId.set("authy")
-        versionNumber.set(version)
-        versionType.set("release")
-        versionName.set("$pluginName $version")
-        uploadFile.set(shadowJar as Any)
-        additionalFiles.set(listOf("build/libs/${pluginName}-${pluginVersion}-drv.jar"))
-        gameVersions.addAll("1.17", "1.18", "1.19", "1.20")
-        loaders.addAll("spigot", "paper", "purpur")
-        changelog.set(rootProject.file("changelog.md").readText())
-        syncBodyFrom.set(rootProject.file("README.md").readText())
-    }
-
     register<Exec>("createGitHubRelease") {
         dependsOn(shadowJar)
         dependsOn("shadowJarDrivers")
@@ -108,6 +92,22 @@ tasks {
         dependsOn(modrinth)
         dependsOn(modrinthSyncBody)
     }
+}
+
+modrinth {
+    val version = pluginVersion
+
+    token.set(System.getenv("MODRINTH_TOKEN"))
+    projectId.set("authy")
+    versionNumber.set(version)
+    versionType.set("release")
+    versionName.set("$pluginName $version")
+    uploadFile.set(tasks.shadowJar as Any)
+    additionalFiles.set(listOf("build/libs/${pluginName}-${pluginVersion}-drv.jar"))
+    gameVersions.addAll("1.17", "1.18", "1.19", "1.20")
+    loaders.addAll("spigot", "paper", "purpur")
+    changelog.set(rootProject.file("changelog.md").readText())
+    syncBodyFrom.set(rootProject.file("README.md").readText())
 }
 
 repositories {
