@@ -29,7 +29,9 @@ val pluginName: String by project
 val pluginVersion: String by project
 val minecraftVersion: String by project
 
-val withDrivers: Configuration by configurations.creating
+val withDrivers: Configuration by configurations.creating {
+    extendsFrom(configurations.compileOnly.get(), configurations.implementation.get())
+}
 
 tasks {
 
@@ -67,12 +69,12 @@ tasks {
     }
 
     register<ShadowJar>("shadowJarDrivers") {
+        from(sourceSets.main.get().output)
         dependsOn(processResources)
         dependsOn(makeDefaults)
         relocate("org.bstats", group)
         archiveFileName.set("${pluginName}-${pluginVersion}-drv.jar")
-        configurations = listOf(project.configurations["runtimeClasspath"], withDrivers)
-
+        configurations = listOf(withDrivers)
     }
 
     register<Exec>("createGitHubRelease") {
