@@ -1,6 +1,7 @@
-# <img align="left" width="100" height="100" src="https://github.com/Iru21/Authy/assets/12859907/010ce25c-4e45-43b9-bf3e-3e7e698adc52">Authy - a simple authentication plugin for Minecraft 1.17+!
+## <img align="left" width="100" height="100" src="https://github.com/Iru21/Authy/assets/12859907/010ce25c-4e45-43b9-bf3e-3e7e698adc52">Authy — a simple authentication plugin for Minecraft 1.17+!
 
-![Spigot Downloads](https://img.shields.io/spiget/downloads/100004?label=Spigot%20Downloads&color=%23ee8b1a) ![Modrinth Downloads](https://img.shields.io/modrinth/dt/authy?label=Modrinth%20Downloads&color=%231bd96a)
+[<img alt="spigot" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/spigot_vector.svg">](https://www.spigotmc.org/resources/authy.100004/)
+[<img alt="modrinth" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg">](https://modrinth.com/plugin/authy)
 
 _Click one of the badges above to get it!_
 
