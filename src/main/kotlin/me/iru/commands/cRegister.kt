@@ -23,7 +23,7 @@ class cRegister(override var name: String = "register") : ICommand {
         if (sender is Player) {
             val p: Player = sender
             if (!loginProcess.contains(p)) {
-                p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("already_authed")}!")
+                p.sendMessage("${translations.getPrefix(PrefixType.ERROR)} ${translations.get("already_authed")}")
                 return true
             }
             val requirePin = authy.config.getBoolean("requirePin")
