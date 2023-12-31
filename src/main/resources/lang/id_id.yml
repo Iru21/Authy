@@ -1,0 +1,84 @@
+# key template:
+# [where]_[section]_[key]
+
+enabled: "&aDiaktifkan"
+disabled: "&cDinonaktifkan"
+
+# can be in minecraft (&x) or hex (#abc123) format
+prefix_warning_value: "&l(!)"
+prefix_warning_color: "#FFDA4A"
+
+prefix_error_value: "&l(❌)"
+prefix_error_color: "#BE4143"
+
+prefix_login_value: "&l(✔)"
+prefix_login_color: "&a"
+
+prefix_remember_value: "&l(🔱)"
+prefix_remember_color: "#AFFFB1"
+
+prefix_pin_value: "&l(〰)"
+prefix_pin_color: "#ACEFFF"
+
+prefix_unregister_value: "&l(✔)"
+prefix_unregister_color: "#FFCF8A"
+
+prefix_register_value: "&l(✔)"
+prefix_register_color: "#CDFF00"
+
+already_authed: "&7Kamu sudah terautentikasi!"
+no_pin_warning: "&cKamu belum mengatur pin! &7Untuk keamanan, atur pin dengan command &8/&fpin!"
+
+login_success: "&7Berhasil masuk!"
+autologin_success: "&7Berhasil masuk otomatis!"
+register_success: "&7Berhasil mendaftar!"
+unregister_success: "&7Berhasil membatalkan pendaftaran!"
+timedout_error: "&7Waktu untuk autentikasi telah habis!"
+invalid_username: "&7Username invalid!"
+
+loginprocess_reminder_login: "&7Masuk dengan command &8/&flogin &8[&fpassword&8] %s"
+loginprocess_reminder_pin: "&8[&fkode pin&8]"
+loginprocess_reminder_register: "&7Daftar dengan command &8/&fregister &8[&fkata santi&8] [&fulangi password&8] %s"
+
+command_register_usagepin: "&7Cara penggunaan: &8/&fregister &8[&fpassword&8] [&fulangi password&8] [&fkode pin&8]"
+command_register_usage: "&7Cara penggunaan: &8/&fregister &8[&fpassword&8] [&fulangi password&8]"
+command_register_notidentical: "&7Password yang diulang tidak sama!"
+command_register_breaksrules: "&7Passwordmu tidak memenuhi persyaratan! &cSyarat&8: &fPanjang minimal&8: &c%s&8, &fPanjang maksimal&8: &c%s&8, &fMinimal huruf besar&8: &c%s&8, &fMinimal angka&8: &c%s"
+command_register_alreadyregistered: "&7Kamu sudah terdaftar!"
+
+command_login_usagepin: "&7Cara penggunaan: &8/&flogin &8[&fpassword&8] [&fkode pin&8]"
+command_login_usage: "&7Cara penggunaan: &8/&flogin &8[&fpassword&8]"
+command_login_notregistered: "&7Kamu tidak terdaftar! Gunakan command &8/&fregister&7!"
+command_login_wrongpassword: "&7Password salah!"
+command_login_wrongpin: "&7Pin salah!"
+command_login_nopinwarning: "&cKamu belum mengatur pin! &7Untuk keamanan, atur pin dengan command &8/&fpin!"
+
+pincommand_info_bar: "&8[%s●&8] &8&m----&r &7Pin &8&m----&r &8[%s●&8]"
+pincommand_info_status: "&8  - &7Status&8: %s"
+pincommand_info_split: "    &8&m----"
+pincommand_info_togglehelp: "&8  - /&fpin &7toggle &8- &7Aktif/Nonaktifkan pin"
+pincommand_info_sethelp: "&8  - /&fpin &7set &8[&7kode pin baru&8] - &7Atur pin"
+
+command_pin_setpinbeforetoggle: "&7Kamu perlu mengatur pin terlebih dahulu! Gunakan command &8/&fpin &7set &8[&7kode pin baru&8]&7!"
+command_pin_toggled: "&7Pin %s&7!"
+command_pin_required: "&7Kamu tidak bisa menonaktifkan pin di server ini!"
+command_pin_setusage: "&7Cara penggunaan&8: /&fpin &7set &8[&7kode pin baru&8]"
+command_pin_breaksrules: "&7Kode pin mu tidak memenuhi persyaratan! &cSyarat&8: &fPanjang minimal&8: &c%s&8, &fPanjang maksimal&8: &c%s&8"
+command_pin_success: "&7Berhasil mengatur pin! &7Jangan lupa untuk mengaktifkannya dengan command &8/&fpin toggle&7!"
+
+command_remember_success: "&7Sesi berhasil disimpan untuk &c%sh!"
+
+command_unregister_successkick: "&7Masuk kembali dan register ulang!"
+
+duplicateprotection_notification_message: "&7Akun dari ip yang sama: &8(%s&8)"
+duplicateprotection_notification_separator: "&8, &r"
+duplicateprotection_notification_namecolor: "#FFDA4A"
+duplicateprotection_max_reached: "&7Hanya boleh ada &c%s &7akun pada ip address yang sama!"
+
+command_changepassword_usage: "&7Cara penggunaan: &8/&fchangepassword &8[&fpassword lama&8] &8[&fpassword baru&8] [&fulangi password baru&8]"
+command_changepassword_success: "&7Passwordmu telah berhasil diubah!"
+command_changepassword_samepassword: "&7Password baru tidak boleh sama dengan password lama!"
+
+# do not edit
+# only updated when new keys have been added/renamed or the formatting has changed
+version: 10
