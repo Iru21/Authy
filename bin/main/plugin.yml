@@ -1,0 +1,36 @@
+name: Authy
+version: ${pluginVersion}
+author: Iru21
+main: me.iru.Authy
+api-version: ${minecraftVersion}
+commands:
+  authy:
+    description: Information and reloading
+    usage: /<command> [reload]
+  register:
+    description: Registers the player
+    usage: /<command> [password] [repeat password]
+    permission: authy.register
+    aliases: reg
+  login:
+    description: Allows the player to log in
+    usage: /<command> [password]
+    permission: authy.login
+    aliases: l
+  unregister:
+    description: Unregisters the player
+    usage: /<command>
+    permission: authy.unregister
+    aliases: unreg
+  remember:
+    description: Enables automatic login for the next 48h
+    usage: /<command>
+    permission: authy.remember
+  pin:
+    description: Enables and sets a pin code
+    usage: /<command>
+    permission: authy.pin
+  changepassword:
+    description: Changes player's password
+    usage>: /<command> [new password] [repeat new password]
+    permission: authy.changepassword

@@ -1,0 +1,84 @@
+# key template:
+# [where]_[section]_[key]
+
+enabled: "&aвключен"
+disabled: "&cвыключен"
+
+# can be in minecraft (&x) or hex (#abc123) format
+prefix_warning_value: "&l(!)"
+prefix_warning_color: "#FFDA4A"
+
+prefix_error_value: "&l(❌)"
+prefix_error_color: "#BE4143"
+
+prefix_login_value: "&l(✔)"
+prefix_login_color: "&a"
+
+prefix_remember_value: "&l(🔱)"
+prefix_remember_color: "#AFFFB1"
+
+prefix_pin_value: "&l(〰)"
+prefix_pin_color: "#ACEFFF"
+
+prefix_unregister_value: "&l(✔)"
+prefix_unregister_color: "#FFCF8A"
+
+prefix_register_value: "&l(✔)"
+prefix_register_color: "#CDFF00"
+
+already_authed: "&7Вы уже авторизованы!"
+no_pin_warning: "&cУ вас нет пин-кода! &7Для большей безопасности его можно установить с помощью команды &8/&fpin&7!"
+
+login_success: "&7Вы успешно авторизовались!"
+autologin_success: "&7Вы авторизовались автоматически!"
+register_success: "&7Вы успешно зарегистрировались!"
+unregister_success: "&7Регистрация успешно отменена!"
+timedout_error: "&7Срок авторизации истек!"
+invalid_username: "&7Неверное имя пользователя!"
+
+loginprocess_reminder_login: "&7Авторизуйтесь, используя &8/&flogin &8[&fпароль&8] %s"
+loginprocess_reminder_pin: "&8[&fпин-код&8]"
+loginprocess_reminder_register: "&7Зарегистрируйтесь, используя &8/&fregister &8[&fпароль&8] [&fповтор пароля&8] %s"
+
+command_register_usagepin: "&7Использование: &8/&fregister &8[&fпароль&8] [&fПовторите пароль&8] [&fпин-код&8]"
+command_register_usage: "&7Использование: &8/&fregister &8[&fпароль&8] [&fПовторите пароль&8]"
+command_register_notidentical: "&7Пароли не совпадают!"
+command_register_breaksrules: "&7Пароль не отвечает требованиям! &cПравила&8: &fМинимальная длина&8: &c%s&8, &fМаксимальная длина&8: &c%s&8, &fМинимум заглавных букв&8: &c%s&8, &fМинимум цифр&8: &c%s"
+command_register_alreadyregistered: "&7Вы уже зарегистрированы!"
+
+command_login_usagepin: "&7Использование: &8/&flogin &8[&fпароль&8] [&fпин-код&8]"
+command_login_usage: "&7Использование: &8/&flogin &8[&fпароль&8]"
+command_login_notregistered: "&7Вы не зарегистрированы! Используйте &8/&fregister &7!"
+command_login_wrongpassword: "&7Неправильный пароль!"
+command_login_wrongpin: "&7Неверный пин-код!"
+command_login_nopinwarning: "&cУ вас нет пин-кода! &7Для большей безопасности его можно установить с помощью команды &8/&fpin&7!"
+
+pincommand_info_bar: "&8[%s●&8] &8&m----&r &7Пин &8&m----&r &8[%s●&8]"
+pincommand_info_status: "&8  - &7Статус&8: %s"
+pincommand_info_split: "    &8&m----"
+pincommand_info_togglehelp: "&8  - /&fpin &7toggle &8- &7включить/выключить пин-код"
+pincommand_info_sethelp: "&8  - /&fpin &7set &8[&7пин-код&8] - &7Установить пин-код"
+
+command_pin_setpinbeforetoggle: "&7Сначала нужно установить пин-код! Используйте &8/&fpin &7set &8[&7пин-код&8]&7!"
+command_pin_toggled: "&7Пин-код %s!"
+command_pin_required: "&7Вы не можете отключить пин-код на этом сервере!"
+command_pin_setusage: "&7Использование&8: /&fpin &7set &8[&7пин-код&8]"
+command_pin_breaksrules: "&7Пин не соответствует требованиям! &Правила&8: &Минимальная длина&8: &c%s&8, &fМаксимальная длина&8: &c%s"
+command_pin_success: "&7Пин-код установлен! &7Не забудьте включить его с помощью &8/&fpin toggle &7!"
+
+command_remember_success: "&7Сессия сохранена на &c%s часов!"
+
+command_unregister_successkick: "&7Переподключитесь и зарегистрируйтесь снова!"
+
+duplicateprotection_notification_message: "&7Аккаунты с одинаковым IP-адресом: &8(%s&8)"
+duplicateprotection_notification_separator: "&8, &r"
+duplicateprotection_notification_namecolor: "#FFDA4A"
+duplicateprotection_max_reached: "&7Достигнут лимит аккаунтов с одинаковым IP-адресом! (Разр.: &c%s)&7"
+
+command_changepassword_usage: "&Использование: &8/&fchangepassword &8[&fстарый пароль&8] &8[&fновый пароль&8] [&fповтор нового пароля&8]"
+command_changepassword_success: "&7Ваш пароль был обновлен!"
+command_changepassword_samepassword: "&7Ваш новый пароль не может совпадать со старым!"
+
+# do not edit
+# only updated when new keys have been added/renamed or the formatting has changed
+version: 10

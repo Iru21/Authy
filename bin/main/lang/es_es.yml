@@ -1,0 +1,80 @@
+# key template:
+# [where]_[section]_[key]
+
+enabled: "&aActivado"
+disabled: "&cDesactivado"
+
+# can be in minecraft (&x) or hex (#abc123) format
+prefix_warning_value: "&l(!)"
+prefix_warning_color: "#FFDA4A"
+
+prefix_error_value: "&l(❌)"
+prefix_error_color: "#BE4143"
+
+prefix_login_value: "&l(✔)"
+prefix_login_color: "&a"
+
+prefix_remember_value: "&l(🔱)"
+prefix_remember_color: "#AFFFB1"
+
+prefix_pin_value: "&l(〰)"
+prefix_pin_color: "#ACEFFF"
+
+prefix_unregister_value: "&l(✔)"
+prefix_unregister_color: "#FFCF8A"
+
+prefix_register_value: "&l(✔)"
+prefix_register_color: "#CDFF00"
+
+already_authed: "&7¡Ya has iniciado sesión!"
+no_pin_warning: "&c¡No has creado un pin! &7Por seguridad, créalo usando el comando &8/&fpin &7"
+
+login_success: "&7¡Has iniciado sesión correctamente!"
+autologin_success: "&7¡Te has autenticado automáticamente!"
+register_success: "&7¡Te has registrado correctamente!"
+unregister_success: "&7¡Has borrado tu registro correctamente!"
+timedout_error: "&7¡El tiempo para autenticarte ha pasado!"
+invalid_username: "&7¡Nombre de usuario no válido!"
+
+loginprocess_reminder_login: "&7Inicia sesión usando &8/&flogin &8[&fcontraseña&8] %s"
+loginprocess_reminder_pin: "&8[&fcódigo pin&8]"
+loginprocess_reminder_register: "&7Regístrate usando &8/&fregister &8[&fcontraseña&8] [&frepetir contraseña&8] %s"
+
+command_register_usagepin: "&7Uso: &8/&fregister &8[&fcontraseña&8] [&frepetir contraseña&8] [&fcódigo pin&8]"
+command_register_usage: "&7Uso: &8/&fregister &8[&fcontraseña&8] [&frepetir contraseña&8]"
+command_register_notidentical: "&7¡La contraseña repetida no coincide con la inicial!"
+command_register_breaksrules: "&7¡Tu contraseña no cumple las reglas! &cReglas&8: &fLongitud mínima&8: &c%s&8, &fLongitud máximo&8: &c%s&8, &fMínimo de caracteres en mayúscula&8: &c%s&8, &fMínimo de números&8: &c%s"
+command_register_alreadyregistered: "&7¡Ya te has registrado!"
+
+command_login_usagepin: "&7Uso: &8/&flogin &8[&fcontraseña&8] [&fcódigo pin&8]"
+command_login_usage: "&7Uso: &8/&flogin &8[&fcontraseña&8]"
+command_login_notregistered: "&7¡No te has registrado! Usa el comando &8/&fregister &7"
+command_login_wrongpassword: "&7¡Contraseña incorrecta!"
+command_login_wrongpin: "&7¡Pin incorrecto!"
+command_login_nopinwarning: "&c¡No has colocado un pin! &7Por seguridad configuralo usando el comando &8/&fpin &7"
+
+pincommand_info_bar: "&8[%s●&8] &8&m----&r &7Pin &8&m----&r &8[%s●&8]"
+pincommand_info_status: "&8  - &7Estado&8: %s"
+pincommand_info_split: "    &8&m----"
+pincommand_info_togglehelp: "&8  - /&fpin &7toggle &8- &7Activa/Desactiva el pin"
+pincommand_info_sethelp: "&8  - /&fpin &7set &8[&7nuevo código pin&8] - &7Configura el pin"
+
+command_pin_setpinbeforetoggle: "&7¡Necesitas configurar un pin primero! Usa el comando &8/&fpin &7set &8[&7nuevo código pin&8] &7"
+command_pin_toggled: "%s &7el pin!"
+command_pin_required: "&7¡No puedes desactivar el código pin en este servidor!"
+command_pin_setusage: "&7Uso&8: /&fpin &7set &8[&7nuevo código pin&8]"
+command_pin_breaksrules: "&7¡Tu pin no cumple las reglas! &cReglas&8: &fLongitud mínima&8: &c%s&8, &fLongitud máxima&8: &c%s&8"
+command_pin_success: "&7¡Tu pin ha sido establecido! &7Recuerda activarlo usando el comando &8/&fpin toggle &7"
+
+command_remember_success: "&7¡Sesión guardada para las próximas &c%sh!"
+
+command_unregister_successkick: "&7¡Entra de nuevo y regístrate!"
+
+duplicateprotection_notification_message: "&7Cuantas con la misma dirección ip: &8(%s&8)"
+duplicateprotection_notification_separator: "&8, &r"
+duplicateprotection_notification_namecolor: "#FFDA4A"
+duplicateprotection_max_reached: "&7¡Solo puede haber &c%s &7ceuntas con la misma dirección ip!"
+
+# do not edit
+# only updated when new keys have been added/renamed or the formatting has changed
+version: 8

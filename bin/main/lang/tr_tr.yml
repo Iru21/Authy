@@ -1,0 +1,80 @@
+# key template:
+# [where]_[section]_[key]
+
+enabled: "&aEtkin"
+disabled: "&cDevre dışı"
+
+# minecraft içinde (&x) şeklinde ya da hex (#abc123) şeklinde olabilir
+prefix_warning_value: "&l(!)"
+prefix_warning_color: "#FFDA4A"
+
+prefix_error_value: "&l(❌)"
+prefix_error_color: "#BE4143"
+
+prefix_login_value: "&l(✔)"
+prefix_login_color: "&a"
+
+prefix_remember_value: "&l(🔱)"
+prefix_remember_color: "#AFFFB1"
+
+prefix_pin_value: "&l(〰)"
+prefix_pin_color: "#ACEFFF"
+
+prefix_unregister_value: "&l(✔)"
+prefix_unregister_color: "#FFCF8A"
+
+prefix_register_value: "&l(✔)"
+prefix_register_color: "#CDFF00"
+
+already_authed: "&7Zaten giriş yapmışsın."
+no_pin_warning: "&cBir PIN belirlememişsin! &7Güvenlik için &8/&fpin &7komutunu kullanarak belirt!"
+
+login_success: "&7Başarıyla giriş yapıldı!"
+autologin_success: "&7Otomatik olarak giriş yapıldı!"
+register_success: "&7Başarıyla kayıt olundu!"
+unregister_success: "&7Başarıyla kaydınız silindi!"
+timedout_error: "&7Doğrulama süresi doldu!"
+invalid_username: "&7Geçersiz kullanıcı adı!"
+
+loginprocess_reminder_login: "&8/&flogin &8[&fşifre&8] %s &7komutunu kullanarak giriş yap."
+loginprocess_reminder_pin: "&8[&fpin kodu&8]"
+loginprocess_reminder_register: "&8/&fregister &8[&fşifre&8] [&fşifre tekrarı&8] %s &7komutuyla kayıt ol."
+
+command_register_usagepin: "&7Kullanım: &8/&fregister &8[&fşifre&8] [&fşifre tekrarı&8] [&fpin kodu&8]"
+command_register_usage: "&7Kullanım: &8/&fregister &8[&fşifre&8] [&fşifre tekrarı&8]"
+command_register_notidentical: "&7Şifre tekrarı ana şifreyle uyuşmuyor!"
+command_register_breaksrules: "&7Şifren gereksinimleri karşılamıyor! &cKurallar&8: &fMinimum uzunluk&8: &c%s&8, &fMaksimum uzunluk&8: &c%s&8, &fMinimum büyük harf gereksinimi&8: &c%s&8, &fMinimum sayı gereksinimi&8: &c%s"
+command_register_alreadyregistered: "&7Zaten kayıt olmuşsun!"
+
+command_login_usagepin: "&7Kullanım: &8/&flogin &8[&fşifre&8] [&fpin kodu&8]"
+command_login_usage: "&7Kullanım: &8/&flogin &8[&fşifre&8]"
+command_login_notregistered: "&7Kayıt olmamışsın! &8/&fregister &7komutunu kullan!"
+command_login_wrongpassword: "&7Yanlış şifre!"
+command_login_wrongpin: "&7Yanlış PIN!"
+command_login_nopinwarning: "&cBir PIN belirlememişsin! &7Güvenlik için &8/&fpin &7komutuyla belirle!"
+
+pincommand_info_bar: "&8[%s●&8] &8&m----&r &7PIN &8&m----&r &8[%s●&8]"
+pincommand_info_status: "&8  - &7Durum&8: %s"
+pincommand_info_split: "    &8&m----"
+pincommand_info_togglehelp: "&8  - /&fpin &7toggle &8- &7PIN kodunu etkinleştirir/devre dışı bırakır"
+pincommand_info_sethelp: "&8  - /&fpin &7set &8[&7pin kodu&8] - &7PIN belirler"
+
+command_pin_setpinbeforetoggle: "&7Öncelikle bir PIN belirlemelisin! &8/&fpin &7set &8[&7pin kodu&8] &7komutunu kullan!"
+command_pin_toggled: "%s &7pin!"
+command_pin_required: "&7Bu sunucuda pin kodunu devre dışı bırakamazsınız!"
+command_pin_setusage: "&7Kullanım&8: /&fpin &7set &8[&7pin kodu&8]"
+command_pin_breaksrules: "&7PIN kodun gereksinimleri karşılamıyor! &cKurallar&8: &fMinimum uzunluk&8: &c%s&8, &fMaksimum uzunluk&8: &c%s&8"
+command_pin_success: "&7PIN kodu ayarlandı! &8/&fpin toggle &7komutuyla aktifleştirmeyi unutma!"
+
+command_remember_success: "&c%s saatliğine &7oturum kaydedildi!"
+
+command_unregister_successkick: "&7Tekrardan giriş yap ve kayıt ol!"
+
+duplicateprotection_notification_message: "&7Aynı IP adresinde olan hesaplar: &8(%s&8)"
+duplicateprotection_notification_separator: "&8, &r"
+duplicateprotection_notification_namecolor: "#FFDA4A"
+duplicateprotection_max_reached: "&7Aynı IP adresinde sadece &c%s &7hesap olabilir!"
+
+# değiştirmeyin
+# yeni özellikler eklendiğinde/adlandırıldıklarında düzenlenir
+version: 8
