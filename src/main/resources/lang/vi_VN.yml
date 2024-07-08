@@ -1,0 +1,84 @@
+# key template:
+# [where]_[section]_[key]
+
+enabled: "&aĐã Bật"
+disabled: "&cĐã Vô Hiệu Hoá"
+
+# can be in minecraft (&x) or hex (#abc123) format
+prefix_warning_value: "&l(!)"
+prefix_warning_color: "#FFDA4A"
+
+prefix_error_value: "&l(❌)"
+prefix_error_color: "#BE4143"
+
+prefix_login_value: "&l(✔)"
+prefix_login_color: "&a"
+
+prefix_remember_value: "&l(🔱)"
+prefix_remember_color: "#AFFFB1"
+
+prefix_pin_value: "&l(〰)"
+prefix_pin_color: "#ACEFFF"
+
+prefix_unregister_value: "&l(✔)"
+prefix_unregister_color: "#FFCF8A"
+
+prefix_register_value: "&l(✔)"
+prefix_register_color: "#CDFF00"
+
+already_authed: "&7Bạn đã được xác thực!"
+no_pin_warning: "&cBạn chưa có bộ ghim! &7Để bảo mật, hãy đặt nó bằng lệnh &8/&fpin &7!"
+
+login_success: "&7Đã đăng nhập thành công!"
+autologin_success: "&7Tự động đăng nhập!"
+register_success: "&7Đăng ký thành công!"
+unregister_success: "&7Đã hủy đăng ký thành công!"
+timedout_error: "&7Đã hết thời gian ủy quyền!"
+invalid_username: "&7Tên sử dụng không hợp lệ!"
+
+loginprocess_reminder_login: "&7Đăng nhập bằng Lệnh &8/&flogin &8[&fMật Khẩu&8] %s"
+loginprocess_reminder_pin: "&8[&fMã PIN&8]"
+loginprocess_reminder_register: "&7Đăng ký sử dụng lệnh &8/&fregister &8[&fMật Khẩu&8] [&fNhập Lại Mật Khẩu Vừa Nhập&8] %s"
+
+command_register_usagepin: "&7Cách sử dụng: &8/&fregister &8[&fMật Khẩu&8] [&fNhập lại mật khẩu bạn vừa nhập&8] [&fMã PIN&8]"
+command_register_usage: "&7Usage: &8/&fregister &8[&fmật khẩu&8] [&fNhập lại mật khẩu&8]"
+command_register_notidentical: "&7Mật khẩu lặp lại không khớp!"
+command_register_breaksrules: "&7Mật khẩu của bạn không phù hợp với yêu cầu! &cQuy tắc&8: &fĐộ dài tối thiểu&8: &c%s&8, &fĐộ dài tối đa&8: &c%s&8, &fKý tự viết hoa tối thiểu&8: &c%s&8, &fSố tối thiểu&8: &c%s"
+command_register_alreadyregistered: "&7Bạn đã đăng ký rồi!"
+
+command_login_usagepin: "&7Cách sử dụng: &8/&flogin &8[&fMật Khẩu&8] [&fMã PIN&8]"
+command_login_usage: "&7Usage: &8/&flogin &8[&fpassword&8]"
+command_login_notregistered: "&7Bạn chưa đăng ký! Sử dụng lệnh &8/&fregister &7!"
+command_login_wrongpassword: "&7Sai mật khẩu!"
+command_login_wrongpin: "&7Pin sai!"
+command_login_nopinwarning: "&cBạn chưa có PIN! &7Để bảo mật, hãy đặt nó bằng lệnh &8/&fpin &7!"
+
+pincommand_info_bar: "&8[%s●&8] &8&m----&r &7Pin &8&m----&r &8[%s●&8]"
+pincommand_info_status: "&8  - &7Trạng thái&8: %s"
+pincommand_info_split: "    &8&m----"
+pincommand_info_togglehelp: "&8  - /&fpin &7toggle &8- &7Bật / Tắt PIN"
+pincommand_info_sethelp: "&8  - /&fpin &7set &8[&7mã pin mới&8] - &7Đặt mã pin"
+
+command_pin_setpinbeforetoggle: "&7Bạn cần phải đặt mã pin trước! Sử dụng lệnh &8/&fpin &7set &8[&7mã pin mới&8] &7!"
+command_pin_toggled: "%s &7Đã Bật PIN!"
+command_pin_required: "&7Bạn không thể tắt mã pin trên máy chủ này!"
+command_pin_setusage: "&7Cách sử dụng&8: /&fpin &7set &8[&7mã pin mới&8]"
+command_pin_breaksrules: "&7Mã pin của bạn không phù hợp với yêu cầu! &cQuy tắc&8: &fĐộ dài tối thiểu&8: &c%s&8, &fĐộ dài tối đa&8: &c%s&8"
+command_pin_success: "&7Ghim đã được thiết lập! &7Hãy nhớ bật nó bằng cách sử dụng lệnh &8/&fpin toggle &7!"
+
+command_remember_success: "&7Đã lưu phiên cho &c%sh!"
+
+command_unregister_successkick: "&7Nhập lại và đăng ký!"
+
+duplicateprotection_notification_message: "&7Các tài khoản có cùng địa chỉ IP: &8(%s&8)"
+duplicateprotection_notification_separator: "&8, &r"
+duplicateprotection_notification_namecolor: "#FFDA4A"
+duplicateprotection_max_reached: "&7Chỉ có thể có &c%s &7tài khoản trên cùng một địa chỉ IP!"
+
+command_changepassword_usage: "&7Cách sử dụng: &8/&fchangepassword &8[&fpass Cũ&8] &8[&fpass Mới&8] [&fLặp lại mật khẩu mới&8]"
+command_changepassword_success: "&7Mật khẩu của bạn đã được cập nhật!"
+command_changepassword_samepassword: "&7Mật khẩu mới của bạn không được giống mật khẩu cũ!"
+
+# do not edit
+# only updated when new keys have been added/renamed or the formatting has changed
+version: 10
