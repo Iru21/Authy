@@ -1,0 +1,80 @@
+# Hungarian / Magyar lang
+
+enabled: "&aEngedélyezve"
+disabled: "&cKikapcsolva"
+
+prefix_warning_value: "&l(!)"
+prefix_warning_color: "#FFDA4A"
+
+prefix_error_value: "&l(❌)"
+prefix_error_color: "#BE4143"
+
+prefix_login_value: "&l(✔)"
+prefix_login_color: "&a"
+
+prefix_remember_value: "&l(🔱)"
+prefix_remember_color: "#AFFFB1"
+
+prefix_pin_value: "&l(〰)"
+prefix_pin_color: "#ACEFFF"
+
+prefix_unregister_value: "&l(✔)"
+prefix_unregister_color: "#FFCF8A"
+
+prefix_register_value: "&l(✔)"
+prefix_register_color: "#CDFF00"
+
+already_authed: "&7Már be vagy jelentkezve!"
+no_pin_warning: "&cNincs beállítva PIN kódod! &7A biztonság érdekében állítsd be a &8/&fpin &7paranccsal!"
+
+login_success: "&7Sikeres bejelentkezés!"
+autologin_success: "&7Automatikus bejelentkezés sikeres!"
+register_success: "&7Sikeres regisztráció!"
+unregister_success: "&7Sikeres regisztráció törlés!"
+timedout_error: "&7Lejárt az azonosítás ideje!"
+invalid_username: "&7Érvénytelen felhasználónév!"
+
+loginprocess_reminder_login: "&7Jelentkezz be a &8/&flogin &8[&fjelszó&8] %s paranccsal"
+loginprocess_reminder_pin: "&8[&fPIN kód&8]"
+loginprocess_reminder_register: "&7Regisztrálj a &8/&fregister &8[&fjelszó&8] [&fjelszó újra&8] %s paranccsal"
+
+command_register_usagepin: "&7Használat: &8/&fregister &8[&fjelszó&8] [&fjelszó újra&8] [&fPIN kód&8]"
+command_register_usage: "&7Használat: &8/&fregister &8[&fjelszó&8] [&fjelszó újra&8]"
+command_register_notidentical: "&7A megismételt jelszó nem egyezik!"
+command_register_breaksrules: "&7A jelszavad nem felel meg a követelményeknek! &cSzabályok&8: &fMinimális hossz&8: &c%s&8, &fMaximális hossz&8: &c%s&8, &fMinimum nagybetű&8: &c%s&8, &fMinimum szám&8: &c%s"
+command_register_alreadyregistered: "&7Már regisztrálva vagy!"
+
+command_login_usagepin: "&7Használat: &8/&flogin &8[&fjelszó&8] [&fPIN kód&8]"
+command_login_usage: "&7Használat: &8/&flogin &8[&fjelszó&8]"
+command_login_notregistered: "&7Nem vagy regisztrálva! Használd a &8/&fregister &7parancsot!"
+command_login_wrongpassword: "&7Hibás jelszó!"
+command_login_wrongpin: "&7Hibás PIN!"
+command_login_nopinwarning: "&cNincs beállítva PIN kódod! &7A biztonság érdekében állítsd be a &8/&fpin &7paranccsal!"
+
+pincommand_info_bar: "&8[%s●&8] &8&m----&r &7PIN &8&m----&r &8[%s●&8]"
+pincommand_info_status: "&8 - &7Állapot&8: %s"
+pincommand_info_split: " &8&m----"
+pincommand_info_togglehelp: "&8 - /&fpin &7toggle &8- &7PIN be/kikapcsolása"
+pincommand_info_sethelp: "&8 - /&fpin &7set &8[&7új PIN kód&8] - &7PIN beállítása"
+
+command_pin_setpinbeforetoggle: "&7Először állíts be egy PIN-t! Használd a &8/&fpin &7set &8[&7új PIN kód&8] &7parancsot!"
+command_pin_toggled: "%s &7a PIN!"
+command_pin_required: "&7Ezen a szerveren nem kapcsolhatod ki a PIN kódot!"
+command_pin_setusage: "&7Használat&8: /&fpin &7set &8[&7új PIN kód&8]"
+command_pin_breaksrules: "&7A PIN-ed nem felel meg a követelményeknek! &cSzabályok&8: &fMinimális hossz&8: &c%s&8, &fMaximális hossz&8: &c%s&8"
+command_pin_success: "&7PIN beállítva! &7Ne felejtsd el aktiválni a &8/&fpin toggle &7paranccsal!"
+
+command_remember_success: "&7Munkamenet mentve &c%s &7órára!"
+
+command_unregister_successkick: "&7Lépj be újra és regisztrálj!"
+
+duplicateprotection_notification_message: "&7Fiókok ugyanarról az IP címről: &8(%s&8)"
+duplicateprotection_notification_separator: "&8, &r"
+duplicateprotection_notification_namecolor: "#FFDA4A"
+duplicateprotection_max_reached: "&7Csak &c%s &7fiók lehet ugyanarról az IP címről!"
+
+command_changepassword_usage: "&7Használat: &8/&fchangepassword &8[&frégi jelszó&8] &8[&fúj jelszó&8] [&fúj jelszó újra&8]"
+command_changepassword_success: "&7A jelszavad frissítve lett!"
+command_changepassword_samepassword: "&7Az új jelszó nem lehet ugyanaz, mint a régi!"
+
+version: 10
